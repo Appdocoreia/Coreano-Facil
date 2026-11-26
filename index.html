@@ -18,29 +18,23 @@
   --lav:#efeeff;
   --line:#ececf4;
   --bg:#f7f7fc;
+  --green:#dff8ed;
+  --red:#ffe8e8;
 }
-
-* { box-sizing:border-box; }
-
+* {box-sizing:border-box;}
 body {
   margin:0;
   background:var(--bg);
   color:var(--ink);
   font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
 }
-
 header {
   background:linear-gradient(135deg,#625ce7,#8b75ef);
   color:white;
   padding:26px 20px 32px;
   border-radius:0 0 28px 28px;
 }
-
-.wrap {
-  max-width:780px;
-  margin:auto;
-}
-
+.wrap {max-width:780px;margin:auto;}
 header .top {
   display:flex;
   justify-content:space-between;
@@ -49,27 +43,10 @@ header .top {
   font-weight:700;
   font-size:13px;
 }
-
-h1 {
-  font-size:30px;
-  line-height:1.2;
-  margin:25px 0 8px;
-}
-
-header p { margin:0; opacity:.9; }
-
-main {
-  max-width:780px;
-  margin:-12px auto 30px;
-  padding:0 16px;
-}
-
-.stats {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
+h1 {font-size:30px;line-height:1.2;margin:25px 0 8px;}
+header p {margin:0;opacity:.9;}
+main {max-width:780px;margin:-12px auto 30px;padding:0 16px;}
+.stats {display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
 .stat,.panel,.tile {
   background:white;
   border:1px solid var(--line);
@@ -77,24 +54,14 @@ main {
   padding:15px;
   box-shadow:0 5px 18px #29265b08;
 }
-
-.stat strong {
-  display:block;
-  font-size:21px;
-}
-
-.stat span {
-  font-size:12px;
-  color:var(--muted);
-}
-
+.stat strong {display:block;font-size:21px;}
+.stat span {font-size:12px;color:var(--muted);}
 nav {
   display:flex;
   gap:8px;
   overflow-x:auto;
   padding:18px 0 12px;
 }
-
 nav button {
   border:0;
   border-radius:999px;
@@ -104,34 +71,16 @@ nav button {
   font-weight:700;
   white-space:nowrap;
 }
-
-nav button.active {
-  background:var(--purple);
-  color:white;
-}
-
-.panel {
-  padding:18px;
-  margin:8px 0 14px;
-}
-
+nav button.active {background:var(--purple);color:white;}
+.panel {padding:18px;margin:8px 0 14px;}
 .section-head {
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
 }
-
-h2 {
-  font-size:19px;
-  margin:0 0 12px;
-}
-
-.muted {
-  color:var(--muted);
-  font-size:14px;
-}
-
+h2 {font-size:19px;margin:0 0 12px;}
+.muted {color:var(--muted);font-size:14px;}
 .progress {
   height:9px;
   background:#eeedf7;
@@ -139,19 +88,16 @@ h2 {
   overflow:hidden;
   margin-top:10px;
 }
-
 .progress i {
   display:block;
   height:100%;
   background:#61c99c;
 }
-
 .grid {
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
-
 .tile {
   padding:14px;
   text-align:left;
@@ -159,21 +105,10 @@ h2 {
   color:inherit;
   width:100%;
 }
-
-.tile .emoji { font-size:24px; }
-
-.tile b {
-  display:block;
-  margin:6px 0 3px;
-}
-
-.tile small { color:var(--muted); }
-
-button {
-  cursor:pointer;
-  font:inherit;
-}
-
+.tile .emoji {font-size:24px;}
+.tile b {display:block;margin:6px 0 3px;}
+.tile small {color:var(--muted);}
+button {cursor:pointer;font:inherit;}
 .primary {
   background:var(--purple);
   color:white;
@@ -182,7 +117,14 @@ button {
   padding:11px 15px;
   font-weight:700;
 }
-
+.secondary {
+  background:var(--lav);
+  color:var(--purple);
+  border:0;
+  border-radius:12px;
+  padding:11px 15px;
+  font-weight:700;
+}
 .lesson {
   border:1px solid var(--line);
   border-radius:14px;
@@ -190,24 +132,9 @@ button {
   margin:9px 0;
   background:white;
 }
-
-.lesson h3 {
-  font-size:16px;
-  margin:0 0 5px;
-}
-
-.lesson p {
-  margin:4px 0;
-  color:var(--muted);
-  font-size:14px;
-}
-
-.korean {
-  font-size:27px;
-  font-weight:800;
-  letter-spacing:1px;
-}
-
+.lesson h3 {font-size:16px;margin:0 0 5px;}
+.lesson p {margin:4px 0;color:var(--muted);font-size:14px;}
+.korean {font-size:29px;font-weight:800;letter-spacing:1px;}
 .answer {
   display:block;
   width:100%;
@@ -218,12 +145,16 @@ button {
   padding:12px;
   margin:8px 0;
 }
-
-.answer:hover {
-  border-color:var(--purple);
-  background:var(--lav);
+.answer:hover {border-color:var(--purple);background:var(--lav);}
+.answer:disabled {opacity:1;cursor:default;}
+.feedback {
+  padding:12px;
+  border-radius:12px;
+  margin-top:12px;
+  font-weight:600;
 }
-
+.feedback.good {background:var(--green);color:#176b4c;}
+.feedback.bad {background:var(--red);color:#a33b3b;}
 .feedback-area {
   text-align:center;
   padding:24px 16px;
@@ -232,7 +163,6 @@ button {
   border:1px solid var(--line);
   border-radius:18px;
 }
-
 .feedback-link {
   display:inline-block;
   padding:14px 24px;
@@ -242,28 +172,22 @@ button {
   text-decoration:none;
   font-weight:bold;
 }
-
-.feedback-area p {
-  font-size:13px;
-  color:var(--muted);
-  margin-bottom:0;
-}
-
-footer {
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  padding:20px;
-}
-
+.feedback-area p {font-size:13px;color:var(--muted);margin-bottom:0;}
+footer {text-align:center;color:var(--muted);font-size:12px;padding:20px;}
 @media(min-width:620px) {
-  .grid { grid-template-columns:repeat(3,1fr); }
+  .grid {grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:360px) {
+  header .top {font-size:11px;}
+  h1 {font-size:25px;}
+  .stats {gap:6px;}
+  .stat {padding:10px;}
+  .stat strong {font-size:18px;}
 }
 </style>
 </head>
 
 <body>
-
 <header>
   <div class="wrap">
     <div class="top">
@@ -302,12 +226,9 @@ footer {
   <section id="content"></section>
 
   <div class="feedback-area">
-    <a
-      class="feedback-link"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSfM4YlJV9QZAVRQ1kqn2OSLUUZwna47-JadYb-3S9EKQmwIHA/viewform"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <a class="feedback-link"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSfM4YlJV9QZAVRQ1kqn2OSLUUZwna47-JadYb-3S9EKQmwIHA/viewform"
+       target="_blank" rel="noopener noreferrer">
       ⭐ Avaliar aplicativo
     </a>
     <p>Sua opinião é importante para nós!</p>
@@ -320,36 +241,36 @@ footer {
 
 <script>
 const lessons = [
-  ["Cumprimentos","안녕하세요","Olá / Bom dia"],
-  ["Apresentações","저는 마리아예요","Eu sou Maria"],
-  ["Obrigado","감사합니다","Obrigado(a)"],
-  ["Desculpas","죄송합니다","Desculpe"],
-  ["Sim e não","네 / 아니요","Sim / Não"],
-  ["Família","가족","Família"],
-  ["Números 1","하나, 둘, 셋","Um, dois, três"],
-  ["Números 2","일, 이, 삼","Um, dois, três (sino-coreano)"],
-  ["Comida","밥","Arroz / refeição"],
-  ["Água","물 주세요","Água, por favor"],
-  ["Café","커피","Café"],
-  ["Restaurante","맛있어요","Está delicioso"],
-  ["Tempo","오늘","Hoje"],
-  ["Dias","월요일","Segunda-feira"],
-  ["Lugares","학교","Escola"],
-  ["Transporte","버스","Ônibus"],
-  ["Compras","얼마예요?","Quanto custa?"],
-  ["Cores","빨간색","Vermelho"],
-  ["Adjetivos","좋아요","É bom / gosto"],
-  ["Verbos","가요","Vou / vai"],
-  ["Casa","집","Casa"],
-  ["Trabalho","일","Trabalho"],
-  ["Estudos","공부해요","Estudo"],
-  ["Hobbies","음악","Música"],
-  ["Clima","날씨","Clima"],
-  ["Sentimentos","행복해요","Estou feliz"],
-  ["Localização","어디예요?","Onde fica?"],
-  ["Pedido","도와주세요","Ajude-me, por favor"],
-  ["Passado","갔어요","Fui"],
-  ["Revisão","한국어를 공부해요","Estudo coreano"]
+  ["Cumprimentos","안녕하세요","Olá / Bom dia","Uma saudação educada usada no dia a dia."],
+  ["Apresentações","저는 마리아예요","Eu sou Maria","저는 significa 'eu' como tópico da frase."],
+  ["Obrigado","감사합니다","Obrigado(a)","Uma expressão educada para agradecer."],
+  ["Desculpas","죄송합니다","Desculpe","Use esta expressão em situações formais."],
+  ["Sim e não","네 / 아니요","Sim / Não","네 significa sim e 아니요 significa não."],
+  ["Família","가족","Família","가족 é a palavra coreana para família."],
+  ["Números 1","하나, 둘, 셋","Um, dois, três","Números coreanos nativos."],
+  ["Números 2","일, 이, 삼","Um, dois, três","Números de origem sino-coreana."],
+  ["Comida","밥","Arroz / refeição","밥 também pode significar refeição."],
+  ["Água","물 주세요","Água, por favor","주세요 é uma forma educada de pedir algo."],
+  ["Café","커피","Café","커피 é café em coreano."],
+  ["Restaurante","맛있어요","Está delicioso","Uma expressão muito usada em restaurantes."],
+  ["Tempo","오늘","Hoje","오늘 significa hoje."],
+  ["Dias","월요일","Segunda-feira","월요일 significa segunda-feira."],
+  ["Lugares","학교","Escola","학교 é o lugar onde estudamos."],
+  ["Transporte","버스","Ônibus","버스 significa ônibus."],
+  ["Compras","얼마예요?","Quanto custa?","Use esta pergunta ao fazer compras."],
+  ["Cores","빨간색","Vermelho","빨간색 significa vermelho."],
+  ["Adjetivos","좋아요","É bom / gosto","좋아요 pode expressar que algo é bom."],
+  ["Verbos","가요","Vou / vai","가요 significa ir, em linguagem educada."],
+  ["Casa","집","Casa","집 significa casa."],
+  ["Trabalho","일","Trabalho","일 pode significar trabalho."],
+  ["Estudos","공부해요","Estudo","공부하다 significa estudar."],
+  ["Hobbies","음악","Música","음악 significa música."],
+  ["Clima","날씨","Clima","날씨 significa clima ou tempo."],
+  ["Sentimentos","행복해요","Estou feliz","행복해요 significa estar feliz."],
+  ["Localização","어디예요?","Onde fica?","Uma pergunta para descobrir onde algo está."],
+  ["Pedido","도와주세요","Ajude-me, por favor","Uma maneira educada de pedir ajuda."],
+  ["Passado","갔어요","Fui","갔어요 é a forma passada do verbo 가다."],
+  ["Revisão","한국어를 공부해요","Estudo coreano","한국어 significa língua coreana."]
 ];
 
 const vocab = [
@@ -367,8 +288,19 @@ const vocab = [
   ["아니요","Não"]
 ];
 
+const hangul = [
+  ["ㄱ","G/K"],["ㄴ","N"],["ㄷ","D/T"],["ㄹ","R/L"],
+  ["ㅁ","M"],["ㅂ","B/P"],["ㅅ","S"],["ㅇ","Mudo / NG"],
+  ["ㅈ","J"],["ㅊ","CH"],["ㅋ","K"],["ㅌ","T"],
+  ["ㅍ","P"],["ㅎ","H"],
+  ["ㅏ","A"],["ㅑ","YA"],["ㅓ","EO"],["ㅕ","YEO"],
+  ["ㅗ","O"],["ㅛ","YO"],["ㅜ","U"],["ㅠ","YU"],
+  ["ㅡ","EU"],["ㅣ","I"]
+];
+
 let xp = Number(localStorage.getItem("xp") || 0);
 let completed = JSON.parse(localStorage.getItem("completed") || "[]");
+let quizAnswered = JSON.parse(localStorage.getItem("quizAnswered") || "[]");
 
 const content = document.getElementById("content");
 
@@ -383,8 +315,16 @@ function speak(text) {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "ko-KR";
+    utterance.rate = 0.8;
     window.speechSynthesis.speak(utterance);
   }
+}
+
+function saveProgress() {
+  localStorage.setItem("xp", xp);
+  localStorage.setItem("completed", JSON.stringify(completed));
+  localStorage.setItem("quizAnswered", JSON.stringify(quizAnswered));
+  stats();
 }
 
 function render(tab = "inicio") {
@@ -402,11 +342,8 @@ function render(tab = "inicio") {
           <b>${percent}%</b>
         </div>
         <p class="muted">Continue aprendendo no seu ritmo.</p>
-        <div class="progress">
-          <i style="width:${percent}%"></i>
-        </div>
+        <div class="progress"><i style="width:${percent}%"></i></div>
       </div>
-
       <h2>Comece por aqui</h2>
       <div class="grid">
         <button class="tile" onclick="render('hangul')">
@@ -434,23 +371,15 @@ function render(tab = "inicio") {
   }
 
   if (tab === "hangul") {
-    const chars = [
-      "ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ",
-      "ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ",
-      "ㅏ","ㅑ","ㅓ","ㅕ","ㅗ","ㅛ","ㅜ",
-      "ㅠ","ㅡ","ㅣ"
-    ];
-
     content.innerHTML = `
       <div class="panel">
         <h2>O alfabeto coreano — 한글</h2>
-        <p class="muted">
-          Toque em uma letra para ouvir a pronúncia.
-        </p>
+        <p class="muted">Toque em uma letra para ouvir sua pronúncia.</p>
         <div class="grid">
-          ${chars.map(char => `
-            <button class="tile korean" onclick="speak('${char}')">
-              ${char}
+          ${hangul.map(item => `
+            <button class="tile" onclick="speak('${item[0]}')">
+              <span class="korean">${item[0]}</span>
+              <small>${item[1]}</small>
             </button>
           `).join("")}
         </div>
@@ -462,9 +391,7 @@ function render(tab = "inicio") {
     content.innerHTML = `
       <div class="panel">
         <h2>Vocabulário essencial</h2>
-        <p class="muted">
-          Toque na palavra coreana para ouvir.
-        </p>
+        <p class="muted">Toque na palavra coreana para ouvir.</p>
         ${vocab.map(word => `
           <div class="lesson section-head">
             <div>
@@ -484,20 +411,18 @@ function render(tab = "inicio") {
     content.innerHTML = `
       <div class="panel">
         <h2>30 lições para iniciantes</h2>
-        <p class="muted">
-          Conclua uma lição para ganhar 10 XP.
-        </p>
+        <p class="muted">Estude cada lição e conclua para ganhar 10 XP.</p>
+        <div class="progress">
+          <i style="width:${completed.length / 30 * 100}%"></i>
+        </div>
         ${lessons.map((lesson, index) => `
           <div class="lesson section-head">
             <div>
-              <h3>
-                ${completed.includes(index) ? "✅" : "📘"}
-                ${index + 1}. ${lesson[0]}
-              </h3>
+              <h3>${completed.includes(index) ? "✅" : "📘"} ${index + 1}. ${lesson[0]}</h3>
               <div class="korean">${lesson[1]}</div>
               <p>${lesson[2]}</p>
             </div>
-            <button class="primary" onclick="complete(${index})">
+            <button class="primary" onclick="openLesson(${index})">
               ${completed.includes(index) ? "Rever" : "Estudar"}
             </button>
           </div>
@@ -507,62 +432,127 @@ function render(tab = "inicio") {
   }
 
   if (tab === "quiz") {
-    const question = vocab[Math.floor(Math.random() * vocab.length)];
-
-    const options = [
-      question[1],
-      ...vocab
-        .filter(word => word[1] !== question[1])
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 3)
-        .map(word => word[1])
-    ].sort(() => Math.random() - 0.5);
-
-    content.innerHTML = `
-      <div class="panel">
-        <h2>🧠 Quiz rápido</h2>
-        <p class="muted">O que significa esta palavra?</p>
-        <div class="korean">${question[0]}</div>
-        <button class="primary" onclick="speak('${question[0]}')">
-          🔊 Ouvir
-        </button>
-        ${options.map(option => `
-          <button
-            class="answer"
-            onclick="check(this, ${JSON.stringify(option)}, ${JSON.stringify(question[1])})"
-          >
-            ${option}
-          </button>
-        `).join("")}
-        <p id="feedback" class="muted"></p>
-      </div>
-    `;
+    showQuiz();
   }
 }
 
-function complete(index) {
+function openLesson(index) {
+  const lesson = lessons[index];
+  const isDone = completed.includes(index);
+
+  content.innerHTML = `
+    <div class="panel">
+      <p class="muted">LIÇÃO ${index + 1} DE 30</p>
+      <h2>${lesson[0]}</h2>
+      <div class="lesson">
+        <p class="muted">Palavra ou expressão coreana</p>
+        <div class="korean">${lesson[1]}</div>
+        <h3>${lesson[2]}</h3>
+        <button class="primary" onclick="speak('${lesson[1]}')">
+          🔊 Ouvir pronúncia
+        </button>
+      </div>
+      <div class="lesson">
+        <h3>📖 Explicação</h3>
+        <p>${lesson[3]}</p>
+      </div>
+      <div class="lesson">
+        <h3>✍️ Vamos praticar!</h3>
+        <p>1. Leia a expressão coreana.</p>
+        <p>2. Ouça a pronúncia.</p>
+        <p>3. Repita em voz alta algumas vezes.</p>
+      </div>
+      ${isDone
+        ? `<div class="feedback good">✅ Você já concluiu esta lição!</div>`
+        : `<button class="primary" onclick="completeLesson(${index})">Concluir lição · +10 XP ⭐</button>`
+      }
+      <br><br>
+      <button class="secondary" onclick="render('licoes')">← Voltar às lições</button>
+    </div>
+  `;
+}
+
+function completeLesson(index) {
   if (!completed.includes(index)) {
     completed.push(index);
     xp += 10;
-    localStorage.setItem("completed", JSON.stringify(completed));
-    localStorage.setItem("xp", xp);
-    stats();
+    saveProgress();
   }
-  render("licoes");
+  openLesson(index);
 }
 
-function check(element, answer, correct) {
+let currentQuestion = null;
+
+function showQuiz() {
+  const questionIndex = Math.floor(Math.random() * vocab.length);
+  const question = vocab[questionIndex];
+  currentQuestion = questionIndex;
+
+  const options = [
+    question[1],
+    ...vocab
+      .filter(word => word[1] !== question[1])
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3)
+      .map(word => word[1])
+  ].sort(() => Math.random() - 0.5);
+
+  const alreadyAnswered = quizAnswered.includes(questionIndex);
+
+  content.innerHTML = `
+    <div class="panel">
+      <h2>🧠 Quiz rápido</h2>
+      <p class="muted">O que significa esta palavra?</p>
+      <div class="korean">${question[0]}</div>
+      <br>
+      <button class="primary" onclick="speak('${question[0]}')">🔊 Ouvir</button>
+      <div id="quizOptions">
+        ${options.map(option => `
+          <button class="answer"
+            onclick="checkAnswer(this,'${encodeURIComponent(option)}',${questionIndex})">
+            ${option}
+          </button>
+        `).join("")}
+      </div>
+      <p id="feedback"></p>
+      <button class="secondary" onclick="showQuiz()">Próxima pergunta →</button>
+      <p class="muted">⭐ +5 XP por resposta correta. Cada palavra dá XP apenas uma vez.</p>
+      ${alreadyAnswered ? `<p class="muted">Você já ganhou XP nesta palavra. Pode praticar novamente!</p>` : ""}
+    </div>
+  `;
+}
+
+function checkAnswer(element, encodedAnswer, questionIndex) {
+  const answer = decodeURIComponent(encodedAnswer);
+  const correct = vocab[questionIndex][1];
   const feedback = document.getElementById("feedback");
+  const buttons = document.querySelectorAll("#quizOptions button");
+
+  if (feedback.dataset.answered === "true") return;
+  feedback.dataset.answered = "true";
+
+  buttons.forEach(button => button.disabled = true);
 
   if (answer === correct) {
-    feedback.textContent = "Muito bem! +5 XP 🎉";
-    xp += 5;
-    localStorage.setItem("xp", xp);
-    stats();
+    if (!quizAnswered.includes(questionIndex)) {
+      quizAnswered.push(questionIndex);
+      xp += 5;
+      saveProgress();
+      feedback.textContent = "Muito bem! +5 XP 🎉";
+    } else {
+      feedback.textContent = "Muito bem! Você já ganhou XP nesta palavra! 🎉";
+    }
+    feedback.className = "feedback good";
     element.style.background = "#dff8ed";
   } else {
     feedback.textContent = "Quase! A resposta correta é: " + correct;
+    feedback.className = "feedback bad";
     element.style.background = "#ffe8e8";
+    buttons.forEach(button => {
+      if (button.textContent.trim() === correct) {
+        button.style.background = "#dff8ed";
+      }
+    });
   }
 }
 
@@ -581,6 +571,5 @@ if ("serviceWorker" in navigator) {
 stats();
 render();
 </script>
-
 </body>
 </html>
