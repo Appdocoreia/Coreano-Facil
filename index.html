@@ -1,59 +1,112 @@
- if(mode==="hangul"){
-    const all=[
-      ...vowelBasic,
-      ...vowelCompound,
-      ...consonantBasic,
-      ...consonantDouble
-    ];
-    const item=all[Math.floor(Math.random()*all.length)];
-    const options=[
-      item,
-      ...all.filter(x=>x.c!==item.c)
-        .sort(()=>Math.random()-.5)
-        .slice(0,3)
-    ];
+/* ==================================
+   HANGUL RESPONSIVE UI FIX
+   ================================== */
 
-    return {
-      prompt:item.a,
-      label:"ESCOLHA O SÍMBOLO CORRETO",
-      answer:item.c,
-      options:options.sort(()=>Math.random()-.5).map(x=>x.c),
-      speech:item.a
-    };
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.tabs .chip {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 7px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+  text-align: center;
+  font-size: 12px;
+}
+
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 105px), 1fr)
+  );
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.char-card {
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 6px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #fff;
+  text-align: center;
+}
+
+.char-card strong {
+  display: block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: clamp(27px, 5vw, 35px);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.char-card small {
+  display: block;
+  width: 100%;
+  min-height: 20px;
+  margin: 5px 0 10px;
+  color: var(--muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.char-card button {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 35px;
+  padding: 8px 4px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--soft);
+  color: var(--purple);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: normal;
+}
+
+.panel {
+  min-width: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 430px) {
+  .tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  if(mode==="lesson"){
-    const lesson=lessons[Math.floor(Math.random()*lessons.length)];
-    const word=lesson.words[
-      Math.floor(Math.random()*lesson.words.length)
-    ];
-    const wrong=vocab.filter(x=>x[1]!==word[1])
-      .sort(()=>Math.random()-.5)
-      .slice(0,3);
-    const options=[word,...wrong].sort(()=>Math.random()-.5);
-
-    return {
-      prompt:word[0],
-      label:"ESCOLHA A RESPOSTA CORRETA",
-      answer:word[1],
-      options:options.map(x=>x[1]),
-      speech:word[0]
-    };
+  .char-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
   }
 
-  const item=vocab[Math.floor(Math.random()*vocab.length)];
-  const wrong=vocab.filter(x=>x[1]!==item[1])
-    .sort(()=>Math.random()-.5)
-    .slice(0,3);
-  const options=[item,...wrong].sort(()=>Math.random()-.5);
+  .char-card {
+    padding: 12px 4px;
+  }
 
-  return {
-    prompt:mode==="listening"?"🔊":item[0],
-    label:mode==="listening"
-      ?"OUÇA E ESCOLHA A RESPOSTA CORRETA"
-      :"ESCOLHA O SIGNIFICADO CORRETO",
-    answer:item[1],
-    options:options.map(x=>x[1]),
-    speech:item[0]
-  };
+  .char-card button {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 700px) {
+  .tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
