@@ -2,127 +2,77 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#6655d9">
-<meta name="description" content="Aprenda coreano de um jeito fácil e divertido!">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#5b55d9">
+<meta name="description" content="Aprenda coreano de um jeito fácil e divertido.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Coreano Fácil</title>
 <style>
-:root{--purple:#6655d9;--ink:#25233a;--muted:#77758b;--bg:#f6f5fb;--card:#fff;--line:#eceaf4;--green:#16865b}
+:root{--ink:#24243b;--muted:#77778f;--purple:#625ce7;--lav:#efeeff;--line:#ececf4;--bg:#f7f7fc;--white:#fff;--mint:#dff8ed}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-header{background:linear-gradient(130deg,#6655d9,#9385f3);color:white;padding:25px 18px 30px;border-radius:0 0 26px 26px}
-.wrap{max-width:900px;margin:auto;padding:0 16px}header .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.brand{font-size:22px;font-weight:850;letter-spacing:-.5px}.tag{opacity:.9;font-size:13px;margin-top:5px}
-.pill{background:#ffffff25;padding:8px 12px;border-radius:99px;font-size:13px;white-space:nowrap}
-main{padding:18px 0 50px}.welcome{font-size:20px;font-weight:800;margin:8px 0 4px}.sub{color:var(--muted);font-size:14px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
-.stat,.panel,.lesson{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:14px}
-.stat b{font-size:22px;display:block}.stat span{font-size:12px;color:var(--muted)}
-.progress{height:9px;background:#eceaf5;border-radius:20px;overflow:hidden;margin-top:9px}.progress i{display:block;height:100%;background:var(--purple);width:0}
-nav{display:flex;gap:8px;overflow:auto;padding:5px 0 14px}
-nav button,.btn{border:0;border-radius:12px;padding:11px 14px;font-weight:700;background:#eceaf8;color:#5145ae;cursor:pointer;white-space:nowrap}
-nav button.active,.btn.primary{background:var(--purple);color:white}
-h2{font-size:19px;margin:14px 0 10px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.lesson{display:flex;align-items:center;gap:12px;text-align:left;width:100%;cursor:pointer;color:inherit}
-.lesson .num{background:#f0edff;color:var(--purple);width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-weight:850;flex-shrink:0}
-.lesson small{display:block;color:var(--muted);margin-top:3px}.done{margin-left:auto;color:var(--green);font-weight:800}
-.panel{padding:18px;margin:10px 0}.hangul{font-size:38px;font-weight:800;color:var(--purple);line-height:1.3}
-.word{font-size:27px;font-weight:800}.translation{color:var(--muted);margin-top:4px}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.btn{font-size:14px}.btn.secondary{background:#f0eff6;color:#454258}
-.quiz-option{display:block;width:100%;text-align:left;margin:8px 0;padding:13px;border:1px solid var(--line);border-radius:12px;background:white;font-size:15px;cursor:pointer}
-.quiz-option:active{border-color:var(--purple)}.feedback{font-weight:700;margin-top:12px;min-height:24px}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
-.hidden{display:none!important}
-@media(min-width:700px){header{padding-top:32px}.welcome{font-size:24px}}
+header{background:linear-gradient(135deg,#625ce7,#8b75ef);color:white;padding:26px 20px 32px;border-radius:0 0 28px 28px}
+.wrap{max-width:780px;margin:auto}header .top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;opacity:.95}
+h1{font-size:30px;line-height:1.12;margin:25px 0 8px}header p{margin:0;opacity:.9}
+main{max-width:780px;margin:-12px auto 40px;padding:0 16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat,.panel,.tile{background:white;border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:0 5px 18px #29265b08}
+.stat strong{display:block;font-size:21px}.stat span{font-size:12px;color:var(--muted)}
+nav{display:flex;gap:8px;overflow:auto;padding:18px 0 12px}
+nav button{border:0;border-radius:999px;background:#eae9f8;color:#555276;padding:10px 15px;font-weight:700;white-space:nowrap}
+nav button.active{background:var(--purple);color:white}
+.panel{padding:18px;margin:8px 0 14px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+h2{font-size:19px;margin:0 0 12px}.muted{color:var(--muted);font-size:14px}
+.progress{height:9px;background:#eeedf7;border-radius:9px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:#61c99c;width:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tile{padding:14px;text-align:left;cursor:pointer;color:inherit}.tile .emoji{font-size:24px}.tile b{display:block;margin:6px 0 3px}.tile small{color:var(--muted)}
+button{cursor:pointer;font:inherit}.primary{background:var(--purple);color:white;border:0;border-radius:12px;padding:11px 15px;font-weight:700}
+.lesson{border:1px solid var(--line);border-radius:14px;padding:14px;margin:9px 0;background:#fff}
+.lesson h3{font-size:16px;margin:0 0 5px}.lesson p{margin:4px 0;color:var(--muted);font-size:14px}
+.korean{font-size:27px;font-weight:800;letter-spacing:1px}.answer{display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;margin:8px 0}
+.answer:focus,.answer:hover{border-color:var(--purple);background:var(--lav)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
- <div class="top"><div><div class="brand">🇰🇷 Coreano Fácil</div><div class="tag">Aprenda coreano de um jeito fácil e divertido!</div></div><div class="pill">⭐ <span id="xp">0</span> XP</div></div>
+<div class="top"><span>🇰🇷 COREANO FÁCIL</span><span>🇧🇷 Para quem fala português</span></div>
+<h1>안녕하세요!<br>Vamos aprender coreano?</h1>
+<p>Pequenos passos todos os dias. 💜</p>
 </div></header>
-<main class="wrap">
- <div class="welcome">안녕하세요! Olá! 👋</div><div class="sub">Seu primeiro passo para aprender coreano começa aqui.</div>
- <div class="stats">
-  <div class="stat"><b id="level">1</b><span>Nível</span></div>
-  <div class="stat"><b id="completed">0/30</b><span>Lições concluídas</span></div>
-  <div class="stat"><b id="streak">0</b><span>Sequência de estudo</span></div>
- </div>
- <div class="panel"><b>Seu progresso</b><div class="progress"><i id="bar"></i></div><div class="sub" id="progressText" style="margin-top:7px">Vamos começar!</div></div>
- <nav>
-  <button class="active" data-tab="home">Início</button><button data-tab="hangul">Hangul</button><button data-tab="vocab">Vocabulário</button><button data-tab="quiz">Quiz</button><button data-tab="lessons">30 lições</button>
- </nav>
- <section id="home">
-  <h2>Continue aprendendo</h2>
-  <div class="grid">
-   <button class="lesson" onclick="showTab('hangul')"><span class="num">가</span><span><b>Aprenda o Hangul</b><small>Conheça o alfabeto coreano</small></span></button>
-   <button class="lesson" onclick="showTab('vocab')"><span class="num">가방</span><span><b>Palavras do dia</b><small>Aprenda palavras úteis</small></span></button>
-   <button class="lesson" onclick="showTab('quiz')"><span class="num">?</span><span><b>Teste seus conhecimentos</b><small>Pratique com perguntas</small></span></button>
-  </div>
-  <h2>Primeiras palavras</h2><div class="grid" id="homeWords"></div>
- </section>
- <section id="hangul" class="hidden"><h2>O alfabeto coreano — 한글</h2><p class="sub">Toque em um caractere para ouvir uma aproximação da pronúncia. A pronúncia pode variar conforme a posição na palavra.</p><div class="grid" id="hangulGrid"></div></section>
- <section id="vocab" class="hidden"><h2>Vocabulário essencial</h2><p class="sub">Palavras e expressões úteis em coreano, com tradução em português brasileiro.</p><div class="grid" id="vocabGrid"></div></section>
- <section id="quiz" class="hidden"><h2>Quiz de coreano</h2><div class="panel"><div class="sub" id="qCount">Pergunta 1</div><div class="word" id="question">O que significa 안녕하세요?</div><div id="options"></div><div class="feedback" id="feedback"></div><div class="actions"><button class="btn primary" id="next" onclick="nextQuestion()" disabled>Próxima pergunta</button></div></div></section>
- <section id="lessons" class="hidden"><h2>Plano de 30 lições</h2><p class="sub">Estude no seu ritmo. Cada lição concluída adiciona XP ao seu progresso.</p><div class="grid" id="lessonGrid"></div></section>
- <section id="lessonDetail" class="hidden"><button class="btn secondary" onclick="showTab('lessons')">← Voltar às lições</button><div class="panel"><div class="sub" id="detailNumber"></div><h2 id="detailTitle"></h2><p id="detailDesc"></p><div class="hangul" id="detailKorean"></div><div class="translation" id="detailPortuguese"></div><div class="actions"><button class="btn secondary" onclick="speak(document.getElementById('detailKorean').textContent)">🔊 Ouvir</button><button class="btn primary" id="completeLesson">Concluir lição +10 XP</button></div></div></section>
+<main>
+<div class="stats">
+<div class="stat"><strong id="xp">0</strong><span>⭐ XP acumulado</span></div>
+<div class="stat"><strong id="done">0/30</strong><span>📚 Lições concluídas</span></div>
+<div class="stat"><strong id="level">1</strong><span>🏅 Seu nível</span></div>
+</div>
+<nav id="tabs">
+<button class="active" data-tab="inicio">Início</button><button data-tab="hangul">Hangul</button><button data-tab="vocabulario">Vocabulário</button><button data-tab="licoes">Lições</button><button data-tab="quiz">Quiz</button>
+</nav>
+<section id="content"></section>
 </main>
-<footer>Coreano Fácil · Feito para quem fala português brasileiro 🇧🇷</footer>
+<footer>Coreano Fácil · Feito com carinho para estudantes de coreano</footer>
 <script>
-const words=[
-["안녕하세요","Olá / Oi"],["감사합니다","Obrigado(a)"],["네","Sim"],["아니요","Não"],["사랑","Amor"],["친구","Amigo(a)"],["물","Água"],["밥","Arroz / Refeição"],["학교","Escola"],["한국","Coreia"],["가족","Família"],["책","Livro"],["집","Casa"],["커피","Café"],["맛있어요","Está gostoso"],["죄송합니다","Desculpe"],["주세요","Por favor, me dê"],["이름","Nome"],["좋아요","Bom / Gosto"],["안녕히 가세요","Adeus (para quem vai)"]
-];
-const letters=[["ㄱ","g/k"],["ㄴ","n"],["ㄷ","d/t"],["ㄹ","r/l"],["ㅁ","m"],["ㅂ","b/p"],["ㅅ","s"],["ㅇ","mudo/ng"],["ㅈ","j"],["ㅊ","ch"],["ㅋ","k aspirado"],["ㅌ","t aspirado"],["ㅍ","p aspirado"],["ㅎ","h"],["ㅏ","a"],["ㅑ","ya"],["ㅓ","eo"],["ㅕ","yeo"],["ㅗ","o"],["ㅛ","yo"],["ㅜ","u"],["ㅠ","yu"],["ㅡ","eu"],["ㅣ","i"]];
-const topics=[
-["Conhecendo o Hangul","O alfabeto coreano é chamado 한글 (Hangul). Comece reconhecendo as letras.","한글","Alfabeto coreano"],
-["As vogais básicas","Aprenda as vogais simples e seus sons aproximados.","ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ","a · eo · o · u · eu · i"],
-["As consoantes básicas","Conheça as consoantes mais usadas do coreano.","ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ","g/k · n · d/t · r/l · m · b/p · s"],
-["Formando sílabas","As letras se juntam em blocos silábicos, como 가, 나 e 다.","가 나 다 라 마","ga · na · da · ra · ma"],
-["Cumprimentos","Aprenda a cumprimentar alguém com educação.","안녕하세요","Olá!"],
-["Como agradecer","Use expressões de agradecimento no dia a dia.","감사합니다","Obrigado(a)!"],
-["Sim e não","Duas respostas essenciais para uma conversa.","네 / 아니요","Sim / Não"],
-["Apresentando-se","Aprenda a dizer seu nome e se apresentar.","저는 ___예요","Eu sou ___. (informal educado)"],
-["Nacionalidades","Aprenda a falar sobre países e nacionalidades.","브라질 / 한국","Brasil / Coreia"],
-["Números sino-coreanos","Conheça os números de origem sino-coreana.","일 이 삼 사 오","1 · 2 · 3 · 4 · 5"],
-["Números nativos","Conheça os números coreanos nativos.","하나 둘 셋 넷 다섯","1 · 2 · 3 · 4 · 5"],
-["Dias da semana","Aprenda os nomes dos dias da semana.","월요일","Segunda-feira"],
-["Que horas são?","Uma pergunta útil para organizar o dia.","몇 시예요?","Que horas são?"],
-["Comidas","Aprenda palavras para pedir comida.","밥 / 물 / 커피","Refeição / Água / Café"],
-["No restaurante","Uma expressão simples para fazer um pedido.","주세요","Por favor, me dê"],
-["Família","Aprenda palavras sobre pessoas da família.","가족","Família"],
-["Amigos","Como falar sobre amizade.","친구","Amigo(a)"],
-["Lugares","Vocabulário para lugares comuns.","학교 / 집","Escola / Casa"],
-["Transporte","Palavras úteis para se locomover.","버스 / 지하철","Ônibus / Metrô"],
-["Compras","Uma expressão útil para perguntar o preço.","얼마예요?","Quanto custa?"],
-["Cores","Aprenda algumas cores comuns.","빨간색 / 파란색","Vermelho / Azul"],
-["Adjetivos","Descreva coisas e situações.","좋아요 / 커요","É bom / É grande"],
-["Verbos do cotidiano","Conheça verbos muito usados.","가다 / 오다","Ir / Vir"],
-["Fazendo perguntas","Aprenda a reconhecer uma pergunta simples.","뭐예요?","O que é?"],
-["Partículas 은/는","Entenda o tópico da frase de forma introdutória.","저는 학생이에요","Eu sou estudante"],
-["Partículas 이/가","Uma introdução à marcação do sujeito.","비가 와요","Está chovendo"],
-["Passado básico","Veja um exemplo simples no passado.","갔어요","Fui"],
-["Futuro básico","Veja uma forma comum de falar do futuro.","갈 거예요","Vou ir / Irei"],
-["Frases úteis","Reúna expressões que ajudam em conversas reais.","천천히 말해 주세요","Fale devagar, por favor"],
-["Revisão geral","Revise o vocabulário e as estruturas das lições anteriores.","잘했어요!","Muito bem!"]
-];
-let state=JSON.parse(localStorage.getItem("cf-progress")||'{"xp":0,"done":[],"streak":0}');
-function save(){localStorage.setItem("cf-progress",JSON.stringify(state));updateStats()}
-function updateStats(){document.getElementById("xp").textContent=state.xp;document.getElementById("level").textContent=Math.floor(state.xp/50)+1;document.getElementById("completed").textContent=state.done.length+"/30";document.getElementById("streak").textContent=state.streak;let p=state.done.length/30*100;document.getElementById("bar").style.width=p+"%";document.getElementById("progressText").textContent=state.done.length?`${state.done.length} de 30 lições concluídas`:"Vamos começar!"}
-function showTab(id){document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));}
-document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
-function speak(t){if("speechSynthesis"in window){let u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";speechSynthesis.cancel();speechSynthesis.speak(u)}else alert("A leitura em voz alta não está disponível neste navegador.")}
-function wordCard(w){return `<div class="panel"><div class="word">${w[0]}</div><div class="translation">${w[1]}</div><div class="actions"><button class="btn secondary" onclick="speak('${w[0]}')">🔊 Ouvir</button></div></div>`}
-document.getElementById("homeWords").innerHTML=words.slice(0,3).map(wordCard).join("");
-document.getElementById("vocabGrid").innerHTML=words.map(wordCard).join("");
-document.getElementById("hangulGrid").innerHTML=letters.map(x=>`<button class="panel" style="cursor:pointer;text-align:center" onclick="speak('${x[0]}')"><div class="hangul">${x[0]}</div><div class="translation">${x[1]}</div><small>🔊 Ouvir</small></button>`).join("");
-function renderLessons(){document.getElementById("lessonGrid").innerHTML=topics.map((t,i)=>`<button class="lesson" onclick="openLesson(${i})"><span class="num">${String(i+1).padStart(2,"0")}</span><span><b>${t[0]}</b><small>${t[1]}</small></span>${state.done.includes(i)?'<span class="done">✓</span>':''}</button>`).join("")}
-function openLesson(i){showTab("lessonDetail");document.getElementById("detailNumber").textContent=`LIÇÃO ${i+1} DE 30`;document.getElementById("detailTitle").textContent=topics[i][0];document.getElementById("detailDesc").textContent=topics[i][1];document.getElementById("detailKorean").textContent=topics[i][2];document.getElementById("detailPortuguese").textContent=topics[i][3];let b=document.getElementById("completeLesson");b.textContent=state.done.includes(i)?"Lição concluída ✓":"Concluir lição +10 XP";b.disabled=state.done.includes(i);b.onclick=()=>{if(!state.done.includes(i)){state.done.push(i);state.xp+=10;state.streak=Math.max(1,state.streak);save();renderLessons();openLesson(i)}}}
-const questions=[["안녕하세요","Olá","Obrigado","Adeus",0],["감사합니다","Obrigado(a)","Desculpe","Sim",0],["네","Não","Sim","Água",1],["물","Água","Casa","Amigo",0],["친구","Escola","Amigo(a)","Família",1],["사랑","Amor","Livro","Café",0],["학교","Casa","Coreia","Escola",2],["아니요","Sim","Não","Olá",1],["가족","Família","Amigo","Nome",0],["얼마예요?","Onde fica?","Quanto custa?","Que horas são?",1]];
-let qi=0,answered=false;
-function renderQuestion(){let q=questions[qi];document.getElementById("qCount").textContent=`Pergunta ${qi+1} de ${questions.length}`;document.getElementById("question").textContent=`O que significa ${q[0]}?`;document.getElementById("feedback").textContent="";document.getElementById("next").disabled=true;document.getElementById("next").textContent=qi===questions.length-1?"Recomeçar quiz":"Próxima pergunta";answered=false;document.getElementById("options").innerHTML=q.slice(1,4).map((a,i)=>`<button class="quiz-option" onclick="answer(${i})">${a}</button>`).join("")}
-function answer(i){if(answered)return;answered=true;let q=questions[qi],ok=i===q[4];document.getElementById("feedback").textContent=ok?"Muito bem! +5 XP 🎉":`Quase! A resposta certa é: ${q[q[4]+1]}`;if(ok){state.xp+=5;save()}document.getElementById("next").disabled=false}
-function nextQuestion(){qi=(qi+1)%questions.length;renderQuestion()}
-renderLessons();renderQuestion();updateStats();
-if("serviceWorker"in navigator && location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}))}
+const lessons=[
+["Cumprimentos","안녕하세요","Olá / Bom dia"],["Apresentações","저는 마리아예요","Eu sou Maria"],["Obrigado","감사합니다","Obrigado(a)"],["Desculpas","죄송합니다","Desculpe"],["Sim e não","네 / 아니요","Sim / Não"],["Família","가족","Família"],["Números 1","하나, 둘, 셋","Um, dois, três"],["Números 2","일, 이, 삼","Um, dois, três (sino-coreano)"],["Comida","밥","Arroz / refeição"],["Água","물 주세요","Água, por favor"],["Café","커피","Café"],["Restaurante","맛있어요","Está delicioso"],["Tempo","오늘","Hoje"],["Dias","월요일","Segunda-feira"],["Lugares","학교","Escola"],["Transporte","버스","Ônibus"],["Compras","얼마예요?","Quanto custa?"],["Cores","빨간색","Vermelho"],["Adjetivos","좋아요","É bom / gosto"],["Verbos","가요","Vou / vai"],["Casa","집","Casa"],["Trabalho","일","Trabalho"],["Estudos","공부해요","Estudo"],["Hobbies","음악","Música"],["Clima","날씨","Clima"],["Sentimentos","행복해요","Estou feliz"],["Localização","어디예요?","Onde fica?"],["Pedido","도와주세요","Ajude-me, por favor"],["Passado","갔어요","Fui"],["Revisão","한국어를 공부해요","Estudo coreano"]];
+const vocab=[["안녕하세요","Olá"],["감사합니다","Obrigado(a)"],["사랑","Amor"],["친구","Amigo(a)"],["물","Água"],["밥","Arroz / refeição"],["학교","Escola"],["책","Livro"],["집","Casa"],["가족","Família"],["네","Sim"],["아니요","Não"]];
+let xp=Number(localStorage.xp||0), completed=JSON.parse(localStorage.completed||"[]");
+const content=document.getElementById("content");
+function stats(){document.getElementById("xp").textContent=xp;document.getElementById("done").textContent=completed.length+"/30";document.getElementById("level").textContent=Math.floor(xp/100)+1}
+function speak(t){if("speechSynthesis"in window){let u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";speechSynthesis.speak(u)}}
+function render(tab="inicio"){
+document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+if(tab==="inicio"){content.innerHTML=`<div class="panel"><div class="section-head"><h2>Seu progresso</h2><b>${Math.round(completed.length/30*100)}%</b></div><p class="muted">Continue aprendendo no seu ritmo.</p><div class="progress"><i style="width:${completed.length/30*100}%"></i></div></div><h2>Comece por aqui</h2><div class="grid"><button class="tile" onclick="render('hangul')"><span class="emoji">🔤</span><b>Aprender Hangul</b><small>Conheça o alfabeto coreano</small></button><button class="tile" onclick="render('vocabulario')"><span class="emoji">💬</span><b>Palavras úteis</b><small>Vocabulário do dia a dia</small></button><button class="tile" onclick="render('licoes')"><span class="emoji">📖</span><b>30 lições</b><small>Aprenda passo a passo</small></button><button class="tile" onclick="render('quiz')"><span class="emoji">🧠</span><b>Praticar</b><small>Teste o que aprendeu</small></button></div>`}
+if(tab==="hangul"){let chars=["ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ","ㅏ","ㅑ","ㅓ","ㅕ","ㅗ","ㅛ","ㅜ","ㅠ","ㅡ","ㅣ"];content.innerHTML=`<div class="panel"><h2>O alfabeto coreano — 한글</h2><p class="muted">Toque em uma letra para ouvir a pronúncia aproximada.</p><div class="grid">${chars.map(c=>`<button class="tile korean" onclick="speak('${c}')">${c}</button>`).join("")}</div></div>`}
+if(tab==="vocabulario"){content.innerHTML=`<div class="panel"><h2>Vocabulário essencial</h2><p class="muted">Toque na palavra coreana para ouvir.</p>${vocab.map(v=>`<div class="lesson section-head"><div><div class="korean">${v[0]}</div><p>${v[1]}</p></div><button class="primary" onclick="speak('${v[0]}')">🔊 Ouvir</button></div>`).join("")}</div>`}
+if(tab==="licoes"){content.innerHTML=`<div class="panel"><h2>30 lições para iniciantes</h2><p class="muted">Conclua uma lição para ganhar 10 XP.</p>${lessons.map((l,i)=>`<div class="lesson section-head"><div><h3>${completed.includes(i)?"✅":"📘"} ${i+1}. ${l[0]}</h3><div class="korean">${l[1]}</div><p>${l[2]}</p></div><button class="primary" onclick="complete(${i})">${completed.includes(i)?"Rever":"Estudar"}</button></div>`).join("")}</div>`}
+if(tab==="quiz"){let q=vocab[Math.floor(Math.random()*vocab.length)];let opts=[q[1],...vocab.filter(x=>x[1]!==q[1]).sort(()=>Math.random()-.5).slice(0,3).map(x=>x[1])].sort(()=>Math.random()-.5);content.innerHTML=`<div class="panel"><h2>🧠 Quiz rápido</h2><p class="muted">O que significa esta palavra?</p><div class="korean">${q[0]}</div><button class="primary" onclick="speak('${q[0]}')">🔊 Ouvir</button>${opts.map(o=>`<button class="answer" onclick="check(this,'${o.replace(/'/g,"\\'")}','${q[1].replace(/'/g,"\\'")}')">${o}</button>`).join("")}<p id="feedback" class="muted"></p></div>`}
+}
+function complete(i){if(!completed.includes(i)){completed.push(i);xp+=10;localStorage.completed=JSON.stringify(completed);localStorage.xp=xp;stats()}render("licoes")}
+function check(el,a,b){let f=document.getElementById("feedback");if(a===b){f.textContent="Muito bem! +5 XP 🎉";xp+=5;localStorage.xp=xp;stats()}else f.textContent="Quase! A resposta correta é: "+b}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>render(b.dataset.tab)));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));
+stats();render();
 </script>
 </body></html>

@@ -1,20 +1,11 @@
 # Coreano Fácil
 
-Aplicativo web progressivo (PWA) para falantes de português brasileiro que querem começar a aprender coreano.
+Aplicativo web/PWA para falantes de português que estão começando a aprender coreano.
 
-## Arquivos
-- `index.html`: aplicativo completo (interface, conteúdo e progresso).
-- `manifest.webmanifest`: configuração para instalação como aplicativo.
-- `service-worker.js`: cache para uso offline após a primeira visita.
-- `icon.svg`, `icon-192.png`, `icon-512.png`: ícones.
+## Publicar no GitHub Pages
+1. Envie os arquivos para a raiz do repositório.
+2. Em Settings > Pages, selecione Deploy from a branch.
+3. Escolha `main` e `/(root)`.
+4. Salve e aguarde a publicação.
 
-## Publicar pelo celular com GitHub Pages
-1. Extraia este ZIP no celular.
-2. Abra o repositório `coreano-facil` no GitHub.
-3. Toque em **Add file** > **Upload files**.
-4. Envie os arquivos e pastas que estão dentro do ZIP (não envie o ZIP).
-5. Faça o commit.
-6. Em Settings > Pages, escolha a publicação pela branch `main` e pasta `/(root)`.
-7. Abra o endereço do GitHub Pages que aparecer.
-
-O progresso fica salvo no armazenamento local do navegador/dispositivo. A pronúncia usa a síntese de voz coreana disponível no navegador; a disponibilidade da voz depende do dispositivo.
+O progresso é salvo no navegador do dispositivo (localStorage).
