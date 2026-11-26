@@ -1,619 +1,112 @@
+/* ==================================
+   HANGUL RESPONSIVE UI FIX
+   ================================== */
 
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#6558d9">
-<meta name="description" content="Aprenda coreano de um jeito fácil e divertido.">
-<title>Coreano Fácil</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root{
- --bg:#f6f7fb;--white:#fff;--ink:#24243a;--muted:#85869a;
- --purple:#6558d9;--purple2:#8277ed;--soft:#efedff;
- --line:#e9e9f1;--green:#16845b;--greenbg:#e2f7ee;
- --red:#c84c62;--redbg:#ffedf0;--yellow:#fff3d9;
- --shadow:0 10px 30px rgba(35,35,75,.055);--radius:21px
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans","Noto Sans KR",sans-serif}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.app{max-width:1120px;margin:auto;padding:24px 25px 55px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:24px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#8176ed,#5044c2);color:white;display:grid;place-items:center;font-family:"Noto Sans KR";font-size:24px;font-weight:800;box-shadow:0 7px 18px #6558d933}
-.brand strong{font-size:19px;letter-spacing:-.5px}
-.brand small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
-.stats{display:flex;gap:8px}
-.stat{background:white;border:1px solid var(--line);border-radius:13px;padding:9px 12px;font-size:12px;font-weight:800}
-.stat span{color:var(--muted);font-weight:500}
-.hero{background:linear-gradient(120deg,#29264f,#5148a8 65%,#7569e8);color:white;border-radius:27px;padding:30px 34px;display:grid;grid-template-columns:1.5fr .7fr;align-items:center;gap:15px;position:relative;overflow:hidden;box-shadow:0 17px 36px #433b9b20}
-.hero:after{content:"가";position:absolute;right:10%;top:-55px;font-family:"Noto Sans KR";font-size:230px;font-weight:800;color:#ffffff0c}
-.eyebrow{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;font-weight:800;color:#c9c4ff}
-.hero h1{font-size:clamp(27px,4vw,39px);line-height:1.16;letter-spacing:-1.3px;margin:12px 0}
-.hero p{max-width:510px;color:#e2dfff;line-height:1.65;font-size:14px;margin:0 0 20px}
-.hero-art{justify-self:end;text-align:center;z-index:1}
-.hero-circle{width:138px;height:138px;border:1px solid #ffffff50;border-radius:50%;display:grid;place-items:center;background:#ffffff12;font-family:"Noto Sans KR";font-size:68px;font-weight:800}
-.hero-art small{display:block;color:#dedaff;margin-top:10px;line-height:1.5}
-.btn{border:0;border-radius:12px;background:var(--purple);color:white;padding:12px 17px;font-weight:800;transition:.18s}
-.btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
-.btn.white{background:white;color:#5148b8}
-.btn.soft{background:var(--soft);color:var(--purple)}
-.btn.outline{background:white;border:1px solid var(--line);color:var(--ink)}
-.progress-card,.panel,.feature,.lesson-card{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-.progress-card{padding:18px 21px;margin:18px 0 23px}
-.progress-head{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:800}
-.progress-head span:last-child{color:var(--purple)}
-.progress-track{height:9px;background:#efeff6;border-radius:20px;overflow:hidden;margin-top:12px}
-.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--purple),#a69cff);border-radius:20px;transition:width .3s}
-.nav{display:flex;gap:6px;overflow-x:auto;background:#ececf4;padding:5px;border-radius:15px;margin-bottom:23px}
-.nav button{white-space:nowrap;border:0;background:transparent;color:#77798e;border-radius:11px;padding:11px 15px;font-size:12px;font-weight:800}
-.nav button.active{background:white;color:var(--purple);box-shadow:0 3px 10px #25254b0d}
-.heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:7px 0 17px}
-.heading h2{font-size:23px;letter-spacing:-.7px;margin:0}
-.heading p{color:var(--muted);font-size:13px;margin:5px 0 0}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.feature{padding:20px}
-.feature-icon{width:43px;height:43px;border-radius:14px;background:var(--soft);display:grid;place-items:center;font-size:21px;margin-bottom:13px}
-.feature h3{font-size:16px;margin:0 0 7px}
-.feature p{color:var(--muted);font-size:13px;line-height:1.55;min-height:40px;margin:0 0 15px}
-.lesson-list{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
-.lesson-card{width:100%;display:flex;align-items:center;gap:13px;padding:15px;text-align:left;color:inherit;transition:.18s}
-.lesson-card:hover{border-color:#c6c0ff;transform:translateY(-1px)}
-.lesson-number{width:42px;height:42px;flex:none;border-radius:14px;background:var(--soft);color:var(--purple);display:grid;place-items:center;font-weight:800}
-.lesson-info{flex:1;min-width:0}
-.lesson-info strong{display:block;font-size:13px}
-.lesson-info small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
-.lesson-check{color:var(--green);font-weight:900}
-.panel{padding:21px;margin-bottom:14px}
-.panel h3{font-size:16px;margin:0 0 14px}
-.tabs,.mode-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:17px}
-.chip{border:1px solid var(--line);background:white;color:var(--muted);border-radius:30px;padding:9px 13px;font-size:11px;font-weight:800}
-.chip.active{background:var(--soft);color:var(--purple);border-color:#d5d0ff}
-.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px}
-.char-card{border:1px solid var(--line);border-radius:15px;padding:13px 8px;text-align:center}
-.char-card strong{font-family:"Noto Sans KR";font-size:30px;display:block}
-.char-card small{display:block;color:var(--muted);font-size:11px;margin:4px 0 9px}
-.char-card button,.speak{border:0;background:var(--soft);color:var(--purple);border-radius:9px;padding:7px 10px;font-size:11px;font-weight:800}
-.lesson-detail{max-width:850px;margin:auto}
-.back{border:0;background:transparent;color:var(--purple);font-weight:800;padding:7px 0 15px}
-.lesson-banner{padding:22px;border-radius:19px;background:linear-gradient(120deg,#f0eeff,#faf9ff);margin-bottom:14px}
-.lesson-banner .eyebrow{color:var(--purple)}
-.lesson-banner h2{font-size:25px;margin:8px 0}
-.lesson-banner p{font-size:13px;color:var(--muted);margin:0}
-.word-list{display:grid;gap:8px}
-.word-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 13px;background:#fafaff;border:1px solid #efeff7;border-radius:12px}
-.word-row strong{font-family:"Noto Sans KR";font-size:18px}
-.word-row small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
-.phrase{background:#fafaff;border:1px solid #efeff7;padding:15px;border-radius:14px;margin-bottom:10px}
-.phrase strong{font-family:"Noto Sans KR";font-size:19px}
-.phrase small{display:block;color:var(--muted);margin-top:5px}
-.tip{background:var(--greenbg);color:#236b53;border-radius:12px;padding:13px 15px;font-size:12px;line-height:1.6;margin-top:12px}
-.dialogue{background:#f8f8fc;padding:15px;border-radius:13px;line-height:2;font-size:14px}
-.dialogue b{color:var(--purple)}
-.practice-question{border:1px solid var(--line);border-radius:13px;padding:13px;margin:9px 0}
-.practice-question p{margin:0 0 10px;font-size:13px;font-weight:700}
-.practice-question button{margin:3px}
-.answer-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:19px 0}
-.answer{background:white;border:1px solid var(--line);border-radius:12px;padding:13px;font-weight:700;color:var(--ink)}
-.answer:hover{border-color:var(--purple)}
-.answer.correct{background:var(--greenbg);border-color:#9dddc4}
-.answer.wrong{background:var(--redbg);border-color:#f0b7c0}
-.quiz-area{max-width:650px;margin:auto;text-align:center}
-.quiz-question{font-size:24px;font-weight:800;margin:19px 0}
-.quiz-sub{color:var(--muted);font-size:12px}
-.feedback{min-height:25px;font-weight:800;font-size:13px;margin:12px}
-.field{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;outline:none;margin:8px 0}
-.field:focus{border-color:var(--purple)}
-.settings-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
-.settings-row:last-child{border:0}
-.settings-row label{font-weight:800;font-size:13px}
-.settings-row small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
-.select{padding:9px;border:1px solid var(--line);border-radius:9px;background:white}
-.empty{text-align:center;padding:28px;color:var(--muted);line-height:1.7}
-.footer{text-align:center;color:#a2a3b2;font-size:11px;margin-top:32px}
-@media(max-width:760px){
- .app{padding:15px 13px 40px}.hero{grid-template-columns:1fr;padding:24px}.hero-art{display:none}
- .grid{grid-template-columns:1fr 1fr}.lesson-list{grid-template-columns:1fr}
- .stat{padding:8px;font-size:11px}.heading h2{font-size:20px}
-}
-@media(max-width:430px){
- .grid{grid-template-columns:1fr}.stats .stat:nth-child(2){display:none}
- .hero h1{font-size:28px}.answer-grid{grid-template-columns:1fr}
-}
-</style>
-</head>
-
-<body>
-<div class="app">
-
-<header class="topbar">
- <div class="brand">
-  <div class="logo">한</div>
-  <div><strong>Coreano Fácil</strong><small>Aprenda coreano passo a passo</small></div>
- </div>
- <div class="stats">
-  <div class="stat">⚡ <b id="xpTop">0</b> <span>XP</span></div>
-  <div class="stat">📚 <b id="doneTop">0</b><span>/30</span></div>
-  <div class="stat">🏅 <b id="levelTop">1</b><span>Nível</span></div>
- </div>
-</header>
-
-<section class="hero">
- <div>
-  <div class="eyebrow">안녕하세요 · Olá!</div>
-  <h1>Seu coreano começa aqui.</h1>
-  <p>Aprenda o alfabeto, descubra novas palavras e pratique conversas reais. Um passo de cada vez, no seu ritmo.</p>
-  <button class="btn white" onclick="continueLearning()">Continuar aprendendo →</button>
- </div>
- <div class="hero-art">
-  <div class="hero-circle">가</div>
-  <small>오늘도 화이팅!<br>Você consegue!</small>
- </div>
-</section>
-
-<div class="progress-card">
- <div class="progress-head"><span>Seu progresso</span><span id="progressText">0% concluído</span></div>
- <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-</div>
-
-<nav class="nav" id="nav">
- <button class="active" data-page="home">⌂ Início</button>
- <button data-page="hangul">가 Hangul</button>
- <button data-page="vocab">▤ Vocabulário</button>
- <button data-page="lessons">▣ Lições</button>
- <button data-page="quiz">✦ Quiz</button>
- <button data-page="settings">⚙ Áudio</button>
-</nav>
-
-<main id="main"></main>
-<div class="footer">Coreano Fácil · 오늘도 화이팅! ♡</div>
-</div>
-
-<script>
-// --------------------------------------------------
-// DADOS E PROGRESSO: preserva os registros anteriores
-// --------------------------------------------------
-const $=s=>document.querySelector(s);
-function readStore(key,fallback){
- try{const x=JSON.parse(localStorage.getItem(key));return x??fallback}
- catch{return fallback}
-}
-let xp=Math.max(0,Number(localStorage.getItem("xp")||localStorage.getItem("cf_xp")||0));
-let completed=readStore("completed",readStore("cf_completed",[]));
-if(!Array.isArray(completed))completed=[];
-let mistakes=readStore("cf_mistakes",[]);
-if(!Array.isArray(mistakes))mistakes=[];
-let currentPage="home",currentLesson=null;
-let hangulCategory="Vogais básicas";
-let quizMode="meaning",quiz=null;
-let voiceRate=Number(localStorage.getItem("cf_voice_rate")||0.82);
-
-function save(){
- localStorage.setItem("xp",String(xp));
- localStorage.setItem("completed",JSON.stringify(completed));
- localStorage.setItem("cf_xp",String(xp));
- localStorage.setItem("cf_completed",JSON.stringify(completed));
- localStorage.setItem("cf_mistakes",JSON.stringify(mistakes));
-}
-function addXP(amount){xp+=amount;save();updateStats()}
-function updateStats(){
- const done=completed.length;
- $("#xpTop").textContent=xp;
- $("#doneTop").textContent=done;
- $("#levelTop").textContent=Math.floor(xp/100)+1;
- $("#progressText").textContent=Math.round(done/30*100)+"% concluído";
- $("#progressFill").style.width=(done/30*100)+"%";
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  width: 100%;
+  margin-bottom: 18px;
 }
 
-// --------------------------------------------------
-// 30 LIÇÕES
-// Cada lição tem vocabulário, expressão, gramática,
-// diálogo e exercícios gerados a partir do conteúdo.
-// --------------------------------------------------
-function L(title,category,description,words,phrase,translation,grammar,dialogue,parts){
- return {title,category,description,words,phrase,translation,grammar,dialogue,parts};
-}
-const lessons=[
-L("Primeiras letras","Hangul","Reconheça as letras e leia suas primeiras sílabas.",[["가","ga"],["나","na"],["다","da"],["라","ra"],["마","ma"],["바","ba"],["사","sa"],["아","a"]],"저는 한국어를 공부해요.","Eu estudo coreano.","O coreano é escrito em blocos silábicos. Cada bloco combina consoantes e vogais. Exemplo: ㄱ + ㅏ = 가.","A: 안녕하세요!|B: 안녕하세요!|A: 한국어를 공부해요?|B: 네, 공부해요.",["저는","한국어를","공부해요."]),
-L("Cumprimentos","Saudações","Aprenda a cumprimentar e se despedir com educação.",[["안녕하세요","olá"],["안녕","oi / tchau informal"],["감사합니다","obrigado(a)"],["고맙습니다","muito obrigado(a)"],["죄송합니다","desculpe"],["괜찮아요","tudo bem"],["안녕히 가세요","tchau (quem vai)"],["안녕히 계세요","tchau (quem fica)"]],"안녕하세요. 만나서 반가워요.","Olá. Prazer em conhecer você.","안녕하세요 é uma saudação educada. 감사합니다 é uma forma formal de agradecer.","A: 안녕하세요!|B: 안녕하세요!|A: 만나서 반가워요.|B: 저도 반가워요!",["안녕하세요.","만나서","반가워요."]),
-L("Apresentação pessoal","Identidade","Diga seu nome, nacionalidade e ocupação.",[["저","eu (formal)"],["이름","nome"],["나라","país"],["브라질","Brasil"],["한국","Coreia"],["학생","estudante"],["회사원","funcionário de empresa"],["사람","pessoa"]],"저는 브라질 사람이에요.","Eu sou brasileiro(a).","저는 marca o tópico da frase. 이에요/예요 significa ser/estar em linguagem educada. Use 이에요 após consoante e 예요 após vogal.","A: 어느 나라 사람이에요?|B: 저는 브라질 사람이에요.|A: 반가워요!|B: 만나서 반가워요!",["저는","브라질","사람이에요."]),
-L("Perguntas essenciais","Perguntas","Faça perguntas simples para obter informações.",[["뭐","o quê"],["누구","quem"],["어디","onde"],["언제","quando"],["왜","por quê"],["어떻게","como"],["얼마","quanto"],["몇","quantos"]],"이게 뭐예요?","O que é isto?","뭐예요? significa “o que é?”. 어디예요? significa “onde é?”. A entonação ajuda a indicar uma pergunta.","A: 이게 뭐예요?|B: 책이에요.|A: 어디에서 샀어요?|B: 서점에서 샀어요.",["이게","뭐예요?"]),
-L("Números","Números","Conheça números coreanos nativos e sino-coreanos.",[["하나","um (nativo)"],["둘","dois (nativo)"],["셋","três (nativo)"],["넷","quatro (nativo)"],["다섯","cinco (nativo)"],["일","um (sino-coreano)"],["이","dois (sino-coreano)"],["삼","três (sino-coreano)"]],"사과 세 개 주세요.","Três maçãs, por favor.","Números nativos são usados com muitos contadores. Números sino-coreanos aparecem em datas, dinheiro, minutos e números de telefone.","A: 사과 몇 개 드릴까요?|B: 세 개 주세요.|A: 네, 여기 있어요.|B: 감사합니다.",["사과","세","개","주세요."]),
-L("Família","Família","Fale sobre parentes e pessoas próximas.",[["가족","família"],["아버지","pai"],["어머니","mãe"],["부모님","pais"],["형","irmão mais velho (homem falando)"],["누나","irmã mais velha (homem falando)"],["언니","irmã mais velha (mulher falando)"],["동생","irmão/irmã mais novo(a)"]],"우리 가족은 네 명이에요.","Minha família tem quatro pessoas.","우리 significa nosso/nossa e também é usado naturalmente para falar de pessoas próximas. 명 é um contador de pessoas.","A: 가족이 몇 명이에요?|B: 네 명이에요.|A: 형제가 있어요?|B: 네, 동생이 있어요.",["우리","가족은","네","명이에요."]),
-L("Dias e datas","Calendário","Aprenda os dias da semana e palavras de calendário.",[["월요일","segunda-feira"],["화요일","terça-feira"],["수요일","quarta-feira"],["목요일","quinta-feira"],["금요일","sexta-feira"],["토요일","sábado"],["일요일","domingo"],["오늘","hoje"]],"오늘은 월요일이에요.","Hoje é segunda-feira.","은/는 marca o tópico. Para dizer datas, o coreano normalmente usa números sino-coreanos com 년 (ano), 월 (mês) e 일 (dia).","A: 오늘 무슨 요일이에요?|B: 월요일이에요.|A: 내일은요?|B: 화요일이에요.",["오늘은","월요일이에요."]),
-L("Horas e rotina","Horários","Pergunte as horas e descreva sua rotina.",[["시","hora"],["분","minuto"],["오전","a.m."],["오후","p.m."],["지금","agora"],["아침","manhã"],["점심","almoço"],["저녁","noite / jantar"]],"지금 몇 시예요?","Que horas são agora?","Para horas, use números nativos + 시. Para minutos, use números sino-coreanos + 분. Exemplo: 한 시 십 분.","A: 지금 몇 시예요?|B: 세 시예요.|A: 감사합니다.|B: 천만에요.",["지금","몇","시예요?"]),
-L("Comidas","Alimentação","Conheça comidas populares na Coreia.",[["밥","arroz / refeição"],["김치","kimchi"],["불고기","bulgogi"],["비빔밥","bibimbap"],["라면","ramyeon"],["고기","carne"],["야채","legumes"],["맛있다","ser gostoso"]],"한국 음식은 정말 맛있어요.","A comida coreana é realmente gostosa.","맛있어요 é a forma educada de 맛있다. 정말 significa realmente/muito. Use 은/는 para marcar o assunto.","A: 한국 음식 좋아해요?|B: 네, 정말 좋아해요.|A: 불고기는 어때요?|B: 맛있어요!",["한국","음식은","정말","맛있어요."]),
-L("Bebidas","Bebidas","Peça bebidas e fale sobre suas preferências.",[["물","água"],["커피","café"],["차","chá"],["우유","leite"],["주스","suco"],["콜라","refrigerante"],["따뜻하다","ser quente"],["차갑다","ser frio"]],"아이스 커피 한 잔 주세요.","Um café gelado, por favor.","잔 é um contador usado para copos e xícaras. 한 잔 = um copo/xícara. 주세요 significa por favor, me dê.","A: 뭐 드릴까요?|B: 아이스 커피 한 잔 주세요.|A: 네, 알겠습니다.|B: 감사합니다.",["아이스","커피","한","잔","주세요."]),
-L("No café","Cafeteria","Faça um pedido em uma cafeteria coreana.",[["카페","cafeteria"],["메뉴","cardápio"],["아메리카노","americano"],["라떼","latte"],["주문","pedido"],["포장","para viagem"],["매장","loja / salão"],["영수증","recibo"]],"포장해 주세요.","Para viagem, por favor.","주세요 é uma forma educada de pedir algo. 포장해 주세요 significa “embale para viagem”. 여기서 먹을게요 significa “vou comer aqui”.","A: 여기서 드세요?|B: 아니요, 포장해 주세요.|A: 네, 잠시만요.|B: 감사합니다.",["포장해","주세요."]),
-L("No restaurante","Restaurante","Peça pratos e converse em um restaurante.",[["식당","restaurante"],["메뉴","cardápio"],["주문하다","pedir"],["계산","conta / pagamento"],["반찬","acompanhamentos"],["맵다","ser picante"],["덜 맵게","menos picante"],["물 주세요","água, por favor"]],"계산해 주세요.","A conta, por favor.","해 주세요 é uma estrutura educada para pedir que alguém faça algo. 계산해 주세요 = faça a conta, por favor.","A: 주문하시겠어요?|B: 비빔밥 주세요.|A: 맵게 드릴까요?|B: 조금 덜 맵게 해 주세요.",["계산해","주세요."]),
-L("Lugares da cidade","Locais","Identifique lugares importantes da cidade.",[["학교","escola"],["병원","hospital"],["은행","banco"],["약국","farmácia"],["역","estação"],["공원","parque"],["회사","empresa"],["편의점","loja de conveniência"]],"은행이 어디에 있어요?","Onde fica o banco?","에 있어요 indica localização: “está em”. 어디에 있어요? pergunta onde algo está localizado.","A: 은행이 어디에 있어요?|B: 저기 있어요.|A: 감사합니다.|B: 네!",["은행이","어디에","있어요?"]),
-L("Transporte","Transporte","Use transporte público e pergunte sobre trajetos.",[["버스","ônibus"],["지하철","metrô"],["택시","táxi"],["기차","trem"],["공항","aeroporto"],["표","bilhete"],["교통카드","cartão de transporte"],["갈아타다","fazer baldeação"]],"지하철역까지 어떻게 가요?","Como chego à estação de metrô?","까지 significa até. 에서 indica o ponto de partida ou local onde uma ação acontece.","A: 지하철역까지 어떻게 가요?|B: 이 버스를 타세요.|A: 감사합니다.|B: 네, 조심히 가세요.",["지하철역까지","어떻게","가요?"]),
-L("Compras","Compras","Pergunte preços, tamanhos e formas de pagamento.",[["얼마예요","quanto custa?"],["비싸다","ser caro"],["싸다","ser barato"],["카드","cartão"],["현금","dinheiro"],["사이즈","tamanho"],["할인","desconto"],["영수증","recibo"]],"이거 얼마예요?","Quanto custa isto?","이거 é a forma falada de 이것 (isto). 이거 얼마예요? é uma pergunta muito comum em lojas.","A: 이거 얼마예요?|B: 만 원이에요.|A: 조금 비싸네요.|B: 할인해 드릴게요.",["이거","얼마예요?"]),
-L("Cores","Cores","Descreva roupas, objetos e cores.",[["빨간색","vermelho"],["파란색","azul"],["노란색","amarelo"],["초록색","verde"],["검은색","preto"],["흰색","branco"],["분홍색","rosa"],["색깔","cor"]],"저는 파란색을 좋아해요.","Eu gosto da cor azul.","을/를 marca o objeto da frase. 파란색을 좋아해요 = gosto da cor azul.","A: 무슨 색을 좋아해요?|B: 파란색을 좋아해요.|A: 빨간색은요?|B: 빨간색도 좋아해요.",["저는","파란색을","좋아해요."]),
-L("Adjetivos","Descrições","Descreva pessoas, lugares e objetos.",[["크다","ser grande"],["작다","ser pequeno"],["예쁘다","ser bonito"],["좋다","ser bom"],["나쁘다","ser ruim"],["빠르다","ser rápido"],["느리다","ser lento"],["비싸다","ser caro"]],"이 가방은 정말 예뻐요.","Esta bolsa é muito bonita.","Adjetivos coreanos podem funcionar como predicados. 예쁘다 muda para 예뻐요 na forma educada presente.","A: 이 가방 어때요?|B: 정말 예뻐요.|A: 조금 비싸요.|B: 그래도 좋아요.",["이","가방은","정말","예뻐요."]),
-L("Verbos do dia a dia","Ações","Aprenda verbos frequentes para falar de ações.",[["가다","ir"],["오다","vir"],["먹다","comer"],["마시다","beber"],["보다","ver"],["읽다","ler"],["공부하다","estudar"],["일하다","trabalhar"]],"매일 한국어를 공부해요.","Eu estudo coreano todos os dias.","A forma educada presente geralmente termina em 아요/어요/해요. 공부하다 vira 공부해요.","A: 매일 뭐 해요?|B: 한국어를 공부해요.|A: 어디에서 공부해요?|B: 집에서 공부해요.",["매일","한국어를","공부해요."]),
-L("Casa","Casa","Fale sobre cômodos e objetos da casa.",[["집","casa"],["방","quarto"],["거실","sala"],["부엌","cozinha"],["화장실","banheiro"],["침대","cama"],["책상","mesa de estudo"],["창문","janela"]],"제 방에 책상이 있어요.","Há uma mesa no meu quarto.","에 marca localização. 있어요 significa existir ou ter. 없어요 significa não existir ou não ter.","A: 방에 뭐가 있어요?|B: 침대와 책상이 있어요.|A: 좋아요!|B: 네, 편해요.",["제","방에","책상이","있어요."]),
-L("Profissões","Trabalho","Fale sobre profissões e ocupações.",[["직업","profissão"],["학생","estudante"],["선생님","professor(a)"],["회사원","funcionário de empresa"],["의사","médico(a)"],["요리사","cozinheiro(a)"],["경찰관","policial"],["가수","cantor(a)"]],"저는 회사원이에요.","Eu sou funcionário(a) de uma empresa.","이에요/예요 significa “ser”. Use 이에요 depois de consoante e 예요 depois de vogal.","A: 직업이 뭐예요?|B: 저는 회사원이에요.|A: 어디에서 일해요?|B: 서울에서 일해요.",["저는","회사원이에요."]),
-L("Estudos","Estudo","Converse sobre estudar e aprender.",[["한국어","língua coreana"],["책","livro"],["공책","caderno"],["연필","lápis"],["수업","aula"],["숙제","lição de casa"],["시험","prova"],["배우다","aprender"]],"한국어를 배우고 있어요.","Estou aprendendo coreano.","-고 있어요 indica uma ação em andamento: 공부하고 있어요 = estou estudando.","A: 한국어를 공부해요?|B: 네, 배우고 있어요.|A: 어려워요?|B: 조금 어렵지만 재미있어요.",["한국어를","배우고","있어요."]),
-L("Hobbies","Tempo livre","Conte o que gosta de fazer no tempo livre.",[["운동","exercício"],["음악","música"],["영화","filme"],["여행","viagem"],["게임","jogo"],["사진","fotografia"],["요리","culinária"],["취미","hobby"]],"저는 음악 듣는 것을 좋아해요.","Eu gosto de ouvir música.","좋아해요 significa gostar. 듣는 것 transforma o verbo ouvir em uma atividade/coisa: ouvir música.","A: 취미가 뭐예요?|B: 음악 듣는 것을 좋아해요.|A: 운동도 해요?|B: 네, 가끔 해요.",["저는","음악","듣는","것을","좋아해요."]),
-L("Clima e estações","Clima","Fale sobre o clima e as estações do ano.",[["날씨","clima"],["봄","primavera"],["여름","verão"],["가을","outono"],["겨울","inverno"],["비","chuva"],["눈","neve"],["춥다","ser frio"]],"오늘은 날씨가 추워요.","Hoje o tempo está frio.","가/이 marca o sujeito. 추워요 é a forma presente de 춥다. 덥다 significa estar quente.","A: 오늘 날씨 어때요?|B: 추워요.|A: 눈이 와요?|B: 아니요, 비가 와요.",["오늘은","날씨가","추워요."]),
-L("Sentimentos","Emoções","Expresse como você está se sentindo.",[["행복하다","ser feliz"],["슬프다","estar triste"],["피곤하다","estar cansado"],["바쁘다","estar ocupado"],["재미있다","ser divertido"],["걱정하다","preocupar-se"],["기쁘다","estar contente"],["괜찮다","estar bem"]],"오늘은 정말 행복해요.","Hoje estou muito feliz.","오늘은 marca o tópico. 정말 intensifica o adjetivo. Para perguntar como alguém está, use 기분이 어때요?","A: 오늘 기분이 어때요?|B: 정말 행복해요.|A: 좋은 일이 있어요?|B: 네, 좋은 소식이 있어요!",["오늘은","정말","행복해요."]),
-L("Direções","Direções","Peça e entenda direções na cidade.",[["왼쪽","esquerda"],["오른쪽","direita"],["앞","frente"],["뒤","atrás"],["옆","ao lado"],["위","em cima"],["아래","embaixo"],["직진하다","seguir reto"]],"오른쪽으로 가세요.","Vá para a direita.","(으)로 indica direção ou meio. 가세요 é uma forma educada de dar uma instrução ou sugestão.","A: 은행이 어디예요?|B: 오른쪽으로 가세요.|A: 멀어요?|B: 아니요, 가까워요.",["오른쪽으로","가세요."]),
-L("Pedidos e favores","Pedidos","Faça pedidos educados e peça ajuda.",[["도와주세요","ajude-me, por favor"],["잠깐만요","um momento"],["천천히","devagar"],["다시","novamente"],["말하다","falar"],["기다리다","esperar"],["알려주세요","me informe"],["괜찮으세요","está tudo bem?"]],"천천히 말해 주세요.","Fale devagar, por favor.","-아/어 주세요 é usado para pedir que alguém faça algo. 천천히 significa devagar.","A: 죄송해요. 잘 모르겠어요.|B: 괜찮아요.|A: 천천히 말해 주세요.|B: 네, 알겠습니다.",["천천히","말해","주세요."]),
-L("Passado","Tempo passado","Conte o que aconteceu ontem ou antes.",[["어제","ontem"],["지난주","semana passada"],["갔어요","fui"],["먹었어요","comi"],["봤어요","vi"],["했어요","fiz"],["만났어요","encontrei"],["재미있었어요","foi divertido"]],"어제 친구를 만났어요.","Ontem encontrei um amigo.","O passado educado costuma terminar em 았어요/었어요/했어요. 가다 vira 갔어요; 먹다 vira 먹었어요.","A: 어제 뭐 했어요?|B: 영화를 봤어요.|A: 재미있었어요?|B: 네, 정말 재미있었어요.",["어제","친구를","만났어요."]),
-L("Futuro e planos","Planos","Fale sobre planos e intenções futuras.",[["내일","amanhã"],["다음 주","semana que vem"],["계획","plano"],["여행하다","viajar"],["만나다","encontrar"],["공부하다","estudar"],["갈 거예요","vou ir"],["할 거예요","vou fazer"]],"내일 한국어를 공부할 거예요.","Amanhã vou estudar coreano.","(으)ㄹ 거예요 expressa futuro ou intenção. Verbos com vogal final recebem ㄹ 거예요; com consoante, 을 거예요.","A: 내일 뭐 할 거예요?|B: 한국어를 공부할 거예요.|A: 같이 공부해요!|B: 좋아요!",["내일","한국어를","공부할","거예요."]),
-L("Conectando frases","Conectivos","Conecte ideias e construa frases mais naturais.",[["그리고","e / além disso"],["하지만","mas"],["그래서","por isso"],["먼저","primeiro"],["다음에","depois"],["같이","junto"],["또","também / de novo"],["왜냐하면","porque"]],"한국어는 어렵지만 재미있어요.","Coreano é difícil, mas divertido.","하지만 conecta ideias contrastantes. 그리고 adiciona informação. 그래서 apresenta uma consequência.","A: 한국어 공부 어때요?|B: 어려워요. 하지만 재미있어요.|A: 그래서 계속 공부해요?|B: 네, 그리고 매일 연습해요.",["한국어는","어렵지만","재미있어요."]),
-L("Conversação final","Revisão","Combine o que aprendeu em uma conversa completa.",[["처음","pela primeira vez"],["오랜만이에요","há quanto tempo"],["한국어 실력","nível de coreano"],["열심히","com dedicação"],["앞으로","daqui para frente"],["목표","objetivo"],["성공하다","ter sucesso"],["응원하다","torcer / apoiar"]],"앞으로도 한국어를 열심히 공부할 거예요.","Vou continuar estudando coreano com dedicação.","앞으로도 significa daqui para frente também. 열심히 공부할 거예요 expressa intenção de estudar bastante.","A: 한국어 공부는 어때요?|B: 재미있어요. 아직 어렵지만 열심히 공부하고 있어요.|A: 정말 잘하고 있어요!|B: 감사합니다. 앞으로도 열심히 할게요!",["앞으로도","한국어를","열심히","공부할","거예요."])
-];
-
-// --------------------------------------------------
-// HANGUL: todas as categorias principais
-// --------------------------------------------------
-const hangulData={
- "Vogais básicas":[
- ["ㅏ","a","아"],["ㅑ","ya","야"],["ㅓ","eo","어"],["ㅕ","yeo","여"],["ㅗ","o","오"],
- ["ㅛ","yo","요"],["ㅜ","u","우"],["ㅠ","yu","유"],["ㅡ","eu","으"],["ㅣ","i","이"]
- ],
- "Vogais compostas":[
- ["ㅐ","ae","애"],["ㅒ","yae","얘"],["ㅔ","e","에"],["ㅖ","ye","예"],
- ["ㅘ","wa","와"],["ㅙ","wae","왜"],["ㅚ","oe/we","외"],["ㅝ","wo","워"],
- ["ㅞ","we","웨"],["ㅟ","wi","위"],["ㅢ","ui","의"]
- ],
- "Consoantes básicas":[
- ["ㄱ","g/k","가"],["ㄴ","n","나"],["ㄷ","d/t","다"],["ㄹ","r/l","라"],
- ["ㅁ","m","마"],["ㅂ","b/p","바"],["ㅅ","s","사"],["ㅇ","mudo/ng","아"],
- ["ㅈ","j","자"],["ㅊ","ch","차"],["ㅋ","k aspirado","카"],["ㅌ","t aspirado","타"],
- ["ㅍ","p aspirado","파"],["ㅎ","h","하"]
- ],
- "Consoantes duplas":[
- ["ㄲ","kk tenso","까"],["ㄸ","tt tenso","따"],["ㅃ","pp tenso","빠"],
- ["ㅆ","ss tenso","싸"],["ㅉ","jj tenso","짜"]
- ],
- "받침 · finais":[
- ["ㄱ","k","각"],["ㄴ","n","간"],["ㄷ","t","닫"],["ㄹ","l","갈"],
- ["ㅁ","m","감"],["ㅂ","p","갑"],["ㅇ","ng","강"]
- ],
- "Finais duplas":[
- ["ㄳ","k","넋"],["ㄵ","n","앉"],["ㄶ","n","않"],["ㄺ","k/l*","닭"],
- ["ㄻ","m","삶"],["ㄼ","l/p*","짧"],["ㄽ","l","곬"],["ㄾ","l","핥"],
- ["ㄿ","p","읊"],["ㅀ","l","싫"],["ㅄ","p","없"]
- ]
-};
-
-// --------------------------------------------------
-// NAVEGAÇÃO
-// --------------------------------------------------
-function showPage(page){
- currentPage=page;currentLesson=null;
- document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
- render();
- window.scrollTo({top:0,behavior:"smooth"});
-}
-$("#nav").addEventListener("click",e=>{
- const b=e.target.closest("button[data-page]");
- if(b)showPage(b.dataset.page);
-});
-function continueLearning(){
- const next=lessons.findIndex((_,i)=>!completed.includes(i));
- showLesson(next<0?0:next);
-}
-function lessonCard(lesson,i){
- return `<button class="lesson-card" onclick="showLesson(${i})">
- <span class="lesson-number">${String(i+1).padStart(2,"0")}</span>
- <span class="lesson-info"><strong>${lesson.title}</strong><small>${lesson.category} · ${completed.includes(i)?"Concluída":"20 XP ao concluir"}</small></span>
- ${completed.includes(i)?'<span class="lesson-check">✓</span>':'<span style="color:#aaa">›</span>'}
- </button>`;
+.tabs .chip {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 7px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+  text-align: center;
+  font-size: 12px;
 }
 
-// --------------------------------------------------
-// TELA INICIAL
-// --------------------------------------------------
-function homeHTML(){
- return `
- <div class="heading"><div><h2>Seu espaço de aprendizagem</h2><p>Escolha como quer estudar hoje.</p></div></div>
- <div class="grid">
-  <div class="feature"><div class="feature-icon">가</div><h3>Aprenda Hangul</h3><p>Vogais, consoantes, sílabas e sons finais.</p><button class="btn soft" onclick="showPage('hangul')">Explorar letras</button></div>
-  <div class="feature"><div class="feature-icon">📚</div><h3>30 lições práticas</h3><p>Do alfabeto às conversas do cotidiano.</p><button class="btn soft" onclick="showPage('lessons')">Ver lições</button></div>
-  <div class="feature"><div class="feature-icon">✦</div><h3>Desafie-se</h3><p>Pratique com cinco tipos de exercícios.</p><button class="btn soft" onclick="showPage('quiz')">Começar quiz</button></div>
- </div>
- <div class="heading" style="margin-top:27px"><div><h2>Continue aprendendo</h2><p>Retome sua trilha de estudos.</p></div></div>
- <div class="lesson-list">${lessons.slice(0,4).map(lessonCard).join("")}</div>
- `;
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 105px), 1fr)
+  );
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
 }
 
-// --------------------------------------------------
-// TELA DE LIÇÕES
-// --------------------------------------------------
-function lessonsHTML(){
- return `<div class="heading"><div><h2>Trilha de aprendizagem</h2><p>30 lições organizadas do básico à conversação.</p></div><span class="stat">${completed.length}/30</span></div>
- <div class="lesson-list">${lessons.map(lessonCard).join("")}</div>`;
-}
-function showLesson(i){
- currentLesson=i;
- document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.page==="lessons"));
- currentPage="lessons";
- $("#main").innerHTML=lessonHTML(i);
- updateStats();
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function lessonHTML(i){
- const l=lessons[i];
- const words=l.words.map(w=>`
- <div class="word-row"><div><strong>${w[0]}</strong><small>${w[1]}</small></div>
- <button class="speak" onclick="speak('${w[0]}')">🔊 Ouvir</button></div>`).join("");
- const dialogue=l.dialogue.split("|").map((line,j)=>`<div><b>${j%2===0?"A":"B"}:</b> ${line}</div>`).join("");
- const practiceOptions=l.words.slice(0,4);
- return `<div class="lesson-detail">
- <button class="back" onclick="showPage('lessons')">← Voltar às lições</button>
- <div class="lesson-banner"><div class="eyebrow">LIÇÃO ${String(i+1).padStart(2,"0")} · ${l.category}</div><h2>${l.title}</h2><p>${l.description}</p></div>
- <section class="panel"><h3>📖 Vocabulário essencial</h3><div class="word-list">${words}</div></section>
- <section class="panel"><h3>💬 Expressão principal</h3>
- <div class="phrase"><strong>${l.phrase}</strong><small>${l.translation}</small><button class="speak" style="margin-top:10px" onclick="speak('${l.phrase}')">🔊 Ouvir frase</button></div>
- <div class="tip"><b>Gramática:</b> ${l.grammar}</div></section>
- <section class="panel"><h3>🗣️ Diálogo prático</h3><div class="dialogue">${dialogue}</div>
- <p class="quiz-sub">Leia o diálogo em voz alta. Toque nas frases de vocabulário para praticar a pronúncia.</p></section>
- <section class="panel"><h3>✍️ Exercício rápido</h3><p class="quiz-sub">Qual destas palavras significa “${practiceOptions[0][1]}”?</p>
- <div class="practice-question">${practiceOptions.map((w,j)=>`<button class="chip" onclick="lessonPractice(this,${j===0})">${w[0]}</button>`).join("")}<div class="feedback"></div></div>
- <button class="btn" onclick="completeLesson(${i})">${completed.includes(i)?"Lição concluída ✓":"Concluir lição · +20 XP"}</button></section>
- </div>`;
-}
-function lessonPractice(btn,correct){
- const parent=btn.parentElement;
- const feedback=parent.querySelector(".feedback");
- if(parent.dataset.answered)return;
- parent.dataset.answered="1";
- if(correct){feedback.textContent="Muito bem! Resposta correta.";feedback.style.color="var(--green)";addXP(3)}
- else{feedback.textContent="Quase! Reveja o vocabulário desta lição.";feedback.style.color="var(--red)"}
-}
-function completeLesson(i){
- if(!completed.includes(i)){completed.push(i);addXP(20);save()}
- showLesson(i);
+.char-card {
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 6px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #fff;
+  text-align: center;
 }
 
-// --------------------------------------------------
-// HANGUL
-// --------------------------------------------------
-function hangulHTML(){
- return `<div class="heading"><div><h2>Hangul: alfabeto coreano</h2><p>Explore as letras e pratique com exemplos de sílabas.</p></div></div>
- <section class="panel">
- <div class="tabs">${Object.keys(hangulData).map(x=>`<button class="chip ${x===hangulCategory?"active":""}" onclick="setHangul('${x}')">${x}</button>`).join("")}</div>
- <div class="char-grid" id="hangulGrid"></div>
- <div class="tip"><b>Dica:</b> A romanização é apenas aproximada. Sons como ㄱ, ㄷ, ㅂ e ㄹ mudam conforme a posição. ㅐ e ㅔ são pronunciados de forma muito semelhante por muitos falantes. ㅢ também varia conforme o contexto.</div>
- </section>
- <section class="panel"><h3>Como funciona uma sílaba?</h3>
- <div class="grid">
-  <div class="feature"><div class="feature-icon">ㄱ + ㅏ</div><h3>가</h3><p>Consoante + vogal = sílaba.</p><button class="speak" onclick="speak('가')">🔊 Ouvir</button></div>
-  <div class="feature"><div class="feature-icon">ㄱ + ㅏ + ㄴ</div><h3>간</h3><p>Consoante + vogal + 받침.</p><button class="speak" onclick="speak('간')">🔊 Ouvir</button></div>
-  <div class="feature"><div class="feature-icon">ㅎ + ㅏ + ㄴ</div><h3>한</h3><p>Exemplo: 한 em 한국어.</p><button class="speak" onclick="speak('한')">🔊 Ouvir</button></div>
- </div></section>`;
-}
-function setHangul(category){hangulCategory=category;render()}
-function renderHangul(){
- const el=$("#hangulGrid");if(!el)return;
- el.innerHTML=hangulData[hangulCategory].map(x=>`
- <div class="char-card"><strong>${x[0]}</strong><small>${x[1]} · ${x[2]}</small><button onclick="speak('${x[2]}')">🔊 Ouvir</button></div>`).join("");
+.char-card strong {
+  display: block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: clamp(27px, 5vw, 35px);
+  line-height: 1.4;
+  word-break: keep-all;
 }
 
-// --------------------------------------------------
-// VOCABULÁRIO GERAL
-// --------------------------------------------------
-function allWords(){
- const map=new Map();
- lessons.forEach(l=>l.words.forEach(w=>map.set(w[0],w)));
- return [...map.values()];
-}
-function vocabHTML(){
- const words=allWords();
- return `<div class="heading"><div><h2>Vocabulário</h2><p>Revise palavras das 30 lições.</p></div><span class="stat">${words.length} palavras</span></div>
- <section class="panel"><input class="field" id="vocabSearch" placeholder="Buscar em coreano ou português..." oninput="filterVocab()">
- <div class="word-list" id="vocabList">${words.map(w=>`<div class="word-row"><div><strong>${w[0]}</strong><small>${w[1]}</small></div><button class="speak" onclick="speak('${w[0]}')">🔊 Ouvir</button></div>`).join("")}</div></section>`;
-}
-function filterVocab(){
- const q=$("#vocabSearch").value.toLowerCase();
- document.querySelectorAll("#vocabList .word-row").forEach(el=>{
-  el.style.display=el.textContent.toLowerCase().includes(q)?"flex":"none";
- });
+.char-card small {
+  display: block;
+  width: 100%;
+  min-height: 20px;
+  margin: 5px 0 10px;
+  color: var(--muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
 }
 
-// --------------------------------------------------
-// QUIZ: 5 MODOS
-// --------------------------------------------------
-function quizHTML(){
- return `<div class="heading"><div><h2>Quiz de prática</h2><p>Teste o que aprendeu e ganhe XP.</p></div></div>
- <section class="panel quiz-area">
- <div class="mode-tabs">
- <button class="chip ${quizMode==="meaning"?"active":""}" onclick="setQuizMode('meaning')">Significado</button>
- <button class="chip ${quizMode==="listening"?"active":""}" onclick="setQuizMode('listening')">Escuta</button>
- <button class="chip ${quizMode==="fill"?"active":""}" onclick="setQuizMode('fill')">Complete</button>
- <button class="chip ${quizMode==="order"?"active":""}" onclick="setQuizMode('order')">Frase</button>
- <button class="chip ${quizMode==="write"?"active":""}" onclick="setQuizMode('write')">Escrita</button>
- </div>
- <div id="quizArea"></div>
- </section>`;
-}
-function setQuizMode(mode){quizMode=mode;quiz=null;render()}
-function randomItem(arr){return arr[Math.floor(Math.random()*arr.length)]}
-function startQuiz(){
- const pool=allWords();
- const item=randomItem(pool);
- if(quizMode==="meaning"||quizMode==="listening"){
-  let choices=[item,...pool.filter(x=>x[0]!==item[0]).sort(()=>Math.random()-.5).slice(0,3)];
-  choices.sort(()=>Math.random()-.5);
-  quiz={item,choices,answered:false};
- }else if(quizMode==="fill"){
-  const lesson=randomItem(lessons);
-  quiz={lesson,answered:false};
- }else if(quizMode==="order"){
-  const lesson=randomItem(lessons);
-  quiz={lesson,parts:[...lesson.parts].sort(()=>Math.random()-.5),answered:false,selected:[]};
- }else{
-  quiz={item,answered:false};
- }
- drawQuiz();
-}
-function drawQuiz(){
- const area=$("#quizArea");if(!area)return;
- if(!quiz){area.innerHTML=`<div class="empty">Pronto para praticar?<br><br><button class="btn" onclick="startQuiz()">Começar quiz</button></div>`;return}
- if(quizMode==="meaning"||quizMode==="listening"){
-  area.innerHTML=`<div class="quiz-sub">${quizMode==="meaning"?"ESCOLHA O SIGNIFICADO":"OUÇA E ESCOLHA A PALAVRA"}</div>
-  <div class="quiz-question">${quizMode==="meaning"?quiz.item[0]:'<button class="btn soft" onclick="speak(quiz.item[0])">▶ Ouvir palavra</button>'}</div>
-  <div class="answer-grid">${quiz.choices.map((w,i)=>`<button class="answer" onclick="answerChoice(${i},this)">${quizMode==="meaning"?w[1]:w[0]}</button>`).join("")}</div>
-  <div class="feedback" id="quizFeedback"></div><button class="btn" onclick="startQuiz()">Próxima pergunta →</button>`;
- }else if(quizMode==="fill"){
-  const l=quiz.lesson;
-  area.innerHTML=`<div class="quiz-sub">COMPLETE A EXPRESSÃO</div><div class="quiz-question">${l.translation}</div>
-  <p class="quiz-sub">Qual é a frase em coreano?</p>
-  <div class="answer-grid">${[l.phrase,...lessons.filter(x=>x!==l).sort(()=>Math.random()-.5).slice(0,3).map(x=>x.phrase)].sort(()=>Math.random()-.5).map((p,i)=>`<button class="answer" onclick="answerFill(this,'${encodeURIComponent(p)}')">${p}</button>`).join("")}</div>
-  <div class="feedback" id="quizFeedback"></div><button class="btn" onclick="startQuiz()">Próxima pergunta →</button>`;
- }else if(quizMode==="order"){
-  area.innerHTML=`<div class="quiz-sub">ORGANIZE A FRASE</div><div class="quiz-question">${quiz.lesson.translation}</div>
-  <p class="quiz-sub">Toque nas partes na ordem correta.</p>
-  <div id="selectedParts" style="min-height:44px;padding:10px;background:#f5f4ff;border-radius:12px;margin:12px 0;font-family:'Noto Sans KR';font-weight:700">${quiz.selected.join(" ")}</div>
-  <div class="answer-grid">${quiz.parts.map((p,i)=>`<button class="answer" onclick="selectPart(${i})" ${quiz.used?.includes(i)?"disabled":""}>${p}</button>`).join("")}</div>
-  <div class="feedback" id="quizFeedback"></div>
-  <button class="btn" onclick="checkOrder()">Verificar frase</button> <button class="btn soft" onclick="startQuiz()">Outra frase</button>`;
- }else{
-  area.innerHTML=`<div class="quiz-sub">ESCREVA EM COREANO</div><div class="quiz-question">${quiz.item[1]}</div>
-  <p class="quiz-sub">Digite a palavra em Hangul.</p>
-  <input class="field" id="writeAnswer" placeholder="Digite em coreano..." autocomplete="off">
-  <div class="feedback" id="quizFeedback"></div>
-  <button class="btn" onclick="checkWriting()">Verificar</button> <button class="btn soft" onclick="startQuiz()">Próxima</button>`;
- }
-}
-function answerChoice(index,button){
- if(quiz.answered)return;quiz.answered=true;
- const chosen=quiz.choices[index],correct=chosen[0]===quiz.item[0];
- document.querySelectorAll("#quizArea .answer").forEach((b,i)=>{
-  if(quiz.choices[i][0]===quiz.item[0])b.classList.add("correct");
- });
- const f=$("#quizFeedback");
- if(correct){f.textContent="Muito bem! +5 XP";f.style.color="var(--green)";addXP(5)}
- else{f.textContent="Resposta: "+quiz.item[0]+" — "+quiz.item[1];f.style.color="var(--red)";recordMistake(quiz.item)}
-}
-function answerFill(button,encoded){
- if(quiz.answered)return;quiz.answered=true;
- const answer=decodeURIComponent(encoded),correct=answer===quiz.lesson.phrase;
- document.querySelectorAll("#quizArea .answer").forEach(b=>{if(b.textContent===quiz.lesson.phrase)b.classList.add("correct")});
- const f=$("#quizFeedback");
- if(correct){f.textContent="Correto! +5 XP";f.style.color="var(--green)";addXP(5)}
- else{f.textContent="Resposta correta: "+quiz.lesson.phrase;f.style.color="var(--red)"}
-}
-function selectPart(index){
- if(!quiz.used)quiz.used=[];
- if(quiz.used.includes(index))return;
- quiz.used.push(index);quiz.selected.push(quiz.parts[index]);
- $("#selectedParts").textContent=quiz.selected.join(" ");
- drawOrderButtons();
-}
-function drawOrderButtons(){
- document.querySelectorAll("#quizArea .answer").forEach((b,i)=>{
-  b.disabled=quiz.used.includes(i);
-  b.style.opacity=b.disabled?".35":"1";
- });
-}
-function checkOrder(){
- if(quiz.answered)return;
- const correct=quiz.selected.join("|")===quiz.lesson.parts.join("|");
- const f=$("#quizFeedback");
- if(correct){quiz.answered=true;f.textContent="Frase perfeita! +8 XP";f.style.color="var(--green)";addXP(8)}
- else{f.textContent="Ainda não. Tente reorganizar ou escolha outra frase.";f.style.color="var(--red)"}
-}
-function checkWriting(){
- if(quiz.answered)return;
- const val=$("#writeAnswer").value.trim().replace(/\s+/g,"");
- const expected=quiz.item[0].replace(/\s+/g,"");
- const f=$("#quizFeedback");
- if(val===expected){quiz.answered=true;f.textContent="Excelente escrita! +8 XP";f.style.color="var(--green)";addXP(8)}
- else{f.textContent="Tente novamente. Dica: "+quiz.item[1];f.style.color="var(--red)";recordMistake(quiz.item)}
-}
-function recordMistake(item){
- mistakes.unshift({word:item[0],meaning:item[1],date:Date.now()});
- mistakes=mistakes.slice(0,100);save();
+.char-card button {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 35px;
+  padding: 8px 4px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--soft);
+  color: var(--purple);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: normal;
 }
 
-// --------------------------------------------------
-// ÁUDIO: nunca usar voz de outro idioma
-// --------------------------------------------------
-function speak(text){
- if(!("speechSynthesis" in window)){
-  alert("Seu navegador não oferece leitura de voz.");
-  return;
- }
- const voices=speechSynthesis.getVoices();
- const voice=voices.find(v=>/^ko(-|_)/i.test(v.lang));
- if(!voice){
-  alert("Não encontrei uma voz em coreano neste dispositivo. Instale uma voz Korean/한국어 nas configurações de idioma e fala do sistema. O aplicativo não usará uma voz de outro idioma para evitar pronúncia incorreta.");
-  refreshVoices();
-  return;
- }
- speechSynthesis.cancel();
- const utterance=new SpeechSynthesisUtterance(text);
- utterance.voice=voice;
- utterance.lang=voice.lang;
- utterance.rate=voiceRate;
- utterance.pitch=1;
- speechSynthesis.speak(utterance);
-}
-function refreshVoices(){
- const status=$("#voiceStatus");
- if(!status)return;
- if(!("speechSynthesis" in window)){status.textContent="Leitura de voz não suportada.";return}
- const voices=speechSynthesis.getVoices().filter(v=>/^ko(-|_)/i.test(v.lang));
- status.textContent=voices.length?voices.map(v=>v.name+" ("+v.lang+")").join(", "):"Nenhuma voz coreana encontrada neste dispositivo.";
-}
-function setRate(value){
- voiceRate=Number(value);
- localStorage.setItem("cf_voice_rate",String(voiceRate));
+.panel {
+  min-width: 0;
+  overflow: hidden;
 }
 
-// --------------------------------------------------
-// CONFIGURAÇÕES
-// --------------------------------------------------
-function settingsHTML(){
- return `<div class="heading"><div><h2>Configuração de áudio</h2><p>Configure a leitura em voz alta.</p></div></div>
- <section class="panel"><h3>🔊 Voz coreana</h3>
- <div class="settings-row"><div><label>Voz disponível</label><small id="voiceStatus">Verificando vozes instaladas...</small></div><button class="btn soft" onclick="refreshVoices()">Atualizar</button></div>
- <div class="settings-row"><div><label>Velocidade da fala</label><small>Uma velocidade mais lenta ajuda a estudar.</small></div>
- <select class="select" id="rateSelect" onchange="setRate(this.value)">
- <option value=".65">Lenta</option><option value=".82">Natural</option><option value="1">Normal</option><option value="1.1">Rápida</option></select></div>
- <div class="settings-row"><div><label>Testar pronúncia</label><small>안녕하세요 — Olá</small></div><button class="btn" onclick="speak('안녕하세요')">▶ Testar</button></div>
- <div class="tip">A qualidade da voz depende do navegador e das vozes instaladas no dispositivo. Se não houver voz coreana, o aplicativo não tentará ler em português ou outro idioma. Para melhor resultado, instale uma voz coreana no sistema.</div>
- </section>
- <section class="panel"><h3>📊 Seus estudos</h3>
- <div class="settings-row"><label>XP acumulado</label><b>${xp}</b></div>
- <div class="settings-row"><label>Lições concluídas</label><b>${completed.length}/30</b></div>
- <div class="settings-row"><label>Palavras para revisar</label><b>${mistakes.length}</b></div>
- </section>`;
+@media (max-width: 430px) {
+  .tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .char-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .char-card {
+    padding: 12px 4px;
+  }
+
+  .char-card button {
+    font-size: 10px;
+  }
 }
 
-// --------------------------------------------------
-// RENDER PRINCIPAL
-// --------------------------------------------------
-function render(){
- updateStats();
- const main=$("#main");
- if(currentPage==="home")main.innerHTML=homeHTML();
- if(currentPage==="lessons")main.innerHTML=lessonsHTML();
- if(currentPage==="hangul"){main.innerHTML=hangulHTML();renderHangul()}
- if(currentPage==="vocab")main.innerHTML=vocabHTML();
- if(currentPage==="quiz"){main.innerHTML=quizHTML();drawQuiz()}
- if(currentPage==="settings"){
-  main.innerHTML=settingsHTML();
-  $("#rateSelect").value=String(voiceRate);
-  setTimeout(refreshVoices,250);
- }
+@media (min-width: 700px) {
+  .tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
-if("speechSynthesis" in window){
- speechSynthesis.onvoiceschanged=refreshVoices;
- setTimeout(refreshVoices,500);
-}
-render();
-updateStats();
-</script>
-</body>
-</html>
