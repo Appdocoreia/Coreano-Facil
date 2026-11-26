@@ -1,112 +1,73 @@
-/* ==================================
-   HANGUL RESPONSIVE UI FIX
-   ================================== */
 
-.tabs {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 9px;
-  width: 100%;
-  margin-bottom: 18px;
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6558d9">
+<title>Coreano Fácil</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f7fb;color:#24243a;padding:24px;line-height:1.6}
+.box{max-width:600px;margin:40px auto;background:white;padding:25px;border-radius:18px}
+button{border:0;border-radius:10px;background:#6558d9;color:white;padding:12px 18px;font-weight:bold;cursor:pointer}
+.error{color:#c84c62}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Coreano Fácil</h2>
+<p id="status">Carregando seu aplicativo...</p>
+</div>
+<script>
+(async function(){
+const status=document.getElementById("status");
+const sourceURL="https://raw.githubusercontent.com/Appdocoreia/Coreano-Facil/main/index.html";
+
+try{
+ const response=await fetch(sourceURL+"?v="+Date.now(),{cache:"no-store"});
+ if(!response.ok)throw new Error("Não foi possível carregar o aplicativo.");
+ let html=await response.text();
+
+ const oldDialogue='const dialogue=l.dialogue.split("|").map((line,j)=>`<div><b>${j%2===0?"A":"B"}:</b> ${line}</div>`).join("");';
+
+ const newDialogue=`const dialogueLines=l.dialogue.split("|").map(line=>line.trim()).filter(Boolean);
+  const escapeAttr=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+  const dialogue=dialogueLines.map((line,j)=>\`<div class="dialogue-line"><div class="dialogue-text"><b>\${j%2===0?"A":"B"}:</b> \${line}</div><button class="speak" onclick="speak('\${escapeAttr(line)}')">🔊 Ouvir</button></div>\`).join("");
+  const fullDialogue=dialogueLines.join(" ");`;
+
+ if(!html.includes(oldDialogue))throw new Error("A versão original mudou. Atualização interrompida para proteger o aplicativo.");
+
+ html=html.replace(oldDialogue,newDialogue);
+
+ const oldSection='<section class="panel"><h3>🗣️ Diálogo prático</h3><div class="dialogue">${dialogue}</div>\\n  <p class="quiz-sub">Leia o diálogo em voz alta. Toque nas frases de vocabulário para praticar a pronúncia.</p></section>';
+
+ const newSection=`<section class="panel"><h3>🗣️ Diálogo prático</h3>
+  <button class="btn soft" style="margin-bottom:14px" onclick="speak(fullDialogue)">▶ Ouvir diálogo completo</button>
+  <div class="dialogue">\${dialogue}</div>
+  <p class="quiz-sub">Toque em 🔊 para ouvir cada frase ou escute o diálogo completo.</p></section>`;
+
+ if(!html.includes(oldSection))throw new Error("Não foi possível localizar a seção de diálogo. Nenhuma alteração foi aplicada.");
+
+ html=html.replace(oldSection,newSection);
+
+ const css=`
+.dialogue-line{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.dialogue-line:last-child{border-bottom:0}
+.dialogue-text{flex:1;min-width:0;overflow-wrap:anywhere}
+.dialogue-line .speak{flex-shrink:0}
+@media(max-width:430px){.dialogue-line{align-items:flex-start}}
+`;
+
+ html=html.replace("</style>",css+"</style>");
+ document.open();
+ document.write(html);
+ document.close();
+
+}catch(error){
+ status.className="error";
+ status.textContent="Erro: "+error.message+" Atualize a página ou verifique a conexão.";
 }
-
-.tabs .chip {
-  width: 100%;
-  min-width: 0;
-  min-height: 44px;
-  padding: 10px 7px;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  line-height: 1.4;
-  text-align: center;
-  font-size: 12px;
-}
-
-.char-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, 105px), 1fr)
-  );
-  gap: 10px;
-  width: 100%;
-  min-width: 0;
-}
-
-.char-card {
-  min-width: 0;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 6px;
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  background: #fff;
-  text-align: center;
-}
-
-.char-card strong {
-  display: block;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: clamp(27px, 5vw, 35px);
-  line-height: 1.4;
-  word-break: keep-all;
-}
-
-.char-card small {
-  display: block;
-  width: 100%;
-  min-height: 20px;
-  margin: 5px 0 10px;
-  color: var(--muted);
-  font-size: 11px;
-  overflow-wrap: anywhere;
-}
-
-.char-card button {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  min-height: 35px;
-  padding: 8px 4px;
-  border: 0;
-  border-radius: 9px;
-  background: var(--soft);
-  color: var(--purple);
-  font-size: 11px;
-  font-weight: 800;
-  white-space: normal;
-}
-
-.panel {
-  min-width: 0;
-  overflow: hidden;
-}
-
-@media (max-width: 430px) {
-  .tabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .char-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .char-card {
-    padding: 12px 4px;
-  }
-
-  .char-card button {
-    font-size: 10px;
-  }
-}
-
-@media (min-width: 700px) {
-  .tabs {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
+})();
+</script>
+</body>
+</html>
