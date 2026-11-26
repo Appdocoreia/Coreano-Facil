@@ -908,54 +908,288 @@ if("serviceWorker" in navigator){
    COREANO FÁCIL - ROMANIZAÇÃO + OUVIR
    ========================================== */
 (function () {
-  "use strict";
+  'use strict';
 
-  const initials = [
-    "g", "kk", "n", "d", "tt", "r", "m", "b", "pp",
-    "s", "ss", "", "j", "jj", "ch", "k", "t", "p", "h"
+  // 자음 이름
+  const consonantNames = {
+    'ㄱ': 'giyeok · g/k',
+    'ㄴ': 'nieun · n',
+    'ㄷ': 'digeut · d/t',
+    'ㄹ': 'rieul · r/l',
+    'ㅁ': 'mieum · m',
+    'ㅂ': 'bieup · b/p',
+    'ㅅ': 'siot · s',
+    'ㅇ': 'ieung · silencioso/ng',
+    'ㅈ': 'jieut · j',
+    'ㅊ': 'chieut · ch',
+    'ㅋ': 'kieuk · k',
+    'ㅌ': 'tieut · t',
+    'ㅍ': 'pieup · p',
+    'ㅎ': 'hieut · h'
+  };
+
+  // 쌍자음 이름
+  const doubleNames = {
+    'ㄲ': 'ssanggiyeok · kk',
+    'ㄸ': 'ssangdigeut · tt',
+    'ㅃ': 'ssangbieup · pp',
+    'ㅆ': 'ssangsiot · ss',
+    'ㅉ': 'ssangjieut · jj'
+  };
+
+  // 기존 앱에 선언된 배열 사용
+  consonantBasic.forEach(item => {
+    item.s = consonantNames[item.c] || item.s;
+  });
+
+  consonantDouble.forEach(item => {
+    item.s = doubleNames[item.c] || item.s;
+  });
+
+  // 겹받침의 기본 대표 소리
+  const doubleBatchimSounds = {
+    'ㄳ': 'k (som de ㄱ)',
+    'ㄵ': 'n (som de ㄴ)',
+    'ㄶ': 'n (som de ㄴ)',
+    'ㄺ': 'k (som de ㄱ)',
+    'ㄻ': 'm (som de ㅁ)',
+    'ㄼ': 'l (som de ㄹ)',
+    'ㄽ': 'l (som de ㄹ)',
+    'ㄾ': 'l (som de ㄹ)',
+    'ㄿ': 'p (som de ㅂ)',
+    'ㅀ': 'l (som de ㄹ)',
+    'ㅄ': 'p (som de ㅂ)'
+  };
+
+  doubleBatchim.forEach(item => {
+    item.s = doubleBatchimSounds[item.c] || item.s;
+  });
+
+  // 한글 자모
+  const onsetList = [
+    'ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ',
+    'ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'
   ];
 
-  const vowels = [
-    "a", "ae", "ya", "yae", "eo", "e", "yeo",
-    "ye", "o", "wa", "wae", "oe", "yo", "u",
-    "wo", "we", "wi", "yu", "eu", "ui", "i"
+  const vowelList = [
+    'ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ',
+    'ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ',
+    'ㅡ','ㅢ','ㅣ'
   ];
 
-  const finals = [
-    "", "k", "k", "k", "n", "n", "n", "t",
-    "l", "k", "m", "p", "l", "l", "p", "l",
-    "m", "p", "p", "t", "t", "ng", "t", "t",
-    "k", "t", "p", "t"
+  const codaList = [
+    '', 'ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ',
+    'ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ',
+    'ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ',
+    'ㅋ','ㅌ','ㅍ','ㅎ'
   ];
 
-  function romanizeHangul(text) {
-    return Array.from(text).map(function (character) {
-      const code = character.charCodeAt(0);
+  const onsetRoman = {
+    'ㄱ':'g','ㄲ':'kk','ㄴ':'n','ㄷ':'d','ㄸ':'tt',
+    'ㄹ':'r','ㅁ':'m','ㅂ':'b','ㅃ':'pp','ㅅ':'s',
+    'ㅆ':'ss','ㅇ':'','ㅈ':'j','ㅉ':'jj','ㅊ':'ch',
+    'ㅋ':'k','ㅌ':'t','ㅍ':'p','ㅎ':'h'
+  };
 
-      if (code < 0xAC00 || code > 0xD7A3) {
-        return character;
+  const vowelRoman = {
+    'ㅏ':'a','ㅐ':'ae','ㅑ':'ya','ㅒ':'yae',
+    'ㅓ':'eo','ㅔ':'e','ㅕ':'yeo','ㅖ':'ye',
+    'ㅗ':'o','ㅘ':'wa','ㅙ':'wae','ㅚ':'oe',
+    'ㅛ':'yo','ㅜ':'u','ㅝ':'wo','ㅞ':'we',
+    'ㅟ':'wi','ㅠ':'yu','ㅡ':'eu','ㅢ':'ui','ㅣ':'i'
+  };
+
+  const codaRoman = {
+    'ㄱ':'k','ㄲ':'k','ㄳ':'k',
+    'ㄴ':'n','ㄵ':'n','ㄶ':'n',
+    'ㄷ':'t','ㄹ':'l','ㄺ':'k',
+    'ㄻ':'m','ㄼ':'l','ㄽ':'l',
+    'ㄾ':'l','ㄿ':'p','ㅀ':'l',
+    'ㅁ':'m','ㅂ':'p','ㅄ':'p',
+    'ㅅ':'t','ㅆ':'t','ㅇ':'ng',
+    'ㅈ':'t','ㅊ':'t','ㅋ':'k',
+    'ㅌ':'t','ㅍ':'p','ㅎ':'t'
+  };
+
+  const clusters = {
+    'ㄳ':['ㄱ','ㅅ'],
+    'ㄵ':['ㄴ','ㅈ'],
+    'ㄶ':['ㄴ','ㅎ'],
+    'ㄺ':['ㄹ','ㄱ'],
+    'ㄻ':['ㄹ','ㅁ'],
+    'ㄼ':['ㄹ','ㅂ'],
+    'ㄽ':['ㄹ','ㅅ'],
+    'ㄾ':['ㄹ','ㅌ'],
+    'ㄿ':['ㄹ','ㅍ'],
+    'ㅀ':['ㄹ','ㅎ'],
+    'ㅄ':['ㅂ','ㅅ']
+  };
+
+  function decompose(ch) {
+    const n = ch.charCodeAt(0) - 0xAC00;
+
+    if (n < 0 || n > 11171) return null;
+
+    return {
+      onset: onsetList[Math.floor(n / 588)],
+      vowel: vowelList[Math.floor((n % 588) / 28)],
+      coda: codaList[n % 28]
+    };
+  }
+
+  function romanizeHangul(input) {
+    const chars = Array.from(String(input));
+    const parts = chars.map(decompose);
+
+    for (let i = 0; i < parts.length - 1; i++) {
+      const a = parts[i];
+      const b = parts[i + 1];
+
+      if (!a || !b || !a.coda) continue;
+
+      // 연음: 받침 뒤에 모음이 오는 경우
+      if (b.onset === 'ㅇ') {
+        if (a.coda === 'ㅎ') {
+          a.coda = '';
+        } else if (clusters[a.coda]) {
+          const pair = clusters[a.coda];
+
+          a.coda = pair[0];
+
+          if (pair[1] !== 'ㅎ') {
+            b.onset = pair[1];
+          }
+        } else {
+          b.onset = a.coda;
+          a.coda = '';
+        }
+
+        // ㄷ/ㅌ + 이의 구개음화
+        if (
+          b.vowel === 'ㅣ' &&
+          (b.onset === 'ㄷ' || b.onset === 'ㅌ')
+        ) {
+          b.onset = b.onset === 'ㄷ' ? 'ㅈ' : 'ㅊ';
+        }
+
+        continue;
       }
 
-      const offset = code - 0xAC00;
-      const initial = Math.floor(offset / 588);
-      const medial = Math.floor((offset % 588) / 28);
-      const final = offset % 28;
+      // ㅎ 관련 거센소리 변화
+      if (
+        a.coda === 'ㅎ' ||
+        a.coda === 'ㄶ' ||
+        a.coda === 'ㅀ'
+      ) {
+        const retained =
+          a.coda === 'ㄶ' ? 'ㄴ' :
+          a.coda === 'ㅀ' ? 'ㄹ' : '';
 
-      return initials[initial] +
-        vowels[medial] +
-        finals[final];
-    }).join("");
+        if (['ㄱ','ㄷ','ㅈ'].includes(b.onset)) {
+          b.onset = {
+            'ㄱ':'ㅋ',
+            'ㄷ':'ㅌ',
+            'ㅈ':'ㅊ'
+          }[b.onset];
+
+          a.coda = retained;
+          continue;
+        }
+
+        if (b.onset === 'ㅅ') {
+          b.onset = 'ㅆ';
+          a.coda = retained;
+          continue;
+        }
+
+        if (b.onset === 'ㄴ' || b.onset === 'ㅁ') {
+          a.coda = retained || 'ㄴ';
+        }
+      }
+
+      // 구개음화
+      if (
+        b.vowel === 'ㅣ' &&
+        (a.coda === 'ㄷ' || a.coda === 'ㅌ')
+      ) {
+        b.onset = a.coda === 'ㄷ' ? 'ㅈ' : 'ㅊ';
+        a.coda = '';
+        continue;
+      }
+
+      // 비음화
+      if (b.onset === 'ㄴ' || b.onset === 'ㅁ') {
+        if (['ㄱ','ㄲ','ㅋ','ㄳ','ㄺ'].includes(a.coda)) {
+          a.coda = 'ㅇ';
+        } else if (
+          ['ㄷ','ㅅ','ㅆ','ㅈ','ㅊ','ㅌ','ㅎ'].includes(a.coda)
+        ) {
+          a.coda = 'ㄴ';
+        } else if (
+          ['ㅂ','ㅍ','ㄿ','ㅄ'].includes(a.coda)
+        ) {
+          a.coda = 'ㅁ';
+        }
+      }
+
+      // 유음화
+      if (b.onset === 'ㄹ' && a.coda === 'ㄴ') {
+        a.coda = 'ㄹ';
+      }
+
+      if (b.onset === 'ㄴ' && a.coda === 'ㄹ') {
+        b.onset = 'ㄹ';
+      }
+
+      // 장애음 + ㄹ의 비음화
+      if (
+        b.onset === 'ㄹ' &&
+        ['ㄱ','ㄲ','ㅋ','ㄳ','ㄺ'].includes(a.coda)
+      ) {
+        a.coda = 'ㅇ';
+        b.onset = 'ㄴ';
+      } else if (
+        b.onset === 'ㄹ' &&
+        ['ㅂ','ㅍ','ㄿ','ㅄ'].includes(a.coda)
+      ) {
+        a.coda = 'ㅁ';
+        b.onset = 'ㄴ';
+      } else if (
+        b.onset === 'ㄹ' &&
+        ['ㄷ','ㅅ','ㅆ','ㅈ','ㅊ','ㅌ','ㅎ'].includes(a.coda)
+      ) {
+        a.coda = 'ㄴ';
+        b.onset = 'ㄴ';
+      }
+    }
+
+    return parts.map((p, i) => {
+      if (!p) return chars[i];
+
+      let onset = onsetRoman[p.onset] || '';
+
+      if (
+        p.onset === 'ㄹ' &&
+        i > 0 &&
+        parts[i - 1] &&
+        parts[i - 1].coda === 'ㄹ'
+      ) {
+        onset = 'l';
+      }
+
+      return (
+        onset +
+        (vowelRoman[p.vowel] || '') +
+        (p.coda ? (codaRoman[p.coda] || '') : '')
+      );
+    }).join('');
   }
 
-  const content = document.getElementById("content");
+  const root = document.getElementById('content');
+  if (!root) return;
 
-  if (!content) {
-    console.warn("Coreano Fácil: área de conteúdo não encontrada.");
-    return;
-  }
+  const style = document.createElement('style');
 
-  // Estilo da pronúncia
-  const style = document.createElement("style");
   style.textContent = `
     .romanization {
       display: block;
@@ -968,84 +1202,65 @@ if("serviceWorker" in navigator){
       overflow-wrap: anywhere;
     }
   `;
+
   document.head.appendChild(style);
 
   function updateContent() {
-    // Atualiza os nomes relacionados à escuta
     const walker = document.createTreeWalker(
-      content,
+      root,
       NodeFilter.SHOW_TEXT
     );
 
-    const textNodes = [];
+    const nodes = [];
     let node;
 
     while ((node = walker.nextNode())) {
-      textNodes.push(node);
+      nodes.push(node);
     }
 
-    textNodes.forEach(function (textNode) {
-      let value = textNode.nodeValue;
+    nodes.forEach(textNode => {
+      const updated = textNode.nodeValue
+        .replace(/Quiz de escuta/gi, 'Quiz: Ouvir')
+        .replace(/\bEscuta\b/gi, 'Ouvir');
 
-      value = value.replace(
-        /Quiz de escuta/gi,
-        "Quiz: Ouvir"
-      );
-
-      value = value.replace(
-        /\bEscuta\b/gi,
-        "Ouvir"
-      );
-
-      if (value !== textNode.nodeValue) {
-        textNode.nodeValue = value;
+      if (updated !== textNode.nodeValue) {
+        textNode.nodeValue = updated;
       }
     });
 
-    // Adiciona a leitura romanizada aos textos coreanos
-    content.querySelectorAll(".korean").forEach(function (element) {
-      if (element.dataset.romanizationAdded === "true") {
-        return;
-      }
+    root.querySelectorAll('.korean').forEach(element => {
+      if (element.dataset.romanizationAdded === 'true') return;
 
-      const original = element.textContent.trim();
+      const original = Array.from(element.childNodes)
+        .filter(child => child.nodeType === Node.TEXT_NODE)
+        .map(child => child.nodeValue)
+        .join(' ')
+        .trim();
 
-      if (!/[가-힣]/.test(original)) {
-        return;
-      }
+      if (!/[가-힣]/.test(original)) return;
 
-      const reading = romanizeHangul(original);
+      const span = document.createElement('span');
 
-      if (!reading) {
-        return;
-      }
-
-      const span = document.createElement("span");
-      span.className = "romanization";
-      span.lang = "pt-BR";
-      span.textContent = reading;
+      span.className = 'romanization';
+      span.lang = 'pt-BR';
+      span.textContent = romanizeHangul(original);
 
       element.appendChild(span);
-      element.dataset.romanizationAdded = "true";
+      element.dataset.romanizationAdded = 'true';
     });
   }
 
-  // Observa as mudanças de tela do aplicativo
-  const observer = new MutationObserver(function () {
-    updateContent();
-  });
+  const observer = new MutationObserver(updateContent);
 
-  observer.observe(content, {
+  observer.observe(root, {
     childList: true,
     subtree: true
   });
 
-  // Aplica também ao conteúdo que já está na tela
   updateContent();
 
-  console.log("Coreano Fácil: romanização e Ouvir ativados.");
+  console.log('Coreano Fácil: romanização atualizada.');
 })();
-
 </script>
 </body>
 </html>
