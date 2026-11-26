@@ -2,470 +2,506 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#625ce7">
+<meta name="theme-color" content="#5b55d9">
 <meta name="description" content="Aprenda coreano de um jeito fácil e divertido.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Coreano Fácil</title>
 <style>
-:root{--p:#625ce7;--light:#efeeff;--bg:#f7f7fc;--ink:#292941;--muted:#77778f;--line:#e9e9f2;--green:#168653}
+:root{--ink:#24243b;--muted:#77778f;--purple:#625ce7;--lav:#efeeff;--line:#ececf4;--bg:#f7f7fc;--green:#159768;--red:#c94d62}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-header{background:linear-gradient(135deg,#625ce7,#927df0);color:white;padding:25px 18px 28px;border-radius:0 0 25px 25px}
-header h1{font-size:22px;margin:0 0 8px}
-header h2{font-size:21px;margin:20px 0 5px}
-header p{margin:5px 0;opacity:.95}
-.wrap{max-width:760px;margin:auto;padding:16px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
-.stat,.card{background:white;border:1px solid var(--line);border-radius:16px;padding:14px}
-.stat{text-align:center}
-.stat strong{display:block;font-size:21px;color:var(--p)}
-.stat span{font-size:11px;color:var(--muted)}
-nav{display:flex;gap:7px;overflow-x:auto;padding:15px 0}
-nav button,.btn{border:0;border-radius:12px;padding:11px 14px;background:var(--light);color:var(--p);font-weight:700;white-space:nowrap}
-nav button.active,.btn.primary{background:var(--p);color:white}
-.card{margin:10px 0}
-.card h2{font-size:20px;margin:5px 0 10px}
-.card h3{font-size:16px}
-.muted{color:var(--muted)}
-.small{font-size:13px}
-.progress{height:10px;background:#eee;border-radius:20px;overflow:hidden}
-.progress div{height:100%;background:var(--p);transition:width .2s}
-.lesson{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.lesson h3{margin:0 0 4px;font-size:15px}
-.lesson p{margin:0}
-.tag{font-size:11px;background:var(--light);color:var(--p);padding:5px 8px;border-radius:20px;display:inline-block}
-.word{font-size:30px;font-weight:800;margin:10px 0}
-.pron{color:var(--p);font-weight:700}
-.answer{display:block;width:100%;text-align:left;margin:9px 0;padding:14px;border:1px solid var(--line);background:white;border-radius:12px;color:var(--ink);font-size:15px}
-.answer:hover:not(:disabled){border-color:var(--p);background:var(--light)}
-.answer:disabled{opacity:1;cursor:default}
-.answer.correct{border:2px solid #168653;background:#effcf5;color:#17683d}
-.answer.wrong{border:2px solid #d65b5b;background:#fff0f0;color:#a52c2c}
-button{cursor:pointer}
-button:disabled{opacity:.55;cursor:default}
-input{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;font-size:16px;margin:8px 0;color:var(--ink);background:white}
-input:focus{outline:2px solid #c9c5ff;border-color:var(--p)}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.row .btn{flex:1}
-.notice{background:#effcf5;border:1px solid #c9eed9;padding:12px;border-radius:12px;color:#17683d;margin:10px 0}
-.warning{background:#fff8e9;border:1px solid #f2dfb2;padding:12px;border-radius:12px;color:#795b16;margin:10px 0}
-.badge-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.badge-card{border:1px solid var(--line);border-radius:14px;padding:13px;background:white}
-.badge-card.locked{opacity:.45;filter:grayscale(1)}
-.badge-icon{font-size:28px}
-.badge-card strong{display:block;margin:5px 0}
-.result{padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:white}
-.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.quiz-number{font-size:13px;color:var(--muted)}
-.quiz-word{text-align:center;padding:16px 0}
-.quiz-word .word{font-size:42px}
+header{background:linear-gradient(135deg,#625ce7,#8b75ef);color:white;padding:26px 20px 32px;border-radius:0 0 28px 28px}
+.wrap{max-width:780px;margin:auto}
+header .top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:700;font-size:13px}
+h1{font-size:30px;line-height:1.2;margin:25px 0 8px}
+header p{margin:0;opacity:.9}
+main{max-width:780px;margin:-12px auto 30px;padding:0 16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat,.panel,.tile{background:white;border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:0 5px 18px #29265b08}
+.stat strong{display:block;font-size:21px}
+.stat span{font-size:12px;color:var(--muted)}
+nav{display:flex;gap:8px;overflow-x:auto;padding:18px 0 12px}
+nav button,.subnav button{border:0;border-radius:999px;background:#eae9f8;color:#555276;padding:10px 15px;font-weight:700;white-space:nowrap}
+nav button.active,.subnav button.active{background:var(--purple);color:white}
+.panel{padding:18px;margin:8px 0 14px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+h2{font-size:19px;margin:0 0 12px}
+.muted{color:var(--muted);font-size:14px}
+.progress{height:9px;background:#eeedf7;border-radius:9px;overflow:hidden;margin-top:10px}
+.progress i{display:block;height:100%;background:#61c99c}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tile{padding:14px;text-align:left;cursor:pointer;color:inherit;width:100%}
+.tile .emoji{font-size:24px}
+.tile b{display:block;margin:6px 0 3px}
+.tile small{color:var(--muted)}
+button{cursor:pointer;font:inherit}
+.primary{background:var(--purple);color:white;border:0;border-radius:12px;padding:11px 15px;font-weight:700}
+.secondary{background:var(--lav);color:var(--purple);border:1px solid #dedcff;border-radius:12px;padding:10px 13px;font-weight:700}
+.lesson{border:1px solid var(--line);border-radius:14px;padding:14px;margin:9px 0;background:white}
+.lesson h3{font-size:16px;margin:0 0 5px}
+.lesson p{margin:4px 0;color:var(--muted);font-size:14px}
+.korean{font-size:27px;font-weight:800;letter-spacing:1px}
+.answer{display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:12px;background:white;padding:12px;margin:8px 0}
+.answer:hover{border-color:var(--purple);background:var(--lav)}
+.feedback-area{text-align:center;padding:24px 16px;margin:20px 0;background:white;border:1px solid var(--line);border-radius:18px}
+.feedback-link{display:inline-block;padding:14px 24px;background:#6d5ce7;color:white;border-radius:12px;text-decoration:none;font-weight:bold}
+.feedback-area p{font-size:13px;color:var(--muted);margin-bottom:0}
 footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+.subnav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.char-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.char-card{border:1px solid var(--line);background:#fff;border-radius:15px;padding:13px 8px;text-align:center;min-width:0}
+.char-card .letter{font-size:34px;font-weight:850;line-height:1.3}
+.char-card .sound{font-size:13px;color:var(--muted);min-height:19px}
+.char-card button{margin-top:8px;border:0;background:var(--lav);color:var(--purple);border-radius:10px;padding:7px 10px;font-weight:700}
+.tag{display:inline-block;font-size:11px;color:#625ce7;background:#efeeff;padding:4px 8px;border-radius:999px;font-weight:700}
+.notice{padding:12px;border-radius:12px;background:#f5f4ff;color:#555276;font-size:13px;margin:12px 0}
+.quiz-prompt{background:#f8f7ff;border:1px solid #e8e6ff;border-radius:16px;text-align:center;padding:22px 12px;margin:14px 0}
+.quiz-prompt .korean{font-size:38px}
+.correct{background:#e1f7ed!important;border-color:#8bd8b6!important}
+.wrong{background:#ffe9ec!important;border-color:#f0aab5!important}
+.tiny{font-size:12px;color:var(--muted)}
+.feedback-link:focus,button:focus-visible{outline:3px solid #bcb8ff;outline-offset:2px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}.char-grid{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-<h1>🇰🇷 COREANO FÁCIL</h1>
-<p>🇧🇷 Para quem fala português</p>
-<h2>안녕하세요! Vamos aprender coreano?</h2>
+<header>
+<div class="wrap">
+<div class="top"><span>🇰🇷 COREANO FÁCIL</span><span>🇧🇷 Para quem fala português</span></div>
+<h1>안녕하세요!<br>Vamos aprender coreano?</h1>
 <p>Pequenos passos todos os dias. 💜</p>
-</div></header>
+</div>
+</header>
 
-<main class="wrap">
-<section class="stats">
-<div class="stat"><strong id="xp">0</strong><span>XP acumulado</span></div>
-<div class="stat"><strong id="done">0/50</strong><span>Lições concluídas</span></div>
-<div class="stat"><strong id="level">1</strong><span>Seu nível</span></div>
-</section>
+<main>
+<div class="stats">
+<div class="stat"><strong id="xp">0</strong><span>⭐ XP acumulado</span></div>
+<div class="stat"><strong id="done">0/30</strong><span>📚 Lições concluídas</span></div>
+<div class="stat"><strong id="level">1</strong><span>🏅 Seu nível</span></div>
+</div>
 
-<nav>
+<nav id="tabs">
 <button class="active" data-tab="inicio">Início</button>
-<button data-tab="buscar">🔎 Buscar</button>
 <button data-tab="hangul">Hangul</button>
-<button data-tab="escrever">✍️ Escrever</button>
 <button data-tab="vocabulario">Vocabulário</button>
 <button data-tab="licoes">Lições</button>
 <button data-tab="quiz">Quiz</button>
-<button data-tab="revisao">🔁 Revisão</button>
-<button data-tab="conquistas">🏆 Conquistas</button>
 </nav>
 
-<section id="content"></section>
+<section id="content" aria-live="polite"></section>
 
-<section class="card">
-<h3>💜 Ajude a melhorar o Coreano Fácil</h3>
-<p class="small muted">Conte o que você achou do aplicativo. Sua opinião é muito importante!</p>
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSfM4YlJV9QZAVRQ1kqn2OSLUUZwna47-JadYb-3S9EKQmwIHA/viewform" target="_blank" rel="noopener">Responder à pesquisa</a>
-</section>
+<div class="feedback-area">
+<a class="feedback-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfM4YlJV9QZAVRQ1kqn2OSLUUZwna47-JadYb-3S9EKQmwIHA/viewform" target="_blank" rel="noopener noreferrer">⭐ Avaliar aplicativo</a>
+<p>Sua opinião é importante para nós!</p>
+</div>
 </main>
-<footer>Coreano Fácil · Aprenda coreano no seu ritmo 💜</footer>
+
+<footer>Coreano Fácil · Feito com carinho para estudantes de coreano</footer>
 
 <script>
+'use strict';
+
 const lessons=[
-['Cumprimentos','안녕하세요','an-nyeong-ha-se-yo','Olá / Oi','É a forma educada e mais comum de cumprimentar alguém.','안녕하세요? 저는 마리아예요.','Olá! Eu sou Maria.'],
-['Apresentações','저는 마리아예요','jeo-neun ma-ri-a-ye-yo','Eu sou Maria','저는 significa “eu” como tópico; 예요 é uma forma educada de “ser”.','저는 브라질 사람이에요.','Sou brasileira / brasileiro.'],
-['Obrigado','감사합니다','gam-sa-ham-ni-da','Obrigado(a)','Expressão educada e muito usada para agradecer.','도와주셔서 감사합니다.','Obrigado por ajudar.'],
-['Desculpas','죄송합니다','joe-song-ham-ni-da','Desculpe','Forma educada de pedir desculpas.','늦어서 죄송합니다.','Desculpe pelo atraso.'],
-['Sim e não','네 / 아니요','ne / a-ni-yo','Sim / Não','네 significa sim; 아니요 significa não.','네, 좋아요.','Sim, está bom.'],
-['Família','가족','ga-jok','Família','가족 é a palavra geral para família.','우리 가족이에요.','É minha família.'],
-['Números nativos','하나, 둘, 셋','ha-na, dul, set','Um, dois, três','Números nativos são usados para contar objetos e idade em certos contextos.','사과 두 개 주세요.','Duas maçãs, por favor.'],
-['Números sino-coreanos','일, 이, 삼','il, i, sam','Um, dois, três','Sistema usado em datas, dinheiro e números de telefone.','삼 번이에요.','É o número três.'],
-['Comida','밥','bap','Arroz / refeição','밥 pode significar arroz cozido ou refeição.','밥 먹었어요?','Você já comeu?'],
-['Água','물 주세요','mul ju-se-yo','Água, por favor','주세요 é uma forma educada de pedir algo.','물 주세요.','Água, por favor.'],
-['Café','커피','keo-pi','Café','커피 significa café.','커피 한 잔 주세요.','Um café, por favor.'],
-['Restaurante','맛있어요','ma-si-sseo-yo','Está delicioso','Forma educada para dizer que algo está gostoso.','정말 맛있어요!','Está realmente delicioso!'],
-['Hoje','오늘','o-neul','Hoje','오늘 significa hoje.','오늘 바빠요.','Estou ocupado(a) hoje.'],
-['Dias da semana','월요일','wo-ryo-il','Segunda-feira','요일 significa dia da semana. 월요일 é segunda-feira.','오늘은 월요일이에요.','Hoje é segunda-feira.'],
-['Lugares','학교','hak-kkyo','Escola','학교 é escola.','학교에 가요.','Vou à escola.'],
-['Transporte','버스','beo-seu','Ônibus','버스 é ônibus.','버스를 타요.','Pego o ônibus.'],
-['Compras','얼마예요?','eol-ma-ye-yo','Quanto custa?','Pergunta útil para saber o preço.','이거 얼마예요?','Quanto custa isto?'],
-['Cores','빨간색','ppal-gan-saek','Vermelho','빨간색 é a cor vermelha.','빨간색을 좋아해요.','Gosto de vermelho.'],
-['Adjetivos','좋아요','jo-a-yo','É bom / Gosto','좋아요 pode significar “é bom” ou “gosto”.','한국 음식이 좋아요.','Gosto de comida coreana.'],
-['Verbos','가요','ga-yo','Vou / Vai','Forma educada presente do verbo 가다 (ir).','집에 가요.','Vou para casa.'],
-['Casa','집','jip','Casa','집 significa casa ou lar.','집에 있어요.','Estou em casa.'],
-['Trabalho','일','il','Trabalho','일 pode significar trabalho ou tarefa.','오늘 일이 많아요.','Tenho muito trabalho hoje.'],
-['Estudos','공부해요','gong-bu-hae-yo','Estudo','Forma educada do verbo 공부하다 (estudar).','한국어를 공부해요.','Estudo coreano.'],
-['Hobbies','음악','eum-ak','Música','음악 significa música.','음악을 들어요.','Escuto música.'],
-['Clima','날씨','nal-ssi','Clima / tempo','날씨 é usado para falar do clima.','날씨가 좋아요.','O tempo está bom.'],
-['Sentimentos','행복해요','haeng-bok-hae-yo','Estou feliz','행복하다 significa ser ou estar feliz.','오늘 행복해요.','Estou feliz hoje.'],
-['Localização','어디예요?','eo-di-ye-yo','Onde fica?','어디 pergunta “onde”.','화장실이 어디예요?','Onde fica o banheiro?'],
-['Pedido','도와주세요','do-wa-ju-se-yo','Ajude-me, por favor','Expressão educada para pedir ajuda.','도와주세요!','Ajude-me, por favor!'],
-['Passado','갔어요','ga-sseo-yo','Fui / Foi','Forma passada e educada do verbo 가다 (ir).','어제 학교에 갔어요.','Ontem fui à escola.'],
-['Revisão','한국어를 공부해요','han-gu-geo-reul gong-bu-hae-yo','Estudo coreano','Revise vocabulário e estruturas anteriores.','매일 한국어를 공부해요.','Estudo coreano todos os dias.'],
-['Introdução ao Hangul','한글','han-geul','Alfabeto coreano','O Hangul é o sistema de escrita coreano.','한글을 배워요.','Aprendo o Hangul.'],
-['Vogais básicas','ㅏ ㅓ ㅗ ㅜ','a / eo / o / u','Vogais básicas','ㅏ soa como “a”; ㅓ é romanizado “eo”; ㅗ é “o”; ㅜ é “u”.','아, 어, 오, 우','Leia cada vogal em voz alta.'],
-['Outras vogais','ㅡ ㅣ ㅐ ㅔ','eu / i / ae / e','Vogais','ㅡ não tem equivalente exato em português. ㅐ e ㅔ têm pronúncia muito parecida no coreano atual.','으, 이, 애, 에','Pratique os sons com calma.'],
-['Consoantes básicas 1','ㄱ ㄴ ㄷ ㄹ','g/k, n, d/t, r/l','Consoantes','A pronúncia de ㄱ e ㄷ varia conforme a posição. ㄹ pode soar entre r e l.','가, 나, 다, 라','Leia os blocos formados com ㅏ.'],
-['Consoantes básicas 2','ㅁ ㅂ ㅅ ㅇ','m, b/p, s, som zero/ng','Consoantes','ㅇ não tem som no início da sílaba e soa “ng” no final.','마, 바, 사, 아','Observe a posição de ㅇ.'],
-['Consoantes aspiradas','ㅋ ㅌ ㅍ ㅊ','k, t, p, ch aspirados','Consoantes fortes','Essas consoantes são pronunciadas com uma saída de ar mais forte.','카, 타, 파, 차','Coloque a mão perto da boca para sentir o ar.'],
-['Consoantes duplas','ㄲ ㄸ ㅃ ㅆ ㅉ','kk, tt, pp, ss, jj','Consoantes tensas','São sons tensos, produzidos com maior firmeza.','까, 따, 빠, 싸, 짜','Pratique sem acrescentar uma vogal extra.'],
-['Formando sílabas','가 나 다 한','ga, na, da, han','Blocos silábicos','As letras se combinam em blocos. Uma sílaba pode ter consoante inicial, vogal e consoante final.','한 + 국 = 한국','한국 significa Coreia.'],
-['Lendo palavras','학교, 친구, 사람','hak-kkyo, chin-gu, sa-ram','Palavras simples','Leia cada bloco da esquerda para a direita e de cima para baixo.','친구가 와요.','Meu amigo / minha amiga vem.'],
-['Pronúncia e 받침','한국, 밥, 집','han-guk, bap, jip','Consoante final','받침 é a consoante final de um bloco.','한국어','Língua coreana.'],
-['Cumprimentos em contexto','안녕하세요','an-nyeong-ha-se-yo','Olá','안녕하세요 é a saudação padrão.','안녕하세요. 만나서 반가워요.','Olá. Prazer em conhecer você.'],
-['Agradecer e responder','고마워요','go-ma-wo-yo','Obrigado(a)','고마워요 é educado e um pouco mais casual que 감사합니다.','고마워요! / 아니에요.','Obrigado! / Imagina.'],
-['Pedir desculpas','미안해요','mi-an-hae-yo','Desculpe','미안해요 é educado, mas mais casual que 죄송합니다.','정말 미안해요.','Sinto muito mesmo.'],
-['Perguntar e responder','네, 아니요','ne, a-ni-yo','Sim e não','네 e 아니요 são respostas comuns.','한국 사람이에요? 네.','Você é coreano(a)? Sim.'],
-['Apresentar-se','제 이름은 ...예요','je i-reu-meun ... ye-yo','Meu nome é...','제 이름은 é uma maneira educada de dizer “meu nome é”.','제 이름은 루카스예요.','Meu nome é Lucas.'],
-['Países e nacionalidades','브라질 사람','beu-ra-jil sa-ram','Pessoa brasileira','Para dizer que é de um país, use país + 사람.','저는 브라질 사람이에요.','Sou brasileiro(a).'],
-['Contar idade','살','sal','Anos de idade','살 é usado com números nativos para idade em conversas comuns.','스무 살이에요.','Tenho vinte anos.'],
-['Datas e números','이천이십육 년','i-cheon-i-sip-yuk nyeon','Ano de 2026','Datas usam números sino-coreanos. 년 significa ano, 월 mês e 일 dia.','오늘은 11월 26일이에요.','Hoje é 26 de novembro.'],
-['Dias da semana','월 화 수 목 금 토 일','wol, hwa, su, mok, geum, to, il','Dias da semana','Os nomes completos terminam em 요일.','금요일에 만나요.','Vamos nos encontrar na sexta-feira.'],
-['Hoje, amanhã e ontem','오늘, 내일, 어제','o-neul, nae-il, eo-je','Expressões de tempo','오늘 é hoje, 내일 é amanhã e 어제 é ontem.','내일 만나요.','Nos vemos amanhã.'],
-['Frases simples','저는 물을 마셔요','jeo-neun mu-reul ma-syeo-yo','Eu bebo água','은/는 marca o tópico e 을/를 marca o objeto da ação.','저는 커피를 마셔요.','Eu bebo café.'],
-['Revisão final','한국어를 배워요','han-gu-geo-reul bae-wo-yo','Aprendo coreano','Parabéns! Revise as letras, saudações, números e frases simples.','조금씩 매일 공부해요.','Estudo um pouquinho todos os dias.']
+["Cumprimentos","안녕하세요","Olá / Bom dia"],
+["Apresentações","저는 마리아예요","Eu sou Maria"],
+["Obrigado","감사합니다","Obrigado(a)"],
+["Desculpas","죄송합니다","Desculpe"],
+["Sim e não","네 / 아니요","Sim / Não"],
+["Família","가족","Família"],
+["Números 1","하나, 둘, 셋","Um, dois, três"],
+["Números 2","일, 이, 삼","Um, dois, três (sino-coreano)"],
+["Comida","밥","Arroz / refeição"],
+["Água","물 주세요","Água, por favor"],
+["Café","커피","Café"],
+["Restaurante","맛있어요","Está delicioso"],
+["Tempo","오늘","Hoje"],
+["Dias","월요일","Segunda-feira"],
+["Lugares","학교","Escola"],
+["Transporte","버스","Ônibus"],
+["Compras","얼마예요?","Quanto custa?"],
+["Cores","빨간색","Vermelho"],
+["Adjetivos","좋아요","É bom / gosto"],
+["Verbos","가요","Vou / vai"],
+["Casa","집","Casa"],
+["Trabalho","일","Trabalho"],
+["Estudos","공부해요","Estudo"],
+["Hobbies","음악","Música"],
+["Clima","날씨","Clima"],
+["Sentimentos","행복해요","Estou feliz"],
+["Localização","어디예요?","Onde fica?"],
+["Pedido","도와주세요","Ajude-me, por favor"],
+["Passado","갔어요","Fui"],
+["Revisão","한국어를 공부해요","Estudo coreano"]
 ];
 
 const vocab=[
-['안녕하세요','Olá','an-nyeong-ha-se-yo'],['감사합니다','Obrigado(a)','gam-sa-ham-ni-da'],
-['사랑','Amor','sa-rang'],['친구','Amigo(a)','chin-gu'],
-['물','Água','mul'],['밥','Arroz / refeição','bap'],
-['학교','Escola','hak-kkyo'],['책','Livro','chaek'],
-['집','Casa','jip'],['가족','Família','ga-jok'],
-['네','Sim','ne'],['아니요','Não','a-ni-yo']
+["안녕하세요","Olá"],
+["감사합니다","Obrigado(a)"],
+["사랑","Amor"],
+["친구","Amigo(a)"],
+["물","Água"],
+["밥","Arroz / refeição"],
+["학교","Escola"],
+["책","Livro"],
+["집","Casa"],
+["가족","Família"],
+["네","Sim"],
+["아니요","Não"],
+["사람","Pessoa"],
+["한국","Coreia"],
+["커피","Café"],
+["고양이","Gato"],
+["강아지","Cachorro"],
+["시간","Tempo / hora"],
+["오늘","Hoje"],
+["내일","Amanhã"]
 ];
 
-const writingItems=[
-['ㅏ','Vogal “a”.'],['ㅓ','Vogal “eo”.'],['ㅗ','Vogal “o”.'],['ㅜ','Vogal “u”.'],
-['ㅡ','Vogal “eu”.'],['ㅣ','Vogal “i”.'],['ㄱ','Consoante g/k.'],['ㄴ','Consoante n.'],
-['ㄷ','Consoante d/t.'],['ㄹ','Consoante r/l.'],['가','Sí­laba ㄱ + ㅏ.'],['나','Sí­laba ㄴ + ㅏ.'],
-['한','Uma sílaba coreana.'],['한글','O alfabeto coreano.']
+const vowelBasic=[
+{c:"ㅏ",s:"a",a:"아"},
+{c:"ㅑ",s:"ya",a:"야"},
+{c:"ㅓ",s:"eo",a:"어"},
+{c:"ㅕ",s:"yeo",a:"여"},
+{c:"ㅗ",s:"o",a:"오"},
+{c:"ㅛ",s:"yo",a:"요"},
+{c:"ㅜ",s:"u",a:"우"},
+{c:"ㅠ",s:"yu",a:"유"},
+{c:"ㅡ",s:"eu",a:"으"},
+{c:"ㅣ",s:"i",a:"이"}
 ];
 
-function load(key,def){try{const v=JSON.parse(localStorage.getItem(key));return v===null?def:v}catch(e){return def}}
-let xp=Number(localStorage.getItem('cf_xp')||0);
-let completed=load('cf_completed',[]);
-let mistakes=load('cf_mistakes',[]);
-let quizCorrect=Number(localStorage.getItem('cf_quiz_correct')||0);
-let writingDone=Number(localStorage.getItem('cf_writing_done')||0);
-let writeIndex=0;
-let quizSession=[];
-let quizPosition=0;
-let quizScore=0;
-let quizMode='normal';
+const vowelCompound=[
+{c:"ㅐ",s:"ae",a:"애"},
+{c:"ㅒ",s:"yae",a:"얘"},
+{c:"ㅔ",s:"e",a:"에"},
+{c:"ㅖ",s:"ye",a:"예"},
+{c:"ㅘ",s:"wa",a:"와"},
+{c:"ㅙ",s:"wae",a:"왜"},
+{c:"ㅚ",s:"oe / we",a:"외"},
+{c:"ㅝ",s:"wo",a:"워"},
+{c:"ㅞ",s:"we",a:"웨"},
+{c:"ㅟ",s:"wi",a:"위"},
+{c:"ㅢ",s:"ui",a:"의"}
+];
+
+const consonantBasic=[
+{c:"ㄱ",s:"g/k",a:"가"},
+{c:"ㄴ",s:"n",a:"나"},
+{c:"ㄷ",s:"d/t",a:"다"},
+{c:"ㄹ",s:"r/l",a:"라"},
+{c:"ㅁ",s:"m",a:"마"},
+{c:"ㅂ",s:"b/p",a:"바"},
+{c:"ㅅ",s:"s",a:"사"},
+{c:"ㅇ",s:"silencioso/ng",a:"아"},
+{c:"ㅈ",s:"j",a:"자"},
+{c:"ㅊ",s:"ch",a:"차"},
+{c:"ㅋ",s:"k",a:"카"},
+{c:"ㅌ",s:"t",a:"타"},
+{c:"ㅍ",s:"p",a:"파"},
+{c:"ㅎ",s:"h",a:"하"}
+];
+
+const consonantDouble=[
+{c:"ㄲ",s:"kk",a:"까"},
+{c:"ㄸ",s:"tt",a:"따"},
+{c:"ㅃ",s:"pp",a:"빠"},
+{c:"ㅆ",s:"ss",a:"싸"},
+{c:"ㅉ",s:"jj",a:"짜"}
+];
+
+const batchim=[
+{c:"ㄱ",s:"k",a:"국"},
+{c:"ㄴ",s:"n",a:"산"},
+{c:"ㄷ",s:"t",a:"옷"},
+{c:"ㄹ",s:"l",a:"달"},
+{c:"ㅁ",s:"m",a:"밤"},
+{c:"ㅂ",s:"p",a:"밥"},
+{c:"ㅇ",s:"ng",a:"강"}
+];
+
+const doubleBatchim=[
+{c:"ㄳ",s:"ks",a:"넋"},
+{c:"ㄵ",s:"nj",a:"앉다"},
+{c:"ㄶ",s:"nh",a:"많다"},
+{c:"ㄺ",s:"lk",a:"읽다"},
+{c:"ㄻ",s:"lm",a:"삶"},
+{c:"ㄼ",s:"lp",a:"짧다"},
+{c:"ㄽ",s:"ls",a:"곬"},
+{c:"ㄾ",s:"lt",a:"핥다"},
+{c:"ㄿ",s:"lp",a:"읊다"},
+{c:"ㅀ",s:"lh",a:"싫다"},
+{c:"ㅄ",s:"ps",a:"없다"}
+];
+
+let xp=Number(localStorage.getItem("xp")||0);
+let completed=JSON.parse(localStorage.getItem("completed")||"[]");
+if(!Array.isArray(completed))completed=[];
+
+let hangulCategory="vowels";
+let quizMode="meaning";
 let currentQuestion=null;
-let questionAnswered=false;
-let reviewWord=null;
+let answered=false;
 
-function save(){
-localStorage.setItem('cf_xp',String(xp));
-localStorage.setItem('cf_completed',JSON.stringify(completed));
-localStorage.setItem('cf_mistakes',JSON.stringify(mistakes));
-localStorage.setItem('cf_quiz_correct',String(quizCorrect));
-localStorage.setItem('cf_writing_done',String(writingDone));
-stats();
-}
+const content=document.getElementById("content");
+
 function stats(){
-document.getElementById('xp').textContent=xp;
-document.getElementById('done').textContent=completed.length+'/50';
-document.getElementById('level').textContent=Math.floor(xp/100)+1;
-}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function setTab(t){
-document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
-}
-function render(t){
-setTab(t);
-const c=document.getElementById('content');
-
-if(t==='inicio'){
-let pct=Math.round(completed.length/50*100);
-let next=lessons.findIndex((_,i)=>!completed.includes(i));
-c.innerHTML=`<div class="card"><h2>Bem-vindo(a)! 💜</h2><p>Aprenda coreano passo a passo, começando pelo alfabeto e avançando até frases do dia a dia.</p><h3>Seu progresso: ${pct}%</h3><div class="progress"><div style="width:${pct}%"></div></div><p class="muted small">${completed.length} de 50 lições concluídas</p><button class="btn primary" onclick="openLesson(${next<0?0:next})">${next<0?'Revisar lições':'Continuar aprendendo'}</button></div>
-<div class="card"><h3>✨ Palavra do dia</h3><div class="word">안녕하세요</div><p class="pron">an-nyeong-ha-se-yo</p><p>Olá! A saudação mais útil para começar.</p></div>
-<div class="card"><h3>🎯 Continue sua jornada</h3><div class="row"><button class="btn" onclick="render('quiz')">Fazer quiz</button><button class="btn" onclick="render('revisao')">Revisar erros (${mistakes.length})</button></div></div>`;
-}
-else if(t==='buscar'){
-c.innerHTML=`<div class="card"><h2>🔎 Buscar</h2><p class="muted">Pesquise em coreano ou português.</p><input id="searchInput" placeholder="Ex.: água, 물, família..." oninput="doSearch(this.value)"><div id="searchResults"><p class="muted small">Digite algo para começar.</p></div></div>`;
-}
-else if(t==='hangul'){
-c.innerHTML=`<div class="card"><h2>O alfabeto coreano — 한글</h2><p>O Hangul é formado por consoantes e vogais agrupadas em blocos silábicos.</p><h3>Vogais</h3><div class="word">ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ</div><p class="muted">a · eo · o · u · eu · i</p><h3>Consoantes</h3><div class="word">ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ</div><p class="muted">g/k · n · d/t · r/l · m · b/p · s · som zero/ng</p><h3>Como formar um bloco</h3><div class="word">ㄱ + ㅏ = 가</div><p>Uma consoante inicial se combina com uma vogal para formar uma sílaba.</p><button class="btn primary" onclick="openLesson(30)">Começar as aulas de Hangul</button><button class="btn" onclick="render('escrever')">Praticar escrita →</button></div>`;
-}
-else if(t==='escrever'){
-let item=writingItems[writeIndex%writingItems.length];
-c.innerHTML=`<div class="card"><h2>✍️ Prática de escrita</h2><p class="muted">Observe o caractere e digite exatamente o mesmo caractere coreano.</p><p class="small muted">Exercício ${writeIndex+1} de ${writingItems.length}</p><div class="word" style="font-size:58px;text-align:center;margin:24px">${item[0]}</div><p style="text-align:center">${item[1]}</p><input id="writeAnswer" lang="ko" placeholder="Digite aqui: ${item[0]}" autocomplete="off"><div id="writeFeedback" class="small muted">Use o teclado coreano do celular.</div><button id="writeCheck" class="btn primary" onclick="checkWriting()">Verificar resposta</button><button class="btn" onclick="nextWriting()">Próximo →</button></div><div class="card"><h3>Seu progresso de escrita</h3><div class="word">${writingDone}</div><p class="muted small">Respostas corretas registradas</p></div>`;
-}
-else if(t==='vocabulario'){
-c.innerHTML='<div class="card"><h2>Vocabulário essencial</h2><p class="muted">Palavras para começar a reconhecer e memorizar.</p></div>'+vocab.map(v=>`<div class="card"><div class="word">${v[0]}</div><div class="pron">${v[2]}</div><p>${v[1]}</p></div>`).join('');
-}
-else if(t==='licoes'){
-c.innerHTML='<div class="card"><h2>📚 Todas as lições</h2><p class="muted">50 lições do básico ao primeiro conjunto de frases.</p></div>'+lessons.map((l,i)=>`<div class="card lesson"><div><h3>${i+1}. ${l[0]}</h3><p class="muted small">${l[1]} · ${l[3]}</p></div><div><span class="tag">${completed.includes(i)?'Concluída':'10 XP'}</span><br><button class="btn ${completed.includes(i)?'':'primary'}" style="margin-top:7px" onclick="openLesson(${i})">${completed.includes(i)?'Rever':'Estudar'}</button></div></div>`).join('');
-}
-else if(t==='detail'){
-let l=lessons[current];
-c.innerHTML=`<div class="card"><button class="btn" onclick="render('licoes')">← Voltar às lições</button><p class="muted">LIÇÃO ${current+1} DE 50</p><h2>${l[0]}</h2><div class="word">${l[1]}</div><div class="pron">${l[2]}</div><h3>${l[3]}</h3><p>${l[4]}</p><div class="card" style="background:#f7f7fc"><b>Exemplo</b><div class="word" style="font-size:23px">${l[5]}</div><p>${l[6]}</p></div><div class="notice">Leia a palavra coreana em voz alta e tente repetir o exemplo.</div><div class="row"><button class="btn primary" onclick="finish(${current})">${completed.includes(current)?'Concluída ✓':'Concluir lição (+10 XP)'}</button><button class="btn" onclick="openLesson(${Math.min(49,current+1)})">Próxima →</button></div></div>`;
-}
-else if(t==='quiz'){
-quizMode='normal';
-startQuiz();
-}
-else if(t==='revisao'){
-renderReviewList();
-}
-else if(t==='conquistas'){
-renderAchievements();
-}
-}
-let current=0;
-function openLesson(i){current=i;render('detail')}
-function finish(i){if(!completed.includes(i)){completed.push(i);xp+=10;save()}render('licoes')}
-
-function doSearch(value){
-let out=document.getElementById('searchResults');
-if(!out)return;
-let q=value.trim().toLowerCase();
-if(!q){out.innerHTML='<p class="muted small">Digite algo para começar.</p>';return}
-let found=[];
-lessons.forEach((l,i)=>{if(l.join(' ').toLowerCase().includes(q))found.push(`<div class="result"><b>📘 Lição ${i+1}: ${esc(l[0])}</b><p class="small">${esc(l[1])} · ${esc(l[3])}</p><button class="btn primary" onclick="openLesson(${i})">Abrir lição</button></div>`)});
-vocab.forEach(v=>{if(v.join(' ').toLowerCase().includes(q))found.push(`<div class="result"><b>📖 ${esc(v[0])}</b><p>${esc(v[1])}</p><p class="pron small">${esc(v[2])}</p></div>`)});
-out.innerHTML=found.length?found.join(''):'<p class="warning">Nenhum resultado encontrado. Tente outra palavra.</p>';
+ document.getElementById("xp").textContent=xp;
+ document.getElementById("done").textContent=completed.length+"/30";
+ document.getElementById("level").textContent=Math.floor(xp/100)+1;
 }
 
-/* QUIZ: perguntas, respostas e navegação */
-function shuffle(arr){
-let a=arr.slice();
-for(let i=a.length-1;i>0;i--){
-let j=Math.floor(Math.random()*(i+1));
-[a[i],a[j]]=[a[j],a[i]];
+function speak(text){
+ if(!("speechSynthesis" in window)||!("SpeechSynthesisUtterance" in window)){
+  alert("A leitura em voz alta não é compatível com este navegador.");
+  return;
+ }
+ window.speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang="ko-KR";
+ u.rate=.82;
+ const voices=window.speechSynthesis.getVoices();
+ const koreanVoice=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith("ko"));
+ if(koreanVoice)u.voice=koreanVoice;
+ u.onerror=()=>{};
+ window.speechSynthesis.speak(u);
 }
-return a;
+
+function addXP(amount){
+ xp+=amount;
+ localStorage.setItem("xp",String(xp));
+ stats();
 }
-function startQuiz(){
-quizMode='normal';
-quizSession=shuffle(vocab).slice(0,10);
-quizPosition=0;
-quizScore=0;
-showQuestion();
+
+function render(tab="inicio"){
+ document.querySelectorAll("nav button").forEach(b=>{
+  b.classList.toggle("active",b.dataset.tab===tab);
+ });
+
+ if(tab==="inicio"){
+  const percent=Math.round(completed.length/30*100);
+  content.innerHTML=`
+  <div class="panel">
+   <div class="section-head"><h2>Seu progresso</h2><b>${percent}%</b></div>
+   <p class="muted">Continue aprendendo no seu ritmo.</p>
+   <div class="progress"><i style="width:${percent}%"></i></div>
+  </div>
+  <h2>Comece por aqui</h2>
+  <div class="grid">
+   <button class="tile" onclick="render('hangul')"><span class="emoji">🔤</span><b>Aprender Hangul</b><small>Vogais, consoantes e 받침</small></button>
+   <button class="tile" onclick="render('vocabulario')"><span class="emoji">💬</span><b>Palavras úteis</b><small>Vocabulário com áudio</small></button>
+   <button class="tile" onclick="render('licoes')"><span class="emoji">📖</span><b>30 lições</b><small>Aprenda passo a passo</small></button>
+   <button class="tile" onclick="startQuiz('listening')"><span class="emoji">🎧</span><b>Quiz de escuta</b><small>Treine seus ouvidos</small></button>
+   <button class="tile" onclick="render('quiz')"><span class="emoji">🧠</span><b>Praticar</b><small>Teste o que aprendeu</small></button>
+  </div>
+  <div class="notice">💡 Dica: toque no botão 🔊 para ouvir a pronúncia coreana. A voz disponível depende do seu dispositivo e navegador.</div>`;
+ }
+
+ if(tab==="hangul")renderHangul();
+
+ if(tab==="vocabulario"){
+  content.innerHTML=`
+  <div class="panel">
+   <h2>Vocabulário essencial</h2>
+   <p class="muted">Toque em “Ouvir” para escutar a palavra em coreano.</p>
+   ${vocab.map(w=>`
+    <div class="lesson section-head">
+     <div><div class="korean">${w[0]}</div><p>${w[1]}</p></div>
+     <button class="primary" onclick="speak('${w[0]}')">🔊 Ouvir</button>
+    </div>`).join("")}
+  </div>`;
+ }
+
+ if(tab==="licoes"){
+  content.innerHTML=`
+  <div class="panel">
+   <h2>30 lições para iniciantes</h2>
+   <p class="muted">Conclua uma lição para ganhar 10 XP.</p>
+   ${lessons.map((l,i)=>`
+    <div class="lesson section-head">
+     <div>
+      <h3>${completed.includes(i)?"✅":"📘"} ${i+1}. ${l[0]}</h3>
+      <div class="korean">${l[1]}</div>
+      <p>${l[2]}</p>
+     </div>
+     <div>
+      <button class="secondary" onclick="speak('${l[1].replaceAll("'","\\'")}')">🔊</button>
+      <button class="primary" onclick="complete(${i})">${completed.includes(i)?"Rever":"Estudar"}</button>
+     </div>
+    </div>`).join("")}
+  </div>`;
+ }
+
+ if(tab==="quiz")startQuiz("meaning");
 }
-function showQuestion(){
-if(quizPosition>=quizSession.length){showQuizResult();return}
-currentQuestion=quizSession[quizPosition];
-questionAnswered=false;
-let correct=currentQuestion[1];
-let otherAnswers=shuffle(vocab.filter(v=>v[0]!==currentQuestion[0])).slice(0,3).map(v=>v[1]);
-let options=shuffle([correct,...otherAnswers]);
-let c=document.getElementById('content');
-c.innerHTML=`
-<div class="card">
-<div class="quiz-top"><b>🎯 Quiz de vocabulário</b><span class="quiz-number">Pergunta ${quizPosition+1} de ${quizSession.length}</span></div>
-<div class="progress"><div style="width:${quizPosition/quizSession.length*100}%"></div></div>
-<div class="quiz-word"><p class="muted">Qual é o significado desta palavra?</p><div class="word">${currentQuestion[0]}</div><div class="pron">${currentQuestion[2]}</div></div>
-<div id="quizOptions">${options.map((o,i)=>`<button class="answer" data-choice="${i}" onclick="chooseAnswer(${i})">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div>
-<div id="quizFeedback" class="muted small">Escolha uma resposta.</div>
-<div id="quizNext" class="hide"><button class="btn primary" style="width:100%" onclick="nextQuestion()">Próxima pergunta →</button></div>
-</div>`;
-window.quizOptions=options;
+
+function renderHangul(){
+ const categories=[
+  {id:"vowels",label:"Vogais básicas"},
+  {id:"compoundVowels",label:"Vogais compostas"},
+  {id:"consonants",label:"Consoantes"},
+  {id:"doubleConsonants",label:"Consoantes duplas"},
+  {id:"batchim",label:"받침 (batchim)"},
+  {id:"doubleBatchim",label:"받침 duplo"}
+ ];
+
+ const data={
+  vowels:vowelBasic,
+  compoundVowels:vowelCompound,
+  consonants:consonantBasic,
+  doubleConsonants:consonantDouble,
+  batchim:batchim,
+  doubleBatchim:doubleBatchim
+ }[hangulCategory];
+
+ const intro={
+  vowels:"As 10 vogais básicas. O ㅇ é usado aqui como apoio para formar uma sílaba e ouvir o som.",
+  compoundVowels:"As 11 vogais compostas. Algumas pronúncias podem soar muito parecidas no coreano atual.",
+  consonants:"As 14 consoantes básicas. O som pode mudar conforme a posição na sílaba.",
+  doubleConsonants:"As 5 consoantes tensas (fortes). Ouça os exemplos para perceber a diferença.",
+  batchim:"Batchim é a consoante final de uma sílaba. Estas são as 7 pronúncias finais principais.",
+  doubleBatchim:"Os 11 batchim compostos. A pronúncia pode variar quando a palavra é ligada à sílaba seguinte."
+ }[hangulCategory];
+
+ content.innerHTML=`
+ <div class="panel">
+  <h2>Hangul — 한글</h2>
+  <p class="muted">Aprenda o alfabeto coreano por partes e escute cada exemplo.</p>
+  <div class="subnav">
+   ${categories.map(c=>`
+    <button class="${c.id===hangulCategory?"active":""}" onclick="setHangulCategory('${c.id}')">${c.label}</button>
+   `).join("")}
+  </div>
+  <div class="notice">${intro}</div>
+  <div class="char-grid">
+   ${data.map(item=>`
+    <div class="char-card">
+     <div class="letter">${item.c}</div>
+     <div class="sound">${item.s}</div>
+     <button onclick="speak('${item.a}')">🔊 ${item.a}</button>
+    </div>
+   `).join("")}
+  </div>
+  ${hangulCategory==="vowels"?'<div class="notice">Dica: para ouvir uma vogal isolada, usamos ㅇ antes dela: 아, 야, 어, 여… O ㅇ não tem som no início da sílaba.</div>':""}
+  ${hangulCategory==="consonants"?'<div class="notice">A escrita “g/k”, “d/t” etc. é apenas uma aproximação para falantes de português, não uma equivalência perfeita.</div>':""}
+  ${hangulCategory==="compoundVowels"?'<div class="notice">ㅢ pode ser pronunciado de maneiras diferentes conforme a posição e a palavra. ㅐ e ㅔ também podem soar iguais para muitos falantes.</div>':""}
+ </div>`;
 }
-function chooseAnswer(index){
-if(questionAnswered)return;
-questionAnswered=true;
-let choice=window.quizOptions[index];
-let correct=currentQuestion[1];
-let buttons=document.querySelectorAll('#quizOptions .answer');
-buttons.forEach((b,i)=>{
-b.disabled=true;
-if(window.quizOptions[i]===correct)b.classList.add('correct');
-if(i===index&&choice!==correct)b.classList.add('wrong');
+
+function setHangulCategory(id){
+ hangulCategory=id;
+ renderHangul();
+}
+
+function complete(index){
+ if(!completed.includes(index)){
+  completed.push(index);
+  localStorage.setItem("completed",JSON.stringify(completed));
+  addXP(10);
+ }
+ render("licoes");
+}
+
+function startQuiz(mode){
+ quizMode=mode;
+ answered=false;
+ const pool=vocab;
+ const item=pool[Math.floor(Math.random()*pool.length)];
+ const distractors=pool.filter(w=>w[1]!==item[1]).sort(()=>Math.random()-.5).slice(0,3);
+ const opts=[item,...distractors].sort(()=>Math.random()-.5);
+ currentQuestion={item,opts};
+ renderQuiz();
+}
+
+function renderQuiz(){
+ if(!currentQuestion)return;
+
+ const q=currentQuestion.item;
+
+ const prompt=quizMode==="listening"
+ ?`<div class="quiz-prompt">
+   <div class="tiny">OUÇA E ESCOLHA O SIGNIFICADO</div>
+   <div class="korean">🔊</div>
+   <button class="primary" onclick="speak('${q[0]}')">▶ Ouvir novamente</button>
+  </div>`
+ :`<div class="quiz-prompt">
+   <div class="tiny">O QUE SIGNIFICA ESTA PALAVRA?</div>
+   <div class="korean">${q[0]}</div>
+   <button class="secondary" onclick="speak('${q[0]}')">🔊 Ouvir</button>
+  </div>`;
+
+ content.innerHTML=`
+ <div class="panel">
+  <h2>🧠 Quiz rápido</h2>
+  <div class="subnav">
+   <button class="${quizMode==="meaning"?"active":""}" onclick="startQuiz('meaning')">Significado</button>
+   <button class="${quizMode==="listening"?"active":""}" onclick="startQuiz('listening')">🎧 Escuta</button>
+  </div>
+  <p class="muted">${quizMode==="listening"?"Escute a palavra coreana e escolha a tradução.":"Escolha a tradução correta da palavra coreana."}</p>
+  ${prompt}
+  <div id="quizOptions">
+   ${currentQuestion.opts.map((o,i)=>`
+    <button class="answer" onclick="answerQuiz(this,${i})">${o[1]}</button>
+   `).join("")}
+  </div>
+  <p id="feedback" class="muted" aria-live="polite"></p>
+  <button class="primary" id="nextQuestion" style="display:none" onclick="startQuiz(quizMode)">Próxima pergunta →</button>
+  <p class="tiny">Resposta correta: +5 XP. Cada pergunta conta apenas uma vez.</p>
+ </div>`;
+
+ if(quizMode==="listening"){
+  setTimeout(()=>{
+   if(currentQuestion&&!answered)speak(q[0]);
+  },250);
+ }
+}
+
+function answerQuiz(button,index){
+ if(answered)return;
+ answered=true;
+
+ const correct=currentQuestion.item[1];
+ const selected=currentQuestion.opts[index];
+ const buttons=[...document.querySelectorAll("#quizOptions button")];
+
+ buttons.forEach((b,i)=>{
+  b.disabled=true;
+  if(currentQuestion.opts[i][1]===correct)b.classList.add("correct");
+ });
+
+ const feedback=document.getElementById("feedback");
+
+ if(selected[1]===correct){
+  feedback.textContent="Muito bem! Resposta correta. +5 XP 🎉";
+  addXP(5);
+ }else{
+  button.classList.add("wrong");
+  feedback.textContent="Quase! A resposta correta é: "+correct;
+ }
+
+ document.getElementById("nextQuestion").style.display="inline-block";
+}
+
+function speakCurrent(){
+ if(currentQuestion)speak(currentQuestion.item[0]);
+}
+
+document.querySelectorAll("nav button").forEach(button=>{
+ button.addEventListener("click",()=>render(button.dataset.tab));
 });
-let feedback=document.getElementById('quizFeedback');
-if(choice===correct){
-quizScore++;
-quizCorrect++;
-xp+=5;
-feedback.textContent='Muito bem! Resposta correta. +5 XP 🎉';
-feedback.className='notice';
-}else{
-if(!mistakes.some(m=>m[0]===currentQuestion[0])){
-mistakes.push(currentQuestion.slice());
-}
-feedback.textContent='Quase! A resposta correta é '+correct+'. A palavra foi salva para revisão.';
-feedback.className='warning';
-}
-save();
-document.getElementById('quizNext').classList.remove('hide');
-document.getElementById('quizNext').innerHTML=`<button class="btn primary" style="width:100%" onclick="nextQuestion()">${quizPosition===quizSession.length-1?'Ver resultado':'Próxima pergunta →'}</button>`;
-}
-function nextQuestion(){
-if(!questionAnswered)return;
-quizPosition++;
-showQuestion();
-}
-function showQuizResult(){
-let total=quizSession.length;
-let percent=Math.round(quizScore/total*100);
-let message=percent===100?'Perfeito! Você acertou tudo! 🏆':percent>=70?'Muito bem! Continue praticando! 🎉':percent>=40?'Bom começo! Continue estudando! 💜':'Não desista! A prática leva à melhoria. 🌱';
-document.getElementById('content').innerHTML=`
-<div class="card" style="text-align:center">
-<h2>🏁 Quiz concluído!</h2>
-<div class="word" style="font-size:48px">${quizScore}/${total}</div>
-<h3>${percent}% de acertos</h3>
-<div class="progress"><div style="width:${percent}%"></div></div>
-<p>${message}</p>
-<p class="muted small">Você ganhou ${quizScore*5} XP neste quiz.</p>
-<div class="row"><button class="btn primary" onclick="startQuiz()">Jogar novamente</button><button class="btn" onclick="render('revisao')">Revisar erros</button></div>
-</div>`;
+
+if("serviceWorker" in navigator){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register("./service-worker.js").catch(()=>{});
+ });
 }
 
-/* REVISÃO DE ERROS */
-function renderReviewList(){
-let c=document.getElementById('content');
-if(!mistakes.length){
-c.innerHTML=`<div class="card"><h2>🔁 Revisão de erros</h2><div class="notice">Muito bem! Você ainda não tem palavras para revisar.</div><p>Quando errar uma pergunta no quiz, a palavra será salva aqui automaticamente.</p><button class="btn primary" onclick="render('quiz')">Ir para o quiz</button></div>`;
-return;
-}
-c.innerHTML=`<div class="card"><h2>🔁 Revisão de erros</h2><p class="muted">Pratique novamente as palavras que você errou.</p><p><b>${mistakes.length}</b> palavra(s) para revisar.</p><button class="btn primary" onclick="startReview()">Começar revisão</button></div>`+
-mistakes.map((m,i)=>`<div class="card"><div class="word">${esc(m[0])}</div><p class="pron">${esc(m[2]||'')}</p><p>${esc(m[1])}</p><button class="btn" onclick="removeMistake(${i})">Remover da revisão</button></div>`).join('');
-}
-function startReview(){
-if(!mistakes.length){renderReviewList();return}
-quizMode='review';
-quizSession=shuffle(mistakes).slice(0,Math.min(10,mistakes.length));
-quizPosition=0;
-quizScore=0;
-showReviewQuestion();
-}
-function showReviewQuestion(){
-if(quizPosition>=quizSession.length){showReviewResult();return}
-currentQuestion=quizSession[quizPosition];
-questionAnswered=false;
-let correct=currentQuestion[1];
-let other=shuffle(vocab.filter(v=>v[0]!==currentQuestion[0])).slice(0,3).map(v=>v[1]);
-let options=shuffle([correct,...other]);
-document.getElementById('content').innerHTML=`
-<div class="card">
-<div class="quiz-top"><b>🔁 Revisão de erros</b><span class="quiz-number">${quizPosition+1} de ${quizSession.length}</span></div>
-<div class="progress"><div style="width:${quizPosition/quizSession.length*100}%"></div></div>
-<div class="quiz-word"><p class="muted">Qual é o significado desta palavra?</p><div class="word">${currentQuestion[0]}</div><div class="pron">${currentQuestion[2]||''}</div></div>
-<div id="quizOptions">${options.map((o,i)=>`<button class="answer" onclick="chooseReviewAnswer(${i})">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div>
-<div id="quizFeedback" class="muted small">Escolha uma resposta.</div>
-<div id="quizNext" class="hide"></div>
-</div>`;
-window.quizOptions=options;
-}
-function chooseReviewAnswer(index){
-if(questionAnswered)return;
-questionAnswered=true;
-let choice=window.quizOptions[index];
-let correct=currentQuestion[1];
-let buttons=document.querySelectorAll('#quizOptions .answer');
-buttons.forEach((b,i)=>{
-b.disabled=true;
-if(window.quizOptions[i]===correct)b.classList.add('correct');
-if(i===index&&choice!==correct)b.classList.add('wrong');
-});
-let feedback=document.getElementById('quizFeedback');
-if(choice===correct){
-quizScore++;
-mistakes=mistakes.filter(m=>m[0]!==currentQuestion[0]);
-xp+=5;
-feedback.textContent='Muito bem! Palavra removida da revisão. +5 XP 🎉';
-feedback.className='notice';
-}else{
-feedback.textContent='Ainda não! A resposta correta é '+correct+'. Tente novamente mais tarde.';
-feedback.className='warning';
-}
-save();
-document.getElementById('quizNext').classList.remove('hide');
-document.getElementById('quizNext').innerHTML=`<button class="btn primary" style="width:100%" onclick="nextReviewQuestion()">${quizPosition===quizSession.length-1?'Ver resultado':'Próxima palavra →'}</button>`;
-}
-function nextReviewQuestion(){
-if(!questionAnswered)return;
-quizPosition++;
-showReviewQuestion();
-}
-function showReviewResult(){
-document.getElementById('content').innerHTML=`
-<div class="card" style="text-align:center">
-<h2>Revisão concluída!</h2><div class="word">${quizScore}/${quizSession.length}</div>
-<p>Você acertou ${quizScore} palavras.</p>
-<p class="muted">Ainda restam ${mistakes.length} palavra(s) para revisar.</p>
-<button class="btn primary" onclick="render('revisao')">Voltar à revisão</button>
-</div>`;
-}
-function removeMistake(i){mistakes.splice(i,1);save();renderReviewList()}
+if("speechSynthesis" in window)window.speechSynthesis.getVoices();
 
-/* ESCRITA */
-function checkWriting(){
-let item=writingItems[writeIndex%writingItems.length];
-let input=document.getElementById('writeAnswer');
-let feedback=document.getElementById('writeFeedback');
-let button=document.getElementById('writeCheck');
-if(!input||!feedback||button.disabled)return;
-if(input.value.trim()===item[0]){
-writingDone++;xp+=5;save();
-feedback.textContent='Perfeito! Resposta correta. +5 XP 🎉';
-feedback.className='notice';
-button.disabled=true;
-}else{
-feedback.textContent='Ainda não! Observe o caractere e tente novamente: '+item[0];
-feedback.className='warning';
-}
-}
-function nextWriting(){writeIndex=(writeIndex+1)%writingItems.length;render('escrever')}
-
-/* CONQUISTAS */
-function renderAchievements(){
-let badges=[
-['🌱','Primeiro passo','Conclua sua primeira lição.',completed.length>=1],
-['📚','Estudante dedicado','Conclua 5 lições.',completed.length>=5],
-['🎓','Aprendiz de coreano','Conclua 10 lições.',completed.length>=10],
-['🏅','Metade do caminho','Conclua 25 lições.',completed.length>=25],
-['👑','Mestre iniciante','Conclua as 50 lições.',completed.length>=50],
-['⭐','Primeiros pontos','Acumule 50 XP.',xp>=50],
-['💎','Colecionador de XP','Acumule 200 XP.',xp>=200],
-['🧠','Boa memória','Acerte 5 perguntas.',quizCorrect>=5],
-['🔥','Mente afiada','Acerte 20 perguntas.',quizCorrect>=20],
-['✍️','Mão na massa','Acerte 5 exercícios de escrita.',writingDone>=5],
-['🖋️','Praticante de Hangul','Acerte 14 exercícios de escrita.',writingDone>=14]
-];
-let earned=badges.filter(b=>b[3]).length;
-document.getElementById('content').innerHTML=`<div class="card"><h2>🏆 Suas conquistas</h2><p>Desbloqueie medalhas estudando, praticando e acumulando XP.</p><h3>${earned} de ${badges.length} conquistas desbloqueadas</h3><div class="progress"><div style="width:${earned/badges.length*100}%"></div></div></div><div class="badge-grid">`+
-badges.map(b=>`<div class="badge-card ${b[3]?'':'locked'}"><div class="badge-icon">${b[0]}</div><strong>${b[1]}</strong><p class="small muted">${b[2]}</p><span class="tag">${b[3]?'Desbloqueada':'Bloqueada'}</span></div>`).join('')+'</div>';
-}
-
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>render(b.dataset.tab)));
 stats();
-render('inicio');
+render();
 </script>
 </body>
 </html>
