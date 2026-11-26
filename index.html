@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 <meta name="description" content="Aprenda coreano de um jeito fácil e divertido.">
 <title>Coreano Fácil</title>
 <style>
-:root{--purple:#625ce7;--light:#efeeff;--bg:#f7f7fc;--ink:#292941;--muted:#77778f;--line:#e9e9f2;--green:#168653}
+:root{--p:#625ce7;--light:#efeeff;--bg:#f7f7fc;--ink:#292941;--muted:#77778f;--line:#e9e9f2;--green:#168653}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 header{background:linear-gradient(135deg,#625ce7,#927df0);color:white;padding:25px 18px 28px;border-radius:0 0 25px 25px}
@@ -19,30 +19,33 @@ header p{margin:5px 0;opacity:.95}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
 .stat,.card{background:white;border:1px solid var(--line);border-radius:16px;padding:14px}
 .stat{text-align:center}
-.stat strong{display:block;font-size:21px;color:var(--purple)}
+.stat strong{display:block;font-size:21px;color:var(--p)}
 .stat span{font-size:11px;color:var(--muted)}
-nav{display:flex;gap:7px;overflow-x:auto;padding:15px 0;scrollbar-width:thin}
-nav button,.btn{border:0;border-radius:12px;padding:11px 14px;background:var(--light);color:var(--purple);font-weight:700;white-space:nowrap}
-nav button.active,.btn.primary{background:var(--purple);color:white}
+nav{display:flex;gap:7px;overflow-x:auto;padding:15px 0}
+nav button,.btn{border:0;border-radius:12px;padding:11px 14px;background:var(--light);color:var(--p);font-weight:700;white-space:nowrap}
+nav button.active,.btn.primary{background:var(--p);color:white}
 .card{margin:10px 0}
 .card h2{font-size:20px;margin:5px 0 10px}
 .card h3{font-size:16px}
 .muted{color:var(--muted)}
 .small{font-size:13px}
 .progress{height:10px;background:#eee;border-radius:20px;overflow:hidden}
-.progress div{height:100%;background:var(--purple);transition:width .2s}
+.progress div{height:100%;background:var(--p);transition:width .2s}
 .lesson{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .lesson h3{margin:0 0 4px;font-size:15px}
 .lesson p{margin:0}
-.tag{font-size:11px;background:var(--light);color:var(--purple);padding:5px 8px;border-radius:20px;display:inline-block}
+.tag{font-size:11px;background:var(--light);color:var(--p);padding:5px 8px;border-radius:20px;display:inline-block}
 .word{font-size:30px;font-weight:800;margin:10px 0}
-.pron{color:var(--purple);font-weight:700}
-.answer{display:block;width:100%;text-align:left;margin:8px 0;padding:13px;border:1px solid var(--line);background:white;border-radius:12px;color:var(--ink);font-size:15px}
-.answer:hover{border-color:var(--purple);background:var(--light)}
+.pron{color:var(--p);font-weight:700}
+.answer{display:block;width:100%;text-align:left;margin:9px 0;padding:14px;border:1px solid var(--line);background:white;border-radius:12px;color:var(--ink);font-size:15px}
+.answer:hover:not(:disabled){border-color:var(--p);background:var(--light)}
+.answer:disabled{opacity:1;cursor:default}
+.answer.correct{border:2px solid #168653;background:#effcf5;color:#17683d}
+.answer.wrong{border:2px solid #d65b5b;background:#fff0f0;color:#a52c2c}
 button{cursor:pointer}
 button:disabled{opacity:.55;cursor:default}
 input{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;font-size:16px;margin:8px 0;color:var(--ink);background:white}
-input:focus{outline:2px solid #c9c5ff;border-color:var(--purple)}
+input:focus{outline:2px solid #c9c5ff;border-color:var(--p)}
 .row{display:flex;gap:8px;flex-wrap:wrap}
 .row .btn{flex:1}
 .notice{background:#effcf5;border:1px solid #c9eed9;padding:12px;border-radius:12px;color:#17683d;margin:10px 0}
@@ -53,21 +56,20 @@ input:focus{outline:2px solid #c9c5ff;border-color:var(--purple)}
 .badge-icon{font-size:28px}
 .badge-card strong{display:block;margin:5px 0}
 .result{padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:white}
-.result button{margin-top:7px}
-.hide{display:none}
-a{color:var(--purple)}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.quiz-number{font-size:13px;color:var(--muted)}
+.quiz-word{text-align:center;padding:16px 0}
+.quiz-word .word{font-size:42px}
 footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 </style>
 </head>
 <body>
-<header>
-<div class="wrap">
+<header><div class="wrap">
 <h1>🇰🇷 COREANO FÁCIL</h1>
 <p>🇧🇷 Para quem fala português</p>
 <h2>안녕하세요! Vamos aprender coreano?</h2>
 <p>Pequenos passos todos os dias. 💜</p>
-</div>
-</header>
+</div></header>
 
 <main class="wrap">
 <section class="stats">
@@ -76,7 +78,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <div class="stat"><strong id="level">1</strong><span>Seu nível</span></div>
 </section>
 
-<nav id="nav">
+<nav>
 <button class="active" data-tab="inicio">Início</button>
 <button data-tab="buscar">🔎 Buscar</button>
 <button data-tab="hangul">Hangul</button>
@@ -96,7 +98,6 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfM4YlJV9QZAVRQ1kqn2OSLUUZwna47-JadYb-3S9EKQmwIHA/viewform" target="_blank" rel="noopener">Responder à pesquisa</a>
 </section>
 </main>
-
 <footer>Coreano Fácil · Aprenda coreano no seu ritmo 💜</footer>
 
 <script>
@@ -131,7 +132,7 @@ const lessons=[
 ['Pedido','도와주세요','do-wa-ju-se-yo','Ajude-me, por favor','Expressão educada para pedir ajuda.','도와주세요!','Ajude-me, por favor!'],
 ['Passado','갔어요','ga-sseo-yo','Fui / Foi','Forma passada e educada do verbo 가다 (ir).','어제 학교에 갔어요.','Ontem fui à escola.'],
 ['Revisão','한국어를 공부해요','han-gu-geo-reul gong-bu-hae-yo','Estudo coreano','Revise vocabulário e estruturas anteriores.','매일 한국어를 공부해요.','Estudo coreano todos os dias.'],
-['Introdução ao Hangul','한글','han-geul','Alfabeto coreano','O Hangul é o sistema de escrita coreano. As letras são agrupadas em blocos silábicos.','한글을 배워요.','Aprendo o Hangul.'],
+['Introdução ao Hangul','한글','han-geul','Alfabeto coreano','O Hangul é o sistema de escrita coreano.','한글을 배워요.','Aprendo o Hangul.'],
 ['Vogais básicas','ㅏ ㅓ ㅗ ㅜ','a / eo / o / u','Vogais básicas','ㅏ soa como “a”; ㅓ é romanizado “eo”; ㅗ é “o”; ㅜ é “u”.','아, 어, 오, 우','Leia cada vogal em voz alta.'],
 ['Outras vogais','ㅡ ㅣ ㅐ ㅔ','eu / i / ae / e','Vogais','ㅡ não tem equivalente exato em português. ㅐ e ㅔ têm pronúncia muito parecida no coreano atual.','으, 이, 애, 에','Pratique os sons com calma.'],
 ['Consoantes básicas 1','ㄱ ㄴ ㄷ ㄹ','g/k, n, d/t, r/l','Consoantes','A pronúncia de ㄱ e ㄷ varia conforme a posição. ㄹ pode soar entre r e l.','가, 나, 다, 라','Leia os blocos formados com ㅏ.'],
@@ -140,8 +141,8 @@ const lessons=[
 ['Consoantes duplas','ㄲ ㄸ ㅃ ㅆ ㅉ','kk, tt, pp, ss, jj','Consoantes tensas','São sons tensos, produzidos com maior firmeza.','까, 따, 빠, 싸, 짜','Pratique sem acrescentar uma vogal extra.'],
 ['Formando sílabas','가 나 다 한','ga, na, da, han','Blocos silábicos','As letras se combinam em blocos. Uma sílaba pode ter consoante inicial, vogal e consoante final.','한 + 국 = 한국','한국 significa Coreia.'],
 ['Lendo palavras','학교, 친구, 사람','hak-kkyo, chin-gu, sa-ram','Palavras simples','Leia cada bloco da esquerda para a direita e de cima para baixo.','친구가 와요.','Meu amigo / minha amiga vem.'],
-['Pronúncia e 받침','한국, 밥, 집','han-guk, bap, jip','Consoante final','받침 é a consoante final de um bloco. Sua pronúncia pode mudar ao encontrar a sílaba seguinte.','한국어','Língua coreana.'],
-['Cumprimentos em contexto','안녕하세요','an-nyeong-ha-se-yo','Olá','안녕하세요 é a saudação padrão, adequada em muitas situações.','안녕하세요. 만나서 반가워요.','Olá. Prazer em conhecer você.'],
+['Pronúncia e 받침','한국, 밥, 집','han-guk, bap, jip','Consoante final','받침 é a consoante final de um bloco.','한국어','Língua coreana.'],
+['Cumprimentos em contexto','안녕하세요','an-nyeong-ha-se-yo','Olá','안녕하세요 é a saudação padrão.','안녕하세요. 만나서 반가워요.','Olá. Prazer em conhecer você.'],
 ['Agradecer e responder','고마워요','go-ma-wo-yo','Obrigado(a)','고마워요 é educado e um pouco mais casual que 감사합니다.','고마워요! / 아니에요.','Obrigado! / Imagina.'],
 ['Pedir desculpas','미안해요','mi-an-hae-yo','Desculpe','미안해요 é educado, mas mais casual que 죄송합니다.','정말 미안해요.','Sinto muito mesmo.'],
 ['Perguntar e responder','네, 아니요','ne, a-ni-yo','Sim e não','네 e 아니요 são respostas comuns.','한국 사람이에요? 네.','Você é coreano(a)? Sim.'],
@@ -165,29 +166,26 @@ const vocab=[
 ];
 
 const writingItems=[
-{q:'ㅏ',a:'ㅏ',tip:'Vogal “a”.'},
-{q:'ㅓ',a:'ㅓ',tip:'Vogal romanizada como “eo”.'},
-{q:'ㅗ',a:'ㅗ',tip:'Vogal “o”.'},
-{q:'ㅜ',a:'ㅜ',tip:'Vogal “u”.'},
-{q:'ㅡ',a:'ㅡ',tip:'Vogal romanizada como “eu”.'},
-{q:'ㅣ',a:'ㅣ',tip:'Vogal “i”.'},
-{q:'ㄱ',a:'ㄱ',tip:'Consoante g/k.'},
-{q:'ㄴ',a:'ㄴ',tip:'Consoante n.'},
-{q:'ㄷ',a:'ㄷ',tip:'Consoante d/t.'},
-{q:'ㄹ',a:'ㄹ',tip:'Consoante r/l.'},
-{q:'가',a:'가',tip:'Sí­laba formada por ㄱ + ㅏ.'},
-{q:'나',a:'나',tip:'Sí­laba formada por ㄴ + ㅏ.'},
-{q:'한글',a:'한글',tip:'O alfabeto coreano.'},
-{q:'한국',a:'한국',tip:'Coreia.'}
+['ㅏ','Vogal “a”.'],['ㅓ','Vogal “eo”.'],['ㅗ','Vogal “o”.'],['ㅜ','Vogal “u”.'],
+['ㅡ','Vogal “eu”.'],['ㅣ','Vogal “i”.'],['ㄱ','Consoante g/k.'],['ㄴ','Consoante n.'],
+['ㄷ','Consoante d/t.'],['ㄹ','Consoante r/l.'],['가','Sí­laba ㄱ + ㅏ.'],['나','Sí­laba ㄴ + ㅏ.'],
+['한','Uma sílaba coreana.'],['한글','O alfabeto coreano.']
 ];
 
-function load(key,def){try{let v=JSON.parse(localStorage.getItem(key));return v===null?def:v}catch(e){return def}}
+function load(key,def){try{const v=JSON.parse(localStorage.getItem(key));return v===null?def:v}catch(e){return def}}
 let xp=Number(localStorage.getItem('cf_xp')||0);
 let completed=load('cf_completed',[]);
 let mistakes=load('cf_mistakes',[]);
 let quizCorrect=Number(localStorage.getItem('cf_quiz_correct')||0);
 let writingDone=Number(localStorage.getItem('cf_writing_done')||0);
-let tab='inicio',current=0,quizIndex=0,quizAnswered=false,writeIndex=0;
+let writeIndex=0;
+let quizSession=[];
+let quizPosition=0;
+let quizScore=0;
+let quizMode='normal';
+let currentQuestion=null;
+let questionAnswered=false;
+let reviewWord=null;
 
 function save(){
 localStorage.setItem('cf_xp',String(xp));
@@ -202,16 +200,8 @@ document.getElementById('xp').textContent=xp;
 document.getElementById('done').textContent=completed.length+'/50';
 document.getElementById('level').textContent=Math.floor(xp/100)+1;
 }
-function escapeHTML(s){
-return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function finish(i){
-if(!completed.includes(i)){completed.push(i);xp+=10;save()}
-render('licoes');
-}
-function openLesson(i){current=i;render('detail')}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function setTab(t){
-tab=t;
 document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
 }
 function render(t){
@@ -221,94 +211,240 @@ const c=document.getElementById('content');
 if(t==='inicio'){
 let pct=Math.round(completed.length/50*100);
 let next=lessons.findIndex((_,i)=>!completed.includes(i));
-c.innerHTML=`
-<div class="card">
-<h2>Bem-vindo(a)! 💜</h2>
-<p>Aprenda coreano passo a passo, começando pelo alfabeto e avançando até frases do dia a dia.</p>
-<h3>Seu progresso: ${pct}%</h3>
-<div class="progress"><div style="width:${pct}%"></div></div>
-<p class="muted small">${completed.length} de 50 lições concluídas</p>
-<button class="btn primary" onclick="openLesson(${next<0?0:next})">${next<0?'Revisar lições':'Continuar aprendendo'}</button>
-</div>
+c.innerHTML=`<div class="card"><h2>Bem-vindo(a)! 💜</h2><p>Aprenda coreano passo a passo, começando pelo alfabeto e avançando até frases do dia a dia.</p><h3>Seu progresso: ${pct}%</h3><div class="progress"><div style="width:${pct}%"></div></div><p class="muted small">${completed.length} de 50 lições concluídas</p><button class="btn primary" onclick="openLesson(${next<0?0:next})">${next<0?'Revisar lições':'Continuar aprendendo'}</button></div>
 <div class="card"><h3>✨ Palavra do dia</h3><div class="word">안녕하세요</div><p class="pron">an-nyeong-ha-se-yo</p><p>Olá! A saudação mais útil para começar.</p></div>
-<div class="card"><h3>🎯 Continue sua jornada</h3>
-<div class="row">
-<button class="btn" onclick="render('escrever')">✍️ Praticar Hangul</button>
-<button class="btn" onclick="render('revisao')">🔁 Revisar erros (${mistakes.length})</button>
-</div></div>`;
+<div class="card"><h3>🎯 Continue sua jornada</h3><div class="row"><button class="btn" onclick="render('quiz')">Fazer quiz</button><button class="btn" onclick="render('revisao')">Revisar erros (${mistakes.length})</button></div></div>`;
 }
 else if(t==='buscar'){
-c.innerHTML=`
-<div class="card"><h2>🔎 Buscar</h2>
-<p class="muted">Pesquise em coreano ou português. Você pode procurar palavras, traduções e lições.</p>
-<input id="searchInput" placeholder="Ex.: água, 물, família..." oninput="doSearch(this.value)" autocomplete="off">
-<div id="searchResults"><p class="muted small">Digite algo para começar a busca.</p></div>
-</div>`;
+c.innerHTML=`<div class="card"><h2>🔎 Buscar</h2><p class="muted">Pesquise em coreano ou português.</p><input id="searchInput" placeholder="Ex.: água, 물, família..." oninput="doSearch(this.value)"><div id="searchResults"><p class="muted small">Digite algo para começar.</p></div></div>`;
 }
 else if(t==='hangul'){
-c.innerHTML=`
-<div class="card"><h2>O alfabeto coreano — 한글</h2>
-<p>O Hangul é formado por consoantes e vogais agrupadas em blocos silábicos.</p>
-<h3>Vogais</h3><div class="word">ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ</div>
-<p class="muted">a · eo · o · u · eu · i</p>
-<h3>Consoantes</h3><div class="word">ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ</div>
-<p class="muted">g/k · n · d/t · r/l · m · b/p · s · som zero/ng</p>
-<h3>Como formar um bloco</h3><div class="word">ㄱ + ㅏ = 가</div>
-<p>Uma consoante inicial se combina com uma vogal para formar uma sílaba.</p>
-<button class="btn primary" onclick="openLesson(30)">Começar as aulas de Hangul</button>
-<button class="btn" onclick="render('escrever')">Praticar escrita →</button>
-</div>`;
+c.innerHTML=`<div class="card"><h2>O alfabeto coreano — 한글</h2><p>O Hangul é formado por consoantes e vogais agrupadas em blocos silábicos.</p><h3>Vogais</h3><div class="word">ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ</div><p class="muted">a · eo · o · u · eu · i</p><h3>Consoantes</h3><div class="word">ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ</div><p class="muted">g/k · n · d/t · r/l · m · b/p · s · som zero/ng</p><h3>Como formar um bloco</h3><div class="word">ㄱ + ㅏ = 가</div><p>Uma consoante inicial se combina com uma vogal para formar uma sílaba.</p><button class="btn primary" onclick="openLesson(30)">Começar as aulas de Hangul</button><button class="btn" onclick="render('escrever')">Praticar escrita →</button></div>`;
 }
 else if(t==='escrever'){
 let item=writingItems[writeIndex%writingItems.length];
-c.innerHTML=`
-<div class="card"><h2>✍️ Prática de escrita</h2>
-<p class="muted">Observe o caractere e digite exatamente o mesmo caractere coreano.</p>
-<p class="small muted">Exercício ${writeIndex+1} · ${writingItems.length} caracteres disponíveis</p>
-<div class="word" style="font-size:58px;text-align:center;margin:24px">${item.q}</div>
-<p style="text-align:center">${item.tip}</p>
-<input id="writeAnswer" lang="ko" placeholder="Digite aqui: ${item.q}" autocomplete="off" autocapitalize="off">
-<div id="writeFeedback" class="small muted">Dica: altere o teclado do celular para coreano.</div>
-<button class="btn primary" onclick="checkWriting()">Verificar resposta</button>
-<button class="btn" onclick="nextWriting()">Pular →</button>
-</div>
-<div class="card"><h3>Seu progresso de escrita</h3><div class="word">${writingDone}</div><p class="muted small">Respostas corretas registradas</p></div>`;
+c.innerHTML=`<div class="card"><h2>✍️ Prática de escrita</h2><p class="muted">Observe o caractere e digite exatamente o mesmo caractere coreano.</p><p class="small muted">Exercício ${writeIndex+1} de ${writingItems.length}</p><div class="word" style="font-size:58px;text-align:center;margin:24px">${item[0]}</div><p style="text-align:center">${item[1]}</p><input id="writeAnswer" lang="ko" placeholder="Digite aqui: ${item[0]}" autocomplete="off"><div id="writeFeedback" class="small muted">Use o teclado coreano do celular.</div><button id="writeCheck" class="btn primary" onclick="checkWriting()">Verificar resposta</button><button class="btn" onclick="nextWriting()">Próximo →</button></div><div class="card"><h3>Seu progresso de escrita</h3><div class="word">${writingDone}</div><p class="muted small">Respostas corretas registradas</p></div>`;
 }
 else if(t==='vocabulario'){
-c.innerHTML='<div class="card"><h2>Vocabulário essencial</h2><p class="muted">Palavras para começar a reconhecer e memorizar.</p></div>'+
-vocab.map(v=>`<div class="card"><div class="word">${v[0]}</div><div class="pron">${v[2]}</div><p>${v[1]}</p></div>`).join('');
+c.innerHTML='<div class="card"><h2>Vocabulário essencial</h2><p class="muted">Palavras para começar a reconhecer e memorizar.</p></div>'+vocab.map(v=>`<div class="card"><div class="word">${v[0]}</div><div class="pron">${v[2]}</div><p>${v[1]}</p></div>`).join('');
 }
 else if(t==='licoes'){
-c.innerHTML='<div class="card"><h2>📚 Todas as lições</h2><p class="muted">50 lições do básico ao primeiro conjunto de frases.</p></div>'+
-lessons.map((l,i)=>`<div class="card lesson"><div><h3>${i+1}. ${l[0]}</h3><p class="muted small">${l[1]} · ${l[3]}</p></div><div><span class="tag">${completed.includes(i)?'Concluída':'10 XP'}</span><br><button class="btn ${completed.includes(i)?'':'primary'}" style="margin-top:7px" onclick="openLesson(${i})">${completed.includes(i)?'Rever':'Estudar'}</button></div></div>`).join('');
+c.innerHTML='<div class="card"><h2>📚 Todas as lições</h2><p class="muted">50 lições do básico ao primeiro conjunto de frases.</p></div>'+lessons.map((l,i)=>`<div class="card lesson"><div><h3>${i+1}. ${l[0]}</h3><p class="muted small">${l[1]} · ${l[3]}</p></div><div><span class="tag">${completed.includes(i)?'Concluída':'10 XP'}</span><br><button class="btn ${completed.includes(i)?'':'primary'}" style="margin-top:7px" onclick="openLesson(${i})">${completed.includes(i)?'Rever':'Estudar'}</button></div></div>`).join('');
 }
 else if(t==='detail'){
 let l=lessons[current];
-c.innerHTML=`
-<div class="card">
-<button class="btn" onclick="render('licoes')">← Voltar às lições</button>
-<p class="muted">LIÇÃO ${current+1} DE 50</p>
-<h2>${l[0]}</h2><div class="word">${l[1]}</div>
-<div class="pron">${l[2]}</div><h3>${l[3]}</h3><p>${l[4]}</p>
-<div class="card" style="background:#f7f7fc"><b>Exemplo</b><div class="word" style="font-size:23px">${l[5]}</div><p>${l[6]}</p></div>
-<div class="notice">Leia a palavra coreana em voz alta e tente repetir o exemplo.</div>
-<div class="row">
-<button class="btn primary" onclick="finish(${current})">${completed.includes(current)?'Concluída ✓':'Concluir lição (+10 XP)'}</button>
-<button class="btn" onclick="openLesson(${Math.min(49,current+1)})">Próxima →</button>
-</div></div>`;
+c.innerHTML=`<div class="card"><button class="btn" onclick="render('licoes')">← Voltar às lições</button><p class="muted">LIÇÃO ${current+1} DE 50</p><h2>${l[0]}</h2><div class="word">${l[1]}</div><div class="pron">${l[2]}</div><h3>${l[3]}</h3><p>${l[4]}</p><div class="card" style="background:#f7f7fc"><b>Exemplo</b><div class="word" style="font-size:23px">${l[5]}</div><p>${l[6]}</p></div><div class="notice">Leia a palavra coreana em voz alta e tente repetir o exemplo.</div><div class="row"><button class="btn primary" onclick="finish(${current})">${completed.includes(current)?'Concluída ✓':'Concluir lição (+10 XP)'}</button><button class="btn" onclick="openLesson(${Math.min(49,current+1)})">Próxima →</button></div></div>`;
 }
 else if(t==='quiz'){
-showQuiz();
+quizMode='normal';
+startQuiz();
 }
 else if(t==='revisao'){
-if(mistakes.length===0){
-c.innerHTML=`<div class="card"><h2>🔁 Revisão de erros</h2><div class="notice">Muito bem! Você ainda não tem palavras para revisar.</div><p>Quando errar uma pergunta no quiz, a palavra será salva aqui automaticamente.</p><button class="btn primary" onclick="render('quiz')">Ir para o quiz</button></div>`;
-}else{
-c.innerHTML=`<div class="card"><h2>🔁 Revisão de erros</h2><p class="muted">Estas são as palavras que você errou. Tente novamente para fixar o significado.</p><p><b>${mistakes.length}</b> palavra(s) para revisar.</p><button class="btn primary" onclick="startReview()">Começar revisão</button></div>`+
-mistakes.map((m,i)=>`<div class="card"><div class="word">${escapeHTML(m[0])}</div><p class="pron">${escapeHTML(m[2])}</p><p>${escapeHTML(m[1])}</p><button class="btn" onclick="removeMistake(${i})">Remover da revisão</button></div>`).join('');
-}
+renderReviewList();
 }
 else if(t==='conquistas'){
+renderAchievements();
+}
+}
+let current=0;
+function openLesson(i){current=i;render('detail')}
+function finish(i){if(!completed.includes(i)){completed.push(i);xp+=10;save()}render('licoes')}
+
+function doSearch(value){
+let out=document.getElementById('searchResults');
+if(!out)return;
+let q=value.trim().toLowerCase();
+if(!q){out.innerHTML='<p class="muted small">Digite algo para começar.</p>';return}
+let found=[];
+lessons.forEach((l,i)=>{if(l.join(' ').toLowerCase().includes(q))found.push(`<div class="result"><b>📘 Lição ${i+1}: ${esc(l[0])}</b><p class="small">${esc(l[1])} · ${esc(l[3])}</p><button class="btn primary" onclick="openLesson(${i})">Abrir lição</button></div>`)});
+vocab.forEach(v=>{if(v.join(' ').toLowerCase().includes(q))found.push(`<div class="result"><b>📖 ${esc(v[0])}</b><p>${esc(v[1])}</p><p class="pron small">${esc(v[2])}</p></div>`)});
+out.innerHTML=found.length?found.join(''):'<p class="warning">Nenhum resultado encontrado. Tente outra palavra.</p>';
+}
+
+/* QUIZ: perguntas, respostas e navegação */
+function shuffle(arr){
+let a=arr.slice();
+for(let i=a.length-1;i>0;i--){
+let j=Math.floor(Math.random()*(i+1));
+[a[i],a[j]]=[a[j],a[i]];
+}
+return a;
+}
+function startQuiz(){
+quizMode='normal';
+quizSession=shuffle(vocab).slice(0,10);
+quizPosition=0;
+quizScore=0;
+showQuestion();
+}
+function showQuestion(){
+if(quizPosition>=quizSession.length){showQuizResult();return}
+currentQuestion=quizSession[quizPosition];
+questionAnswered=false;
+let correct=currentQuestion[1];
+let otherAnswers=shuffle(vocab.filter(v=>v[0]!==currentQuestion[0])).slice(0,3).map(v=>v[1]);
+let options=shuffle([correct,...otherAnswers]);
+let c=document.getElementById('content');
+c.innerHTML=`
+<div class="card">
+<div class="quiz-top"><b>🎯 Quiz de vocabulário</b><span class="quiz-number">Pergunta ${quizPosition+1} de ${quizSession.length}</span></div>
+<div class="progress"><div style="width:${quizPosition/quizSession.length*100}%"></div></div>
+<div class="quiz-word"><p class="muted">Qual é o significado desta palavra?</p><div class="word">${currentQuestion[0]}</div><div class="pron">${currentQuestion[2]}</div></div>
+<div id="quizOptions">${options.map((o,i)=>`<button class="answer" data-choice="${i}" onclick="chooseAnswer(${i})">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div>
+<div id="quizFeedback" class="muted small">Escolha uma resposta.</div>
+<div id="quizNext" class="hide"><button class="btn primary" style="width:100%" onclick="nextQuestion()">Próxima pergunta →</button></div>
+</div>`;
+window.quizOptions=options;
+}
+function chooseAnswer(index){
+if(questionAnswered)return;
+questionAnswered=true;
+let choice=window.quizOptions[index];
+let correct=currentQuestion[1];
+let buttons=document.querySelectorAll('#quizOptions .answer');
+buttons.forEach((b,i)=>{
+b.disabled=true;
+if(window.quizOptions[i]===correct)b.classList.add('correct');
+if(i===index&&choice!==correct)b.classList.add('wrong');
+});
+let feedback=document.getElementById('quizFeedback');
+if(choice===correct){
+quizScore++;
+quizCorrect++;
+xp+=5;
+feedback.textContent='Muito bem! Resposta correta. +5 XP 🎉';
+feedback.className='notice';
+}else{
+if(!mistakes.some(m=>m[0]===currentQuestion[0])){
+mistakes.push(currentQuestion.slice());
+}
+feedback.textContent='Quase! A resposta correta é '+correct+'. A palavra foi salva para revisão.';
+feedback.className='warning';
+}
+save();
+document.getElementById('quizNext').classList.remove('hide');
+document.getElementById('quizNext').innerHTML=`<button class="btn primary" style="width:100%" onclick="nextQuestion()">${quizPosition===quizSession.length-1?'Ver resultado':'Próxima pergunta →'}</button>`;
+}
+function nextQuestion(){
+if(!questionAnswered)return;
+quizPosition++;
+showQuestion();
+}
+function showQuizResult(){
+let total=quizSession.length;
+let percent=Math.round(quizScore/total*100);
+let message=percent===100?'Perfeito! Você acertou tudo! 🏆':percent>=70?'Muito bem! Continue praticando! 🎉':percent>=40?'Bom começo! Continue estudando! 💜':'Não desista! A prática leva à melhoria. 🌱';
+document.getElementById('content').innerHTML=`
+<div class="card" style="text-align:center">
+<h2>🏁 Quiz concluído!</h2>
+<div class="word" style="font-size:48px">${quizScore}/${total}</div>
+<h3>${percent}% de acertos</h3>
+<div class="progress"><div style="width:${percent}%"></div></div>
+<p>${message}</p>
+<p class="muted small">Você ganhou ${quizScore*5} XP neste quiz.</p>
+<div class="row"><button class="btn primary" onclick="startQuiz()">Jogar novamente</button><button class="btn" onclick="render('revisao')">Revisar erros</button></div>
+</div>`;
+}
+
+/* REVISÃO DE ERROS */
+function renderReviewList(){
+let c=document.getElementById('content');
+if(!mistakes.length){
+c.innerHTML=`<div class="card"><h2>🔁 Revisão de erros</h2><div class="notice">Muito bem! Você ainda não tem palavras para revisar.</div><p>Quando errar uma pergunta no quiz, a palavra será salva aqui automaticamente.</p><button class="btn primary" onclick="render('quiz')">Ir para o quiz</button></div>`;
+return;
+}
+c.innerHTML=`<div class="card"><h2>🔁 Revisão de erros</h2><p class="muted">Pratique novamente as palavras que você errou.</p><p><b>${mistakes.length}</b> palavra(s) para revisar.</p><button class="btn primary" onclick="startReview()">Começar revisão</button></div>`+
+mistakes.map((m,i)=>`<div class="card"><div class="word">${esc(m[0])}</div><p class="pron">${esc(m[2]||'')}</p><p>${esc(m[1])}</p><button class="btn" onclick="removeMistake(${i})">Remover da revisão</button></div>`).join('');
+}
+function startReview(){
+if(!mistakes.length){renderReviewList();return}
+quizMode='review';
+quizSession=shuffle(mistakes).slice(0,Math.min(10,mistakes.length));
+quizPosition=0;
+quizScore=0;
+showReviewQuestion();
+}
+function showReviewQuestion(){
+if(quizPosition>=quizSession.length){showReviewResult();return}
+currentQuestion=quizSession[quizPosition];
+questionAnswered=false;
+let correct=currentQuestion[1];
+let other=shuffle(vocab.filter(v=>v[0]!==currentQuestion[0])).slice(0,3).map(v=>v[1]);
+let options=shuffle([correct,...other]);
+document.getElementById('content').innerHTML=`
+<div class="card">
+<div class="quiz-top"><b>🔁 Revisão de erros</b><span class="quiz-number">${quizPosition+1} de ${quizSession.length}</span></div>
+<div class="progress"><div style="width:${quizPosition/quizSession.length*100}%"></div></div>
+<div class="quiz-word"><p class="muted">Qual é o significado desta palavra?</p><div class="word">${currentQuestion[0]}</div><div class="pron">${currentQuestion[2]||''}</div></div>
+<div id="quizOptions">${options.map((o,i)=>`<button class="answer" onclick="chooseReviewAnswer(${i})">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div>
+<div id="quizFeedback" class="muted small">Escolha uma resposta.</div>
+<div id="quizNext" class="hide"></div>
+</div>`;
+window.quizOptions=options;
+}
+function chooseReviewAnswer(index){
+if(questionAnswered)return;
+questionAnswered=true;
+let choice=window.quizOptions[index];
+let correct=currentQuestion[1];
+let buttons=document.querySelectorAll('#quizOptions .answer');
+buttons.forEach((b,i)=>{
+b.disabled=true;
+if(window.quizOptions[i]===correct)b.classList.add('correct');
+if(i===index&&choice!==correct)b.classList.add('wrong');
+});
+let feedback=document.getElementById('quizFeedback');
+if(choice===correct){
+quizScore++;
+mistakes=mistakes.filter(m=>m[0]!==currentQuestion[0]);
+xp+=5;
+feedback.textContent='Muito bem! Palavra removida da revisão. +5 XP 🎉';
+feedback.className='notice';
+}else{
+feedback.textContent='Ainda não! A resposta correta é '+correct+'. Tente novamente mais tarde.';
+feedback.className='warning';
+}
+save();
+document.getElementById('quizNext').classList.remove('hide');
+document.getElementById('quizNext').innerHTML=`<button class="btn primary" style="width:100%" onclick="nextReviewQuestion()">${quizPosition===quizSession.length-1?'Ver resultado':'Próxima palavra →'}</button>`;
+}
+function nextReviewQuestion(){
+if(!questionAnswered)return;
+quizPosition++;
+showReviewQuestion();
+}
+function showReviewResult(){
+document.getElementById('content').innerHTML=`
+<div class="card" style="text-align:center">
+<h2>Revisão concluída!</h2><div class="word">${quizScore}/${quizSession.length}</div>
+<p>Você acertou ${quizScore} palavras.</p>
+<p class="muted">Ainda restam ${mistakes.length} palavra(s) para revisar.</p>
+<button class="btn primary" onclick="render('revisao')">Voltar à revisão</button>
+</div>`;
+}
+function removeMistake(i){mistakes.splice(i,1);save();renderReviewList()}
+
+/* ESCRITA */
+function checkWriting(){
+let item=writingItems[writeIndex%writingItems.length];
+let input=document.getElementById('writeAnswer');
+let feedback=document.getElementById('writeFeedback');
+let button=document.getElementById('writeCheck');
+if(!input||!feedback||button.disabled)return;
+if(input.value.trim()===item[0]){
+writingDone++;xp+=5;save();
+feedback.textContent='Perfeito! Resposta correta. +5 XP 🎉';
+feedback.className='notice';
+button.disabled=true;
+}else{
+feedback.textContent='Ainda não! Observe o caractere e tente novamente: '+item[0];
+feedback.className='warning';
+}
+}
+function nextWriting(){writeIndex=(writeIndex+1)%writingItems.length;render('escrever')}
+
+/* CONQUISTAS */
+function renderAchievements(){
 let badges=[
 ['🌱','Primeiro passo','Conclua sua primeira lição.',completed.length>=1],
 ['📚','Estudante dedicado','Conclua 5 lições.',completed.length>=5],
@@ -317,121 +453,16 @@ let badges=[
 ['👑','Mestre iniciante','Conclua as 50 lições.',completed.length>=50],
 ['⭐','Primeiros pontos','Acumule 50 XP.',xp>=50],
 ['💎','Colecionador de XP','Acumule 200 XP.',xp>=200],
-['🧠','Boa memória','Acerte 5 perguntas do quiz.',quizCorrect>=5],
-['🔥','Mente afiada','Acerte 20 perguntas do quiz.',quizCorrect>=20],
+['🧠','Boa memória','Acerte 5 perguntas.',quizCorrect>=5],
+['🔥','Mente afiada','Acerte 20 perguntas.',quizCorrect>=20],
 ['✍️','Mão na massa','Acerte 5 exercícios de escrita.',writingDone>=5],
 ['🖋️','Praticante de Hangul','Acerte 14 exercícios de escrita.',writingDone>=14]
 ];
 let earned=badges.filter(b=>b[3]).length;
-c.innerHTML=`<div class="card"><h2>🏆 Suas conquistas</h2><p>Desbloqueie medalhas estudando, praticando e acumulando XP.</p><h3>${earned} de ${badges.length} conquistas desbloqueadas</h3><div class="progress"><div style="width:${earned/badges.length*100}%"></div></div></div><div class="badge-grid">`+
+document.getElementById('content').innerHTML=`<div class="card"><h2>🏆 Suas conquistas</h2><p>Desbloqueie medalhas estudando, praticando e acumulando XP.</p><h3>${earned} de ${badges.length} conquistas desbloqueadas</h3><div class="progress"><div style="width:${earned/badges.length*100}%"></div></div></div><div class="badge-grid">`+
 badges.map(b=>`<div class="badge-card ${b[3]?'':'locked'}"><div class="badge-icon">${b[0]}</div><strong>${b[1]}</strong><p class="small muted">${b[2]}</p><span class="tag">${b[3]?'Desbloqueada':'Bloqueada'}</span></div>`).join('')+'</div>';
 }
-}
 
-function doSearch(value){
-let out=document.getElementById('searchResults');
-if(!out)return;
-let q=value.trim().toLowerCase();
-if(!q){out.innerHTML='<p class="muted small">Digite algo para começar a busca.</p>';return}
-let found=[];
-lessons.forEach((l,i)=>{
-if(l.join(' ').toLowerCase().includes(q)){
-found.push(`<div class="result"><b>📘 Lição ${i+1}: ${escapeHTML(l[0])}</b><p class="small">${escapeHTML(l[1])} · ${escapeHTML(l[3])}</p><button class="btn primary" onclick="openLesson(${i})">Abrir lição</button></div>`);
-}
-});
-vocab.forEach(v=>{
-if(v.join(' ').toLowerCase().includes(q)){
-found.push(`<div class="result"><b>📖 ${escapeHTML(v[0])}</b><p>${escapeHTML(v[1])}</p><p class="pron small">${escapeHTML(v[2])}</p></div>`);
-}
-});
-out.innerHTML=found.length?found.join(''):'<p class="warning">Nenhum resultado encontrado. Tente outra palavra.</p>';
-}
-
-function getQuestionPool(){
-return vocab;
-}
-function showQuiz(){
-let pool=getQuestionPool();
-let q=pool[quizIndex%pool.length];
-let other=pool.filter(v=>v!==q);
-let choices=[q[1],other[(quizIndex+1)%other.length][1],other[(quizIndex+5)%other.length][1]];
-choices=[...new Set(choices)].sort(()=>Math.random()-.5);
-quizAnswered=false;
-document.getElementById('content').innerHTML=`
-<div class="card"><h2>🎯 Quiz de vocabulário</h2>
-<p class="muted">Qual é o significado desta palavra?</p>
-<div class="word">${q[0]}</div><div class="pron">${q[2]}</div>
-${choices.map(o=>`<button class="answer" onclick="answerQuiz(this,${JSON.stringify(o)},${JSON.stringify(q[1])},${JSON.stringify(q[0])})">${escapeHTML(o)}</button>`).join('')}
-<p id="quizFeedback" class="muted small">Cada resposta correta vale 5 XP.</p>
-<div class="row"><button class="btn" onclick="render('quiz')">Outra pergunta</button><button class="btn" onclick="render('revisao')">Revisar erros</button></div>
-</div>`;
-}
-function answerQuiz(btn,choice,correct,word){
-if(quizAnswered)return;
-quizAnswered=true;
-document.querySelectorAll('.answer').forEach(b=>b.disabled=true);
-let f=document.getElementById('quizFeedback');
-if(choice===correct){
-xp+=5;quizCorrect++;save();
-f.textContent='Muito bem! +5 XP 🎉';
-f.className='notice';
-}else{
-if(!mistakes.some(m=>m[0]===word)){
-mistakes.push([word,correct,vocab.find(v=>v[0]===word)?.[2]||'']);
-}
-save();
-f.textContent='Quase! A resposta correta é: '+correct+'. A palavra foi adicionada à revisão.';
-f.className='warning';
-}
-}
-function startReview(){
-if(mistakes.length===0){render('revisao');return}
-let m=mistakes[Math.floor(Math.random()*mistakes.length)];
-let others=vocab.filter(v=>v[0]!==m[0]).sort(()=>Math.random()-.5).slice(0,2);
-let choices=[m[1],...others.map(v=>v[1])].sort(()=>Math.random()-.5);
-document.getElementById('content').innerHTML=`
-<div class="card"><h2>🔁 Hora de revisar!</h2>
-<p class="muted">Qual é o significado desta palavra?</p>
-<div class="word">${escapeHTML(m[0])}</div><div class="pron">${escapeHTML(m[2])}</div>
-${choices.map(o=>`<button class="answer" onclick="answerReview(this,${JSON.stringify(o)},${JSON.stringify(m[1])},${JSON.stringify(m[0])})">${escapeHTML(o)}</button>`).join('')}
-<p id="reviewFeedback" class="muted small">Acerte para remover a palavra da sua lista de revisão.</p>
-<button class="btn" onclick="render('revisao')">Voltar</button>
-</div>`;
-}
-function answerReview(btn,choice,correct,word){
-document.querySelectorAll('.answer').forEach(b=>b.disabled=true);
-let f=document.getElementById('reviewFeedback');
-if(choice===correct){
-mistakes=mistakes.filter(m=>m[0]!==word);
-xp+=5;save();
-f.textContent='Muito bem! Palavra removida da revisão. +5 XP 🎉';
-f.className='notice';
-}else{
-f.textContent='Ainda não! A resposta correta é '+correct+'. Tente novamente mais tarde.';
-f.className='warning';
-}
-}
-function removeMistake(i){
-mistakes.splice(i,1);save();render('revisao');
-}
-function checkWriting(){
-let item=writingItems[writeIndex%writingItems.length];
-let input=document.getElementById('writeAnswer');
-let feedback=document.getElementById('writeFeedback');
-if(!input||!feedback)return;
-if(input.value.trim()===item.a){
-writingDone++;xp+=5;save();
-feedback.textContent='Perfeito! Resposta correta. +5 XP 🎉';
-feedback.className='notice';
-}else{
-feedback.textContent='Ainda não! Observe o caractere e tente novamente: '+item.a;
-feedback.className='warning';
-}
-}
-function nextWriting(){
-writeIndex=(writeIndex+1)%writingItems.length;
-render('escrever');
-}
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>render(b.dataset.tab)));
 stats();
 render('inicio');
