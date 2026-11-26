@@ -905,117 +905,147 @@ if("serviceWorker" in navigator){
 }
 
 /* ==========================================
-   COREANO FÁCIL - ROMANIZATION + OUVIR UPDATE
+   COREANO FÁCIL - ROMANIZAÇÃO + OUVIR
    ========================================== */
-
 (function () {
   "use strict";
 
   const initials = [
-    "g","kk","n","d","tt","r","m","b","pp",
-    "s","ss","","j","jj","ch","k","t","p","h"
+    "g", "kk", "n", "d", "tt", "r", "m", "b", "pp",
+    "s", "ss", "", "j", "jj", "ch", "k", "t", "p", "h"
   ];
 
   const vowels = [
-    "a","ae","ya","yae","eo","e","yeo","ye",
-    "o","wa","wae","oe","yo","u","wo","we",
-    "wi","yu","eu","ui","i"
+    "a", "ae", "ya", "yae", "eo", "e", "yeo",
+    "ye", "o", "wa", "wae", "oe", "yo", "u",
+    "wo", "we", "wi", "yu", "eu", "ui", "i"
   ];
 
   const finals = [
-    "","k","k","k","n","n","n","t","l","k",
-    "m","l","p","l","l","p","l","m","p","p",
-    "t","t","ng","t","t","k","t","p","t"
+    "", "k", "k", "k", "n", "n", "n", "t",
+    "l", "k", "m", "p", "l", "l", "p", "l",
+    "m", "p", "p", "t", "t", "ng", "t", "t",
+    "k", "t", "p", "t"
   ];
 
   function romanizeHangul(text) {
-    return Array.from(text).map(char => {
-      const code = char.charCodeAt(0) - 44032;
+    return Array.from(text).map(function (character) {
+      const code = character.charCodeAt(0);
 
-      if (code < 0 || code > 11171) return char;
+      if (code < 0xAC00 || code > 0xD7A3) {
+        return character;
+      }
 
-      const initial = Math.floor(code / 588);
-      const vowel = Math.floor((code % 588) / 28);
-      const final = code % 28;
+      const offset = code - 0xAC00;
+      const initial = Math.floor(offset / 588);
+      const medial = Math.floor((offset % 588) / 28);
+      const final = offset % 28;
 
       return initials[initial] +
-        vowels[vowel] +
+        vowels[medial] +
         finals[final];
     }).join("");
   }
 
-  function addPronunciation() {
-    document.querySelectorAll(".korean").forEach(element => {
-      if (element.querySelector(".romanization")) return;
+  const content = document.getElementById("content");
 
-      const original = Array.from(element.childNodes)
-        .filter(node => node.nodeType === Node.TEXT_NODE)
-        .map(node => node.textContent)
-        .join("")
-        .trim();
-
-      if (!/[가-힣]/.test(original)) return;
-
-      const pronunciation = document.createElement("span");
-      pronunciation.className = "romanization";
-      pronunciation.textContent = romanizeHangul(original);
-      pronunciation.setAttribute("aria-label", "Pronúncia aproximada");
-
-      element.appendChild(pronunciation);
-    });
+  if (!content) {
+    console.warn("Coreano Fácil: área de conteúdo não encontrada.");
+    return;
   }
 
-  function updateListeningName() {
-    const replacements = {
-      "Escuta": "Ouvir",
-      "🎧 Escuta": "🎧 Ouvir",
-      "Quiz de escuta": "Quiz: Ouvir"
-    };
-
-    document.querySelectorAll(
-      "#content button, #content b, #content small"
-    ).forEach(element => {
-      const current = element.textContent.trim();
-
-      if (replacements[current]) {
-        element.textContent = replacements[current];
-      }
-    });
-  }
-
-  function applyUpdate() {
-    addPronunciation();
-    updateListeningName();
-  }
-
+  // Estilo da pronúncia
   const style = document.createElement("style");
   style.textContent = `
     .romanization {
       display: block;
-      margin-top: 3px;
-      color: #8988a0;
+      margin-top: 4px;
+      color: #85839a;
       font-size: 12px;
       font-weight: 500;
-      line-height: 1.5;
       letter-spacing: 0;
+      line-height: 1.5;
       overflow-wrap: anywhere;
     }
   `;
-
   document.head.appendChild(style);
 
-  applyUpdate();
+  function updateContent() {
+    // Atualiza os nomes relacionados à escuta
+    const walker = document.createTreeWalker(
+      content,
+      NodeFilter.SHOW_TEXT
+    );
 
-  const observer = new MutationObserver(() => {
-    applyUpdate();
+    const textNodes = [];
+    let node;
+
+    while ((node = walker.nextNode())) {
+      textNodes.push(node);
+    }
+
+    textNodes.forEach(function (textNode) {
+      let value = textNode.nodeValue;
+
+      value = value.replace(
+        /Quiz de escuta/gi,
+        "Quiz: Ouvir"
+      );
+
+      value = value.replace(
+        /\bEscuta\b/gi,
+        "Ouvir"
+      );
+
+      if (value !== textNode.nodeValue) {
+        textNode.nodeValue = value;
+      }
+    });
+
+    // Adiciona a leitura romanizada aos textos coreanos
+    content.querySelectorAll(".korean").forEach(function (element) {
+      if (element.dataset.romanizationAdded === "true") {
+        return;
+      }
+
+      const original = element.textContent.trim();
+
+      if (!/[가-힣]/.test(original)) {
+        return;
+      }
+
+      const reading = romanizeHangul(original);
+
+      if (!reading) {
+        return;
+      }
+
+      const span = document.createElement("span");
+      span.className = "romanization";
+      span.lang = "pt-BR";
+      span.textContent = reading;
+
+      element.appendChild(span);
+      element.dataset.romanizationAdded = "true";
+    });
+  }
+
+  // Observa as mudanças de tela do aplicativo
+  const observer = new MutationObserver(function () {
+    updateContent();
   });
 
-  observer.observe(document.getElementById("content"), {
+  observer.observe(content, {
     childList: true,
     subtree: true
   });
 
+  // Aplica também ao conteúdo que já está na tela
+  updateContent();
+
+  console.log("Coreano Fácil: romanização e Ouvir ativados.");
 })();
+
 </script>
 </body>
 </html>
