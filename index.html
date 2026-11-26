@@ -8,155 +8,578 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Coreano Fácil</title>
+
 <style>
-:root{--ink:#24243b;--muted:#77778f;--purple:#625ce7;--lav:#efeeff;--line:#ececf4;--bg:#f7f7fc;--white:#fff;--mint:#dff8ed}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-header{background:linear-gradient(135deg,#625ce7,#8b75ef);color:white;padding:26px 20px 32px;border-radius:0 0 28px 28px}
-.wrap{max-width:780px;margin:auto}header .top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;opacity:.95}
-h1{font-size:30px;line-height:1.12;margin:25px 0 8px}header p{margin:0;opacity:.9}
-main{max-width:780px;margin:-12px auto 40px;padding:0 16px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat,.panel,.tile{background:white;border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:0 5px 18px #29265b08}
-.stat strong{display:block;font-size:21px}.stat span{font-size:12px;color:var(--muted)}
-nav{display:flex;gap:8px;overflow:auto;padding:18px 0 12px}
-nav button{border:0;border-radius:999px;background:#eae9f8;color:#555276;padding:10px 15px;font-weight:700;white-space:nowrap}
-nav button.active{background:var(--purple);color:white}
-.panel{padding:18px;margin:8px 0 14px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-h2{font-size:19px;margin:0 0 12px}.muted{color:var(--muted);font-size:14px}
-.progress{height:9px;background:#eeedf7;border-radius:9px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:#61c99c;width:0}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.tile{padding:14px;text-align:left;cursor:pointer;color:inherit}.tile .emoji{font-size:24px}.tile b{display:block;margin:6px 0 3px}.tile small{color:var(--muted)}
-button{cursor:pointer;font:inherit}.primary{background:var(--purple);color:white;border:0;border-radius:12px;padding:11px 15px;font-weight:700}
-.lesson{border:1px solid var(--line);border-radius:14px;padding:14px;margin:9px 0;background:#fff}
-.lesson h3{font-size:16px;margin:0 0 5px}.lesson p{margin:4px 0;color:var(--muted);font-size:14px}
-.korean{font-size:27px;font-weight:800;letter-spacing:1px}.answer{display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;margin:8px 0}
-.answer:focus,.answer:hover{border-color:var(--purple);background:var(--lav)}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#5b55d9">
-<meta name="description" content="Aprenda coreano de um jeito fácil e divertido.">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>Coreano Fácil</title>
-<style>
-:root{--ink:#24243b;--muted:#77778f;--purple:#625ce7;--lav:#efeeff;--line:#ececf4;--bg:#f7f7fc;--white:#fff;--mint:#dff8ed}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-header{background:linear-gradient(135deg,#625ce7,#8b75ef);color:white;padding:26px 20px 32px;border-radius:0 0 28px 28px}
-.wrap{max-width:780px;margin:auto}header .top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;opacity:.95}
-h1{font-size:30px;line-height:1.12;margin:25px 0 8px}header p{margin:0;opacity:.9}
-main{max-width:780px;margin:-12px auto 40px;padding:0 16px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat,.panel,.tile{background:white;border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:0 5px 18px #29265b08}
-.stat strong{display:block;font-size:21px}.stat span{font-size:12px;color:var(--muted)}
-nav{display:flex;gap:8px;overflow:auto;padding:18px 0 12px}
-nav button{border:0;border-radius:999px;background:#eae9f8;color:#555276;padding:10px 15px;font-weight:700;white-space:nowrap}
-nav button.active{background:var(--purple);color:white}
-.panel{padding:18px;margin:8px 0 14px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-h2{font-size:19px;margin:0 0 12px}.muted{color:var(--muted);font-size:14px}
-.progress{height:9px;background:#eeedf7;border-radius:9px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:#61c99c;width:0}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.tile{padding:14px;text-align:left;cursor:pointer;color:inherit}.tile .emoji{font-size:24px}.tile b{display:block;margin:6px 0 3px}.tile small{color:var(--muted)}
-button{cursor:pointer;font:inherit}.primary{background:var(--purple);color:white;border:0;border-radius:12px;padding:11px 15px;font-weight:700}
-.lesson{border:1px solid var(--line);border-radius:14px;padding:14px;margin:9px 0;background:#fff}
-.lesson h3{font-size:16px;margin:0 0 5px}.lesson p{margin:4px 0;color:var(--muted);font-size:14px}
-.korean{font-size:27px;font-weight:800;letter-spacing:1px}.answer{display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;margin:8px 0}
-.answer:focus,.answer:hover{border-color:var(--purple);background:var(--lav)}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-<div style="text-align:center;padding:20px;margin:20px 0;">
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSfM4YlJV9QZAVRQ1kqn2OSLUUZwna47-JadYb-3S9EKQmwIHA/viewform" target="_blank" style="display:inline-block;padding:14px 24px;background:#6d5ce7;color:white;border-radius:12px;text-decoration:none;font-weight:bold;">
-⭐ Avaliar aplicativo
-</a>
-<p style="font-size:13px;color:#888;">Sua opinião é importante para nós!</p>
-</div>
-@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}}
+:root {
+  --ink:#24243b;
+  --muted:#77778f;
+  --purple:#625ce7;
+  --lav:#efeeff;
+  --line:#ececf4;
+  --bg:#f7f7fc;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+
+header {
+  background:linear-gradient(135deg,#625ce7,#8b75ef);
+  color:white;
+  padding:26px 20px 32px;
+  border-radius:0 0 28px 28px;
+}
+
+.wrap {
+  max-width:780px;
+  margin:auto;
+}
+
+header .top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  font-size:13px;
+}
+
+h1 {
+  font-size:30px;
+  line-height:1.2;
+  margin:25px 0 8px;
+}
+
+header p { margin:0; opacity:.9; }
+
+main {
+  max-width:780px;
+  margin:-12px auto 30px;
+  padding:0 16px;
+}
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.stat,.panel,.tile {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:15px;
+  box-shadow:0 5px 18px #29265b08;
+}
+
+.stat strong {
+  display:block;
+  font-size:21px;
+}
+
+.stat span {
+  font-size:12px;
+  color:var(--muted);
+}
+
+nav {
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:18px 0 12px;
+}
+
+nav button {
+  border:0;
+  border-radius:999px;
+  background:#eae9f8;
+  color:#555276;
+  padding:10px 15px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+nav button.active {
+  background:var(--purple);
+  color:white;
+}
+
+.panel {
+  padding:18px;
+  margin:8px 0 14px;
+}
+
+.section-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+h2 {
+  font-size:19px;
+  margin:0 0 12px;
+}
+
+.muted {
+  color:var(--muted);
+  font-size:14px;
+}
+
+.progress {
+  height:9px;
+  background:#eeedf7;
+  border-radius:9px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.progress i {
+  display:block;
+  height:100%;
+  background:#61c99c;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.tile {
+  padding:14px;
+  text-align:left;
+  cursor:pointer;
+  color:inherit;
+  width:100%;
+}
+
+.tile .emoji { font-size:24px; }
+
+.tile b {
+  display:block;
+  margin:6px 0 3px;
+}
+
+.tile small { color:var(--muted); }
+
+button {
+  cursor:pointer;
+  font:inherit;
+}
+
+.primary {
+  background:var(--purple);
+  color:white;
+  border:0;
+  border-radius:12px;
+  padding:11px 15px;
+  font-weight:700;
+}
+
+.lesson {
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  margin:9px 0;
+  background:white;
+}
+
+.lesson h3 {
+  font-size:16px;
+  margin:0 0 5px;
+}
+
+.lesson p {
+  margin:4px 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.korean {
+  font-size:27px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.answer {
+  display:block;
+  width:100%;
+  text-align:left;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:white;
+  padding:12px;
+  margin:8px 0;
+}
+
+.answer:hover {
+  border-color:var(--purple);
+  background:var(--lav);
+}
+
+.feedback-area {
+  text-align:center;
+  padding:24px 16px;
+  margin:20px 0;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.feedback-link {
+  display:inline-block;
+  padding:14px 24px;
+  background:#6d5ce7;
+  color:white;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.feedback-area p {
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:0;
+}
+
+footer {
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  padding:20px;
+}
+
+@media(min-width:620px) {
+  .grid { grid-template-columns:repeat(3,1fr); }
+}
 </style>
 </head>
+
 <body>
-<header><div class="wrap">
-<div class="top"><span>🇰🇷 COREANO FÁCIL</span><span>🇧🇷 Para quem fala português</span></div>
-<h1>안녕하세요!<br>Vamos aprender coreano?</h1>
-<p>Pequenos passos todos os dias. 💜</p>
-</div></header>
+
+<header>
+  <div class="wrap">
+    <div class="top">
+      <span>🇰🇷 COREANO FÁCIL</span>
+      <span>🇧🇷 Para quem fala português</span>
+    </div>
+    <h1>안녕하세요!<br>Vamos aprender coreano?</h1>
+    <p>Pequenos passos todos os dias. 💜</p>
+  </div>
+</header>
+
 <main>
-<div class="stats">
-<div class="stat"><strong id="xp">0</strong><span>⭐ XP acumulado</span></div>
-<div class="stat"><strong id="done">0/30</strong><span>📚 Lições concluídas</span></div>
-<div class="stat"><strong id="level">1</strong><span>🏅 Seu nível</span></div>
-</div>
-<nav id="tabs">
-<button class="active" data-tab="inicio">Início</button><button data-tab="hangul">Hangul</button><button data-tab="vocabulario">Vocabulário</button><button data-tab="licoes">Lições</button><button data-tab="quiz">Quiz</button>
-</nav>
-<section id="content"></section>
+  <div class="stats">
+    <div class="stat">
+      <strong id="xp">0</strong>
+      <span>⭐ XP acumulado</span>
+    </div>
+    <div class="stat">
+      <strong id="done">0/30</strong>
+      <span>📚 Lições concluídas</span>
+    </div>
+    <div class="stat">
+      <strong id="level">1</strong>
+      <span>🏅 Seu nível</span>
+    </div>
+  </div>
+
+  <nav id="tabs">
+    <button class="active" data-tab="inicio">Início</button>
+    <button data-tab="hangul">Hangul</button>
+    <button data-tab="vocabulario">Vocabulário</button>
+    <button data-tab="licoes">Lições</button>
+    <button data-tab="quiz">Quiz</button>
+  </nav>
+
+  <section id="content"></section>
+
+  <div class="feedback-area">
+    <a
+      class="feedback-link"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSfM4YlJV9QZAVRQ1kqn2OSLUUZwna47-JadYb-3S9EKQmwIHA/viewform"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      ⭐ Avaliar aplicativo
+    </a>
+    <p>Sua opinião é importante para nós!</p>
+  </div>
 </main>
-<footer>Coreano Fácil · Feito com carinho para estudantes de coreano</footer>
+
+<footer>
+  Coreano Fácil · Feito com carinho para estudantes de coreano
+</footer>
+
 <script>
-const lessons=[
-["Cumprimentos","안녕하세요","Olá / Bom dia"],["Apresentações","저는 마리아예요","Eu sou Maria"],["Obrigado","감사합니다","Obrigado(a)"],["Desculpas","죄송합니다","Desculpe"],["Sim e não","네 / 아니요","Sim / Não"],["Família","가족","Família"],["Números 1","하나, 둘, 셋","Um, dois, três"],["Números 2","일, 이, 삼","Um, dois, três (sino-coreano)"],["Comida","밥","Arroz / refeição"],["Água","물 주세요","Água, por favor"],["Café","커피","Café"],["Restaurante","맛있어요","Está delicioso"],["Tempo","오늘","Hoje"],["Dias","월요일","Segunda-feira"],["Lugares","학교","Escola"],["Transporte","버스","Ônibus"],["Compras","얼마예요?","Quanto custa?"],["Cores","빨간색","Vermelho"],["Adjetivos","좋아요","É bom / gosto"],["Verbos","가요","Vou / vai"],["Casa","집","Casa"],["Trabalho","일","Trabalho"],["Estudos","공부해요","Estudo"],["Hobbies","음악","Música"],["Clima","날씨","Clima"],["Sentimentos","행복해요","Estou feliz"],["Localização","어디예요?","Onde fica?"],["Pedido","도와주세요","Ajude-me, por favor"],["Passado","갔어요","Fui"],["Revisão","한국어를 공부해요","Estudo coreano"]];
-const vocab=[["안녕하세요","Olá"],["감사합니다","Obrigado(a)"],["사랑","Amor"],["친구","Amigo(a)"],["물","Água"],["밥","Arroz / refeição"],["학교","Escola"],["책","Livro"],["집","Casa"],["가족","Família"],["네","Sim"],["아니요","Não"]];
-let xp=Number(localStorage.xp||0), completed=JSON.parse(localStorage.completed||"[]");
-const content=document.getElementById("content");
-function stats(){document.getElementById("xp").textContent=xp;document.getElementById("done").textContent=completed.length+"/30";document.getElementById("level").textContent=Math.floor(xp/100)+1}
-function speak(t){if("speechSynthesis"in window){let u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";speechSynthesis.speak(u)}}
-function render(tab="inicio"){
-document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
-if(tab==="inicio"){content.innerHTML=`<div class="panel"><div class="section-head"><h2>Seu progresso</h2><b>${Math.round(completed.length/30*100)}%</b></div><p class="muted">Continue aprendendo no seu ritmo.</p><div class="progress"><i style="width:${completed.length/30*100}%"></i></div></div><h2>Comece por aqui</h2><div class="grid"><button class="tile" onclick="render('hangul')"><span class="emoji">🔤</span><b>Aprender Hangul</b><small>Conheça o alfabeto coreano</small></button><button class="tile" onclick="render('vocabulario')"><span class="emoji">💬</span><b>Palavras úteis</b><small>Vocabulário do dia a dia</small></button><button class="tile" onclick="render('licoes')"><span class="emoji">📖</span><b>30 lições</b><small>Aprenda passo a passo</small></button><button class="tile" onclick="render('quiz')"><span class="emoji">🧠</span><b>Praticar</b><small>Teste o que aprendeu</small></button></div>`}
-if(tab==="hangul"){let chars=["ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ","ㅏ","ㅑ","ㅓ","ㅕ","ㅗ","ㅛ","ㅜ","ㅠ","ㅡ","ㅣ"];content.innerHTML=`<div class="panel"><h2>O alfabeto coreano — 한글</h2><p class="muted">Toque em uma letra para ouvir a pronúncia aproximada.</p><div class="grid">${chars.map(c=>`<button class="tile korean" onclick="speak('${c}')">${c}</button>`).join("")}</div></div>`}
-if(tab==="vocabulario"){content.innerHTML=`<div class="panel"><h2>Vocabulário essencial</h2><p class="muted">Toque na palavra coreana para ouvir.</p>${vocab.map(v=>`<div class="lesson section-head"><div><div class="korean">${v[0]}</div><p>${v[1]}</p></div><button class="primary" onclick="speak('${v[0]}')">🔊 Ouvir</button></div>`).join("")}</div>`}
-if(tab==="licoes"){content.innerHTML=`<div class="panel"><h2>30 lições para iniciantes</h2><p class="muted">Conclua uma lição para ganhar 10 XP.</p>${lessons.map((l,i)=>`<div class="lesson section-head"><div><h3>${completed.includes(i)?"✅":"📘"} ${i+1}. ${l[0]}</h3><div class="korean">${l[1]}</div><p>${l[2]}</p></div><button class="primary" onclick="complete(${i})">${completed.includes(i)?"Rever":"Estudar"}</button></div>`).join("")}</div>`}
-if(tab==="quiz"){let q=vocab[Math.floor(Math.random()*vocab.length)];let opts=[q[1],...vocab.filter(x=>x[1]!==q[1]).sort(()=>Math.random()-.5).slice(0,3).map(x=>x[1])].sort(()=>Math.random()-.5);content.innerHTML=`<div class="panel"><h2>🧠 Quiz rápido</h2><p class="muted">O que significa esta palavra?</p><div class="korean">${q[0]}</div><button class="primary" onclick="speak('${q[0]}')">🔊 Ouvir</button>${opts.map(o=>`<button class="answer" onclick="check(this,'${o.replace(/'/g,"\\'")}','${q[1].replace(/'/g,"\\'")}')">${o}</button>`).join("")}<p id="feedback" class="muted"></p></div>`}
+const lessons = [
+  ["Cumprimentos","안녕하세요","Olá / Bom dia"],
+  ["Apresentações","저는 마리아예요","Eu sou Maria"],
+  ["Obrigado","감사합니다","Obrigado(a)"],
+  ["Desculpas","죄송합니다","Desculpe"],
+  ["Sim e não","네 / 아니요","Sim / Não"],
+  ["Família","가족","Família"],
+  ["Números 1","하나, 둘, 셋","Um, dois, três"],
+  ["Números 2","일, 이, 삼","Um, dois, três (sino-coreano)"],
+  ["Comida","밥","Arroz / refeição"],
+  ["Água","물 주세요","Água, por favor"],
+  ["Café","커피","Café"],
+  ["Restaurante","맛있어요","Está delicioso"],
+  ["Tempo","오늘","Hoje"],
+  ["Dias","월요일","Segunda-feira"],
+  ["Lugares","학교","Escola"],
+  ["Transporte","버스","Ônibus"],
+  ["Compras","얼마예요?","Quanto custa?"],
+  ["Cores","빨간색","Vermelho"],
+  ["Adjetivos","좋아요","É bom / gosto"],
+  ["Verbos","가요","Vou / vai"],
+  ["Casa","집","Casa"],
+  ["Trabalho","일","Trabalho"],
+  ["Estudos","공부해요","Estudo"],
+  ["Hobbies","음악","Música"],
+  ["Clima","날씨","Clima"],
+  ["Sentimentos","행복해요","Estou feliz"],
+  ["Localização","어디예요?","Onde fica?"],
+  ["Pedido","도와주세요","Ajude-me, por favor"],
+  ["Passado","갔어요","Fui"],
+  ["Revisão","한국어를 공부해요","Estudo coreano"]
+];
+
+const vocab = [
+  ["안녕하세요","Olá"],
+  ["감사합니다","Obrigado(a)"],
+  ["사랑","Amor"],
+  ["친구","Amigo(a)"],
+  ["물","Água"],
+  ["밥","Arroz / refeição"],
+  ["학교","Escola"],
+  ["책","Livro"],
+  ["집","Casa"],
+  ["가족","Família"],
+  ["네","Sim"],
+  ["아니요","Não"]
+];
+
+let xp = Number(localStorage.getItem("xp") || 0);
+let completed = JSON.parse(localStorage.getItem("completed") || "[]");
+
+const content = document.getElementById("content");
+
+function stats() {
+  document.getElementById("xp").textContent = xp;
+  document.getElementById("done").textContent = completed.length + "/30";
+  document.getElementById("level").textContent = Math.floor(xp / 100) + 1;
 }
-function complete(i){if(!completed.includes(i)){completed.push(i);xp+=10;localStorage.completed=JSON.stringify(completed);localStorage.xp=xp;stats()}render("licoes")}
-function check(el,a,b){let f=document.getElementById("feedback");if(a===b){f.textContent="Muito bem! +5 XP 🎉";xp+=5;localStorage.xp=xp;stats()}else f.textContent="Quase! A resposta correta é: "+b}
-document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>render(b.dataset.tab)));
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));
-stats();render();
-</script>
-</body></html>
-@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}}
-</style>
-</head>
-<body>
-<header><div class="wrap">
-<div class="top"><span>🇰🇷 COREANO FÁCIL</span><span>🇧🇷 Para quem fala português</span></div>
-<h1>안녕하세요!<br>Vamos aprender coreano?</h1>
-<p>Pequenos passos todos os dias. 💜</p>
-</div></header>
-<main>
-<div class="stats">
-<div class="stat"><strong id="xp">0</strong><span>⭐ XP acumulado</span></div>
-<div class="stat"><strong id="done">0/30</strong><span>📚 Lições concluídas</span></div>
-<div class="stat"><strong id="level">1</strong><span>🏅 Seu nível</span></div>
-</div>
-<nav id="tabs">
-<button class="active" data-tab="inicio">Início</button><button data-tab="hangul">Hangul</button><button data-tab="vocabulario">Vocabulário</button><button data-tab="licoes">Lições</button><button data-tab="quiz">Quiz</button>
-</nav>
-<section id="content"></section>
-</main>
-<footer>Coreano Fácil · Feito com carinho para estudantes de coreano</footer>
-<script>
-const lessons=[
-["Cumprimentos","안녕하세요","Olá / Bom dia"],["Apresentações","저는 마리아예요","Eu sou Maria"],["Obrigado","감사합니다","Obrigado(a)"],["Desculpas","죄송합니다","Desculpe"],["Sim e não","네 / 아니요","Sim / Não"],["Família","가족","Família"],["Números 1","하나, 둘, 셋","Um, dois, três"],["Números 2","일, 이, 삼","Um, dois, três (sino-coreano)"],["Comida","밥","Arroz / refeição"],["Água","물 주세요","Água, por favor"],["Café","커피","Café"],["Restaurante","맛있어요","Está delicioso"],["Tempo","오늘","Hoje"],["Dias","월요일","Segunda-feira"],["Lugares","학교","Escola"],["Transporte","버스","Ônibus"],["Compras","얼마예요?","Quanto custa?"],["Cores","빨간색","Vermelho"],["Adjetivos","좋아요","É bom / gosto"],["Verbos","가요","Vou / vai"],["Casa","집","Casa"],["Trabalho","일","Trabalho"],["Estudos","공부해요","Estudo"],["Hobbies","음악","Música"],["Clima","날씨","Clima"],["Sentimentos","행복해요","Estou feliz"],["Localização","어디예요?","Onde fica?"],["Pedido","도와주세요","Ajude-me, por favor"],["Passado","갔어요","Fui"],["Revisão","한국어를 공부해요","Estudo coreano"]];
-const vocab=[["안녕하세요","Olá"],["감사합니다","Obrigado(a)"],["사랑","Amor"],["친구","Amigo(a)"],["물","Água"],["밥","Arroz / refeição"],["학교","Escola"],["책","Livro"],["집","Casa"],["가족","Família"],["네","Sim"],["아니요","Não"]];
-let xp=Number(localStorage.xp||0), completed=JSON.parse(localStorage.completed||"[]");
-const content=document.getElementById("content");
-function stats(){document.getElementById("xp").textContent=xp;document.getElementById("done").textContent=completed.length+"/30";document.getElementById("level").textContent=Math.floor(xp/100)+1}
-function speak(t){if("speechSynthesis"in window){let u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";speechSynthesis.speak(u)}}
-function render(tab="inicio"){
-document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
-if(tab==="inicio"){content.innerHTML=`<div class="panel"><div class="section-head"><h2>Seu progresso</h2><b>${Math.round(completed.length/30*100)}%</b></div><p class="muted">Continue aprendendo no seu ritmo.</p><div class="progress"><i style="width:${completed.length/30*100}%"></i></div></div><h2>Comece por aqui</h2><div class="grid"><button class="tile" onclick="render('hangul')"><span class="emoji">🔤</span><b>Aprender Hangul</b><small>Conheça o alfabeto coreano</small></button><button class="tile" onclick="render('vocabulario')"><span class="emoji">💬</span><b>Palavras úteis</b><small>Vocabulário do dia a dia</small></button><button class="tile" onclick="render('licoes')"><span class="emoji">📖</span><b>30 lições</b><small>Aprenda passo a passo</small></button><button class="tile" onclick="render('quiz')"><span class="emoji">🧠</span><b>Praticar</b><small>Teste o que aprendeu</small></button></div>`}
-if(tab==="hangul"){let chars=["ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ","ㅏ","ㅑ","ㅓ","ㅕ","ㅗ","ㅛ","ㅜ","ㅠ","ㅡ","ㅣ"];content.innerHTML=`<div class="panel"><h2>O alfabeto coreano — 한글</h2><p class="muted">Toque em uma letra para ouvir a pronúncia aproximada.</p><div class="grid">${chars.map(c=>`<button class="tile korean" onclick="speak('${c}')">${c}</button>`).join("")}</div></div>`}
-if(tab==="vocabulario"){content.innerHTML=`<div class="panel"><h2>Vocabulário essencial</h2><p class="muted">Toque na palavra coreana para ouvir.</p>${vocab.map(v=>`<div class="lesson section-head"><div><div class="korean">${v[0]}</div><p>${v[1]}</p></div><button class="primary" onclick="speak('${v[0]}')">🔊 Ouvir</button></div>`).join("")}</div>`}
-if(tab==="licoes"){content.innerHTML=`<div class="panel"><h2>30 lições para iniciantes</h2><p class="muted">Conclua uma lição para ganhar 10 XP.</p>${lessons.map((l,i)=>`<div class="lesson section-head"><div><h3>${completed.includes(i)?"✅":"📘"} ${i+1}. ${l[0]}</h3><div class="korean">${l[1]}</div><p>${l[2]}</p></div><button class="primary" onclick="complete(${i})">${completed.includes(i)?"Rever":"Estudar"}</button></div>`).join("")}</div>`}
-if(tab==="quiz"){let q=vocab[Math.floor(Math.random()*vocab.length)];let opts=[q[1],...vocab.filter(x=>x[1]!==q[1]).sort(()=>Math.random()-.5).slice(0,3).map(x=>x[1])].sort(()=>Math.random()-.5);content.innerHTML=`<div class="panel"><h2>🧠 Quiz rápido</h2><p class="muted">O que significa esta palavra?</p><div class="korean">${q[0]}</div><button class="primary" onclick="speak('${q[0]}')">🔊 Ouvir</button>${opts.map(o=>`<button class="answer" onclick="check(this,'${o.replace(/'/g,"\\'")}','${q[1].replace(/'/g,"\\'")}')">${o}</button>`).join("")}<p id="feedback" class="muted"></p></div>`}
+
+function speak(text) {
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "ko-KR";
+    window.speechSynthesis.speak(utterance);
+  }
 }
-function complete(i){if(!completed.includes(i)){completed.push(i);xp+=10;localStorage.completed=JSON.stringify(completed);localStorage.xp=xp;stats()}render("licoes")}
-function check(el,a,b){let f=document.getElementById("feedback");if(a===b){f.textContent="Muito bem! +5 XP 🎉";xp+=5;localStorage.xp=xp;stats()}else f.textContent="Quase! A resposta correta é: "+b}
-document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>render(b.dataset.tab)));
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));
-stats();render();
+
+function render(tab = "inicio") {
+  document.querySelectorAll("nav button").forEach(button => {
+    button.classList.toggle("active", button.dataset.tab === tab);
+  });
+
+  if (tab === "inicio") {
+    const percent = Math.round(completed.length / 30 * 100);
+
+    content.innerHTML = `
+      <div class="panel">
+        <div class="section-head">
+          <h2>Seu progresso</h2>
+          <b>${percent}%</b>
+        </div>
+        <p class="muted">Continue aprendendo no seu ritmo.</p>
+        <div class="progress">
+          <i style="width:${percent}%"></i>
+        </div>
+      </div>
+
+      <h2>Comece por aqui</h2>
+      <div class="grid">
+        <button class="tile" onclick="render('hangul')">
+          <span class="emoji">🔤</span>
+          <b>Aprender Hangul</b>
+          <small>Conheça o alfabeto coreano</small>
+        </button>
+        <button class="tile" onclick="render('vocabulario')">
+          <span class="emoji">💬</span>
+          <b>Palavras úteis</b>
+          <small>Vocabulário do dia a dia</small>
+        </button>
+        <button class="tile" onclick="render('licoes')">
+          <span class="emoji">📖</span>
+          <b>30 lições</b>
+          <small>Aprenda passo a passo</small>
+        </button>
+        <button class="tile" onclick="render('quiz')">
+          <span class="emoji">🧠</span>
+          <b>Praticar</b>
+          <small>Teste o que aprendeu</small>
+        </button>
+      </div>
+    `;
+  }
+
+  if (tab === "hangul") {
+    const chars = [
+      "ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ",
+      "ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ",
+      "ㅏ","ㅑ","ㅓ","ㅕ","ㅗ","ㅛ","ㅜ",
+      "ㅠ","ㅡ","ㅣ"
+    ];
+
+    content.innerHTML = `
+      <div class="panel">
+        <h2>O alfabeto coreano — 한글</h2>
+        <p class="muted">
+          Toque em uma letra para ouvir a pronúncia.
+        </p>
+        <div class="grid">
+          ${chars.map(char => `
+            <button class="tile korean" onclick="speak('${char}')">
+              ${char}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  if (tab === "vocabulario") {
+    content.innerHTML = `
+      <div class="panel">
+        <h2>Vocabulário essencial</h2>
+        <p class="muted">
+          Toque na palavra coreana para ouvir.
+        </p>
+        ${vocab.map(word => `
+          <div class="lesson section-head">
+            <div>
+              <div class="korean">${word[0]}</div>
+              <p>${word[1]}</p>
+            </div>
+            <button class="primary" onclick="speak('${word[0]}')">
+              🔊 Ouvir
+            </button>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  if (tab === "licoes") {
+    content.innerHTML = `
+      <div class="panel">
+        <h2>30 lições para iniciantes</h2>
+        <p class="muted">
+          Conclua uma lição para ganhar 10 XP.
+        </p>
+        ${lessons.map((lesson, index) => `
+          <div class="lesson section-head">
+            <div>
+              <h3>
+                ${completed.includes(index) ? "✅" : "📘"}
+                ${index + 1}. ${lesson[0]}
+              </h3>
+              <div class="korean">${lesson[1]}</div>
+              <p>${lesson[2]}</p>
+            </div>
+            <button class="primary" onclick="complete(${index})">
+              ${completed.includes(index) ? "Rever" : "Estudar"}
+            </button>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  if (tab === "quiz") {
+    const question = vocab[Math.floor(Math.random() * vocab.length)];
+
+    const options = [
+      question[1],
+      ...vocab
+        .filter(word => word[1] !== question[1])
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3)
+        .map(word => word[1])
+    ].sort(() => Math.random() - 0.5);
+
+    content.innerHTML = `
+      <div class="panel">
+        <h2>🧠 Quiz rápido</h2>
+        <p class="muted">O que significa esta palavra?</p>
+        <div class="korean">${question[0]}</div>
+        <button class="primary" onclick="speak('${question[0]}')">
+          🔊 Ouvir
+        </button>
+        ${options.map(option => `
+          <button
+            class="answer"
+            onclick="check(this, ${JSON.stringify(option)}, ${JSON.stringify(question[1])})"
+          >
+            ${option}
+          </button>
+        `).join("")}
+        <p id="feedback" class="muted"></p>
+      </div>
+    `;
+  }
+}
+
+function complete(index) {
+  if (!completed.includes(index)) {
+    completed.push(index);
+    xp += 10;
+    localStorage.setItem("completed", JSON.stringify(completed));
+    localStorage.setItem("xp", xp);
+    stats();
+  }
+  render("licoes");
+}
+
+function check(element, answer, correct) {
+  const feedback = document.getElementById("feedback");
+
+  if (answer === correct) {
+    feedback.textContent = "Muito bem! +5 XP 🎉";
+    xp += 5;
+    localStorage.setItem("xp", xp);
+    stats();
+    element.style.background = "#dff8ed";
+  } else {
+    feedback.textContent = "Quase! A resposta correta é: " + correct;
+    element.style.background = "#ffe8e8";
+  }
+}
+
+document.querySelectorAll("nav button").forEach(button => {
+  button.addEventListener("click", () => render(button.dataset.tab));
+});
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./service-worker.js")
+      .catch(() => {});
+  });
+}
+
+stats();
+render();
 </script>
-</body></html>
+
+</body>
+</html>
