@@ -372,8 +372,7 @@ const lessons=[
 {title:"Pedidos e ajuda",target:"도와주세요",meaning:"Ajude-me, por favor",words:[["도와주세요","Ajude-me, por favor"],["주세요","Dê-me, por favor"],["기다려 주세요","Espere, por favor"],["천천히","Devagar"],["다시","De novo"]],phrases:[["도와주세요","Ajude-me, por favor"],["천천히 말해 주세요","Fale devagar, por favor"],["다시 말해 주세요","Repita, por favor"]],grammar:["-아/어 주세요 pede que alguém faça algo.","천천히 é um advérbio que significa devagar.","다시 significa novamente."],dialogue:[["A","죄송하지만 도와주세요."],["B","네, 무엇을 도와드릴까요?"],["A","천천히 말해 주세요."]],question:["Como pedir para falar devagar?","천천히 말해 주세요","빨리 가세요","감사합니다",0]},
 {title:"Passado",target:"갔어요",meaning:"Fui",words:[["갔어요","Fui"],["먹었어요","Comi"],["봤어요","Vi / assisti"],["했어요","Fiz"],["만났어요","Encontrei"]],phrases:[["어제 학교에 갔어요","Ontem fui à escola"],["밥을 먹었어요","Comi"],["친구를 만났어요","Encontrei um amigo"]],grammar:["O passado educado geralmente usa -았어요/-었어요.","가다 vira 갔어요.","먹다 vira 먹었어요."],dialogue:[["A","어제 뭐 했어요?"],["B","영화를 봤어요."],["A","재미있었어요?"]],question:["Qual é o passado de 가요?","갔어요","가요","갈 거예요",0]},
 {title:"Futuro e planos",target:"갈 거예요",meaning:"Vou / irei",words:[["갈 거예요","Irei"],["먹을 거예요","Vou comer"],["만날 거예요","Vou encontrar"],["공부할 거예요","Vou estudar"],["내일","Amanhã"]],phrases:[["내일 갈 거예요","Vou amanhã"],["주말에 쉴 거예요","Vou descansar no fim de semana"],["한국어를 공부할 거예요","Vou estudar coreano"]],grammar:["-ㄹ 거예요/-을 거예요 expressa futuro ou intenção.","Depois de vogal, normalmente usa -ㄹ 거예요; depois de consoante, -을 거예요.","하다 vira 할 거예요."],dialogue:[["A","내일 뭐 할 거예요?"],["B","친구를 만날 거예요."],["A","재미있겠어요!"]],question:["Como dizer 'Vou estudar'?","공부할 거예요","공부했어요","공부해요",0]},
-{title:"Conectar frases",target:"그리고",meaning:"E / além disso",words:[["그리고","E / além disso"],["하지만","Mas"],["그래서","Por isso"],["또는","Ou"],["왜냐하면","Porque"]],phrases:[["밥을 먹고 공부해요","Como e estudo"],["비가 와서 집에 있어요","Como chove, fico em casa"],["좋지만 비싸요","É bom, mas caro"]],grammar:["그리고 conecta ideias e significa 'e'.","하지만 introduz contraste: mas.","그래서 indica consequência: por isso.","-고 conecta ações: 먹고 공부해요."],dialogue:[["A","오늘 뭐 해요?"],["B","공부하고 운동해요."],["A","바쁘네요!"]],question:["Qual palavra significa 'mas'?","하지만","그리고","그래서",0]},
-{title:"Revisão e conversação",target:"한국어를 공부해요",meaning:"Estudo coreano",words:[["안녕하세요","Olá"],["감사합니다","Obrigado(a)"],["한국어","Coreano"],["친구","Amigo(a)"],["좋아요","É bom"]],phrases:[["저는 브라질 사람이에요","Sou brasileiro(a)"],["한국어를 공부하고 있어요","Estou estudando coreano"],["한국에 가고 싶어요","Quero ir à Coreia"]],grammar:["Combine as estruturas aprendidas para formar frases completas.","-고 있어요 expressa uma ação em andamento.","-고 싶어요 expressa vontade ou desejo."],dialogue:[["A","안녕하세요! 이름이 뭐예요?"],["B","저는 마리아예요. 브라질 사람이에요."],["A","한국어를 공부해요?"],["B","네! 한국어를 공부하고 있어요."]],question:["Como dizer 'Quero ir à Coreia'?","한국에 가고 싶어요","한국에 갔어요","한국어를 먹어요",0]}
+
 ];
 
 const vocab=[
@@ -500,7 +499,7 @@ document.querySelectorAll("nav button").forEach(button=>{
 });
 
 function renderHome(){
- const percent=Math.round(completed.length/30*100);
+ const percent=Math.round(Math.min(100,completed.length/30*100));
  const nextLesson=lessons.find((l,i)=>!completed.includes(i));
  content.innerHTML=`
  <div class="panel">
@@ -526,7 +525,7 @@ function renderHome(){
    <small>Aprenda passo a passo</small>
   </button>
   <button class="tile" onclick="startQuiz('listening')">
-   <span class="emoji">🎧</span><b>Quiz de escuta</b>
+   <span class="emoji">🎧</span><b>Quiz: Ouvir</b>
    <small>Treine seus ouvidos</small>
   </button>
   <button class="tile" onclick="render('quiz')">
@@ -568,7 +567,7 @@ function renderHangul(){
   consonants:"As 14 consoantes básicas. O som pode mudar de acordo com a posição na sílaba.",
   doubleConsonants:"As 5 consoantes tensas. Elas exigem uma articulação mais firme e não são simplesmente versões mais altas das consoantes básicas.",
   batchim:"Batchim é a consoante que aparece no final de uma sílaba. Existem 7 sons finais principais.",
-  doubleBatchim:"Os 11 batchim compostos. A pronúncia depende da palavra e do som que vem depois."
+  doubleBatchim:"Os 11 batchim compostos. A pronúncia final mais comum está indicada abaixo, mas pode mudar conforme a palavra e a sílaba seguinte."
  };
  content.innerHTML=`
  <div class="panel">
@@ -597,7 +596,7 @@ function renderHangul(){
   ${hangulCategory==="compoundVowels"?`
    <div class="notice">ㅐ e ㅔ frequentemente têm pronúncia muito semelhante no coreano moderno. A vogal ㅢ também pode mudar de som dependendo da posição na palavra.</div>`:""}
   ${hangulCategory==="batchim"||hangulCategory==="doubleBatchim"?`
-   <div class="notice">O som do batchim pode mudar quando a próxima sílaba começa com ㅇ. Aprenda primeiro o som final básico e depois pratique as ligações entre sílabas.</div>`:""}
+   <div class="notice">O som do batchim pode mudar quando a próxima sílaba começa com ㅇ ou com outra consoante. Primeiro aprenda os sons finais básicos; depois pratique as ligações e mudanças de pronúncia.</div>`:""}
   <button class="secondary" onclick="startQuiz('hangul')">🧠 Praticar Hangul</button>
  </div>`;
 }
@@ -625,7 +624,7 @@ function renderLessons(){
  <div class="panel">
   <h2>30 lições de coreano</h2>
   <p class="muted">Cada lição inclui vocabulário, expressões, gramática e diálogo.</p>
-  <div class="progress"><i style="width:${completed.length/30*100}%"></i></div>
+  <div class="progress"><i style="width:${Math.min(100,completed.length/30*100)}%"></i></div>
   <p class="tiny">${completed.length}/30 concluídas</p>
   ${lessons.map((l,i)=>`
    <div class="lesson">
@@ -726,7 +725,7 @@ function renderQuizMenu(){
    <small>Descubra o significado das palavras coreanas.</small>
   </button>
   <button class="tile" onclick="startQuiz('listening')">
-   <span class="emoji">🎧</span><b>Escuta</b>
+   <span class="emoji">🎧</span><b>Ouvir</b>
    <small>Ouça a palavra e escolha a tradução.</small>
   </button>
   <button class="tile" onclick="startQuiz('hangul')">
@@ -793,7 +792,7 @@ function renderQuiz(){
   <h2 style="margin-top:15px">🧠 Quiz rápido</h2>
   <div class="subnav">
    <button class="${quizMode==="meaning"?"active":""}" onclick="startQuiz('meaning')">Significado</button>
-   <button class="${quizMode==="listening"?"active":""}" onclick="startQuiz('listening')">🎧 Escuta</button>
+   <button class="${quizMode==="listening"?"active":""}" onclick="startQuiz('listening')">🎧 Ouvir</button>
    <button class="${quizMode==="hangul"?"active":""}" onclick="startQuiz('hangul')">Hangul</button>
    <button class="${quizMode==="lesson"?"active":""}" onclick="startQuiz('lesson')">Lições</button>
   </div>
@@ -951,9 +950,9 @@ if("serviceWorker" in navigator){
     'ㄳ': 'k (som de ㄱ)',
     'ㄵ': 'n (som de ㄴ)',
     'ㄶ': 'n (som de ㄴ)',
-    'ㄺ': 'k (som de ㄱ)',
+    'ㄺ': 'k (geralmente; há exceções antes de ㄱ)',
     'ㄻ': 'm (som de ㅁ)',
-    'ㄼ': 'l (som de ㄹ)',
+    'ㄼ': 'l (geralmente; 밟- é uma exceção comum)',
     'ㄽ': 'l (som de ㄹ)',
     'ㄾ': 'l (som de ㄹ)',
     'ㄿ': 'p (som de ㅂ)',
@@ -1206,28 +1205,6 @@ if("serviceWorker" in navigator){
   document.head.appendChild(style);
 
   function updateContent() {
-    const walker = document.createTreeWalker(
-      root,
-      NodeFilter.SHOW_TEXT
-    );
-
-    const nodes = [];
-    let node;
-
-    while ((node = walker.nextNode())) {
-      nodes.push(node);
-    }
-
-    nodes.forEach(textNode => {
-      const updated = textNode.nodeValue
-        .replace(/Quiz de escuta/gi, 'Quiz: Ouvir')
-        .replace(/\bEscuta\b/gi, 'Ouvir');
-
-      if (updated !== textNode.nodeValue) {
-        textNode.nodeValue = updated;
-      }
-    });
-
     root.querySelectorAll('.korean').forEach(element => {
       if (element.dataset.romanizationAdded === 'true') return;
 
@@ -1243,6 +1220,7 @@ if("serviceWorker" in navigator){
 
       span.className = 'romanization';
       span.lang = 'pt-BR';
+      span.title = 'Romanização aproximada (leitura em letras latinas)';
       span.textContent = romanizeHangul(original);
 
       element.appendChild(span);
