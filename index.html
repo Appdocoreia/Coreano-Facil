@@ -415,6 +415,8 @@ let speechRate=.82;
 let voices=[];
 let selectedVoiceName="";
 let quizStreak=0;
+let selectedAssembly={consonant:null,vowel:null};
+let assemblyFeedback="";
 
 const content=document.getElementById("content");
 
@@ -730,7 +732,7 @@ function renderQuizMenu(){
   </button>
   <button class="tile" onclick="startQuiz('hangul')">
    <span class="emoji">🔤</span><b>Hangul</b>
-   <small>Identifique vogais e consoantes.</small>
+   <small>Monte sílabas combinando consoantes e vogais.</small>
   </button>
   <button class="tile" onclick="startQuiz('lesson')">
    <span class="emoji">📖</span><b>Conteúdo das lições</b>
@@ -739,17 +741,30 @@ function renderQuizMenu(){
  </div>`;
 }
 
+function composeHangul(consonant,vowel){
+ const L=consonantBasic.findIndex(x=>x.c===consonant);
+ const V=vowelBasic.findIndex(x=>x.c===vowel);
+ if(L<0||V<0)return "";
+ return String.fromCharCode(0xAC00+(L*21+V)*28);
+}
 function makeQuestion(mode){
  if(mode==="hangul"){
-  const all=[...vowelBasic,...vowelCompound,...consonantBasic,...consonantDouble];
-  const item=all[Math.floor(Math.random()*all.length)];
-  const options=[item,...all.filter(x=>x.c!==item.c).sort(()=>Math.random()-.5).slice(0,3)];
+  const consonant=consonantBasic[Math.floor(Math.random()*consonantBasic.length)];
+  const vowel=vowelBasic[Math.floor(Math.random()*vowelBasic.length)];
+  const onsetRoman={"ㄱ":"G","ㄴ":"N","ㄷ":"D","ㄹ":"R","ㅁ":"M","ㅂ":"B","ㅅ":"S","ㅇ":"","ㅈ":"J","ㅊ":"CH","ㅋ":"K","ㅌ":"T","ㅍ":"P","ㅎ":"H"};
+  const roman=(onsetRoman[consonant.c]||"")+(vowel.s||"").toUpperCase();
+  const consonants=[consonant,...consonantBasic.filter(x=>x.c!==consonant.c).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
+  const vowels=[vowel,...vowelBasic.filter(x=>x.c!==vowel.c).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
   return {
-   prompt:item.a,
-   label:"QUAL É O SÍMBOLO CORRETO?",
-   answer:item.c,
-   options:options.sort(()=>Math.random()-.5).map(x=>x.c),
-   speech:item.a
+   assembly:true,
+   prompt:roman,
+   label:"MONTE A SÍLABA COREANA",
+   answer:composeHangul(consonant.c,vowel.c),
+   consonant:consonant.c,
+   vowel:vowel.c,
+   consonantOptions:consonants.map(x=>x.c),
+   vowelOptions:vowels.map(x=>x.c),
+   speech:composeHangul(consonant.c,vowel.c)
   };
  }
  if(mode==="lesson"){
@@ -758,11 +773,8 @@ function makeQuestion(mode){
   const wrong=vocab.filter(x=>x[1]!==word[1]).sort(()=>Math.random()-.5).slice(0,3);
   const options=[word,...wrong].sort(()=>Math.random()-.5);
   return {
-   prompt:word[0],
-   label:"REVISÃO DAS LIÇÕES",
-   answer:word[1],
-   options:options.map(x=>x[1]),
-   speech:word[0]
+   prompt:word[0],label:"REVISÃO DAS LIÇÕES",answer:word[1],
+   options:options.map(x=>x[1]),speech:word[0]
   };
  }
  const item=vocab[Math.floor(Math.random()*vocab.length)];
@@ -771,21 +783,54 @@ function makeQuestion(mode){
  return {
   prompt:mode==="listening"?"🔊":" "+item[0],
   label:mode==="listening"?"OUÇA E ESCOLHA O SIGNIFICADO":"O QUE SIGNIFICA ESTA PALAVRA?",
-  answer:item[1],
-  options:options.map(x=>x[1]),
-  speech:item[0]
+  answer:item[1],options:options.map(x=>x[1]),speech:item[0]
  };
 }
-
 function startQuiz(mode){
  quizMode=mode;
  answered=false;
+ selectedAssembly={consonant:null,vowel:null};
+ assemblyFeedback="";
  currentQuestion=makeQuestion(mode);
  renderQuiz();
 }
 function renderQuiz(){
  if(!currentQuestion)return;
  const q=currentQuestion;
+ if(q.assembly){
+  const selected=selectedAssembly;
+  const preview=selected.consonant&&selected.vowel?composeHangul(selected.consonant,selected.vowel):"?";
+  content.innerHTML=`
+  <div class="panel">
+   <button class="ghost" onclick="render('quiz')">← Exercícios</button>
+   <h2 style="margin-top:15px">🧠 Quiz rápido</h2>
+   <div class="subnav">
+    <button class="${quizMode==="meaning"?"active":""}" onclick="startQuiz('meaning')">Significado</button>
+    <button class="${quizMode==="listening"?"active":""}" onclick="startQuiz('listening')">🎧 Ouvir</button>
+    <button class="${quizMode==="hangul"?"active":""}" onclick="startQuiz('hangul')">Hangul</button>
+    <button class="${quizMode==="lesson"?"active":""}" onclick="startQuiz('lesson')">Lições</button>
+   </div>
+   <div class="quiz-prompt">
+    <div class="tiny">${q.label}</div>
+    <div style="font-size:34px;font-weight:800;margin:10px 0">${q.prompt}</div>
+    <div class="tiny">Escolha uma consoante e uma vogal para formar a sílaba.</div>
+    <div style="font-size:42px;font-weight:800;margin-top:12px;color:var(--purple)">${preview}</div>
+    <div class="tiny">${selected.consonant||"＿"} + ${selected.vowel||"＿"}</div>
+   </div>
+   <h3>1. Escolha a consoante</h3>
+   <div id="consonantOptions" class="char-grid">
+    ${q.consonantOptions.map((o,i)=>`<button class="answer ${selected.consonant===o?"active":""}" ${answered?"disabled":""} onclick="selectHangulPart('consonant',${i})">${o}</button>`).join("")}
+   </div>
+   <h3 style="margin-top:16px">2. Escolha a vogal</h3>
+   <div id="vowelOptions" class="char-grid">
+    ${q.vowelOptions.map((o,i)=>`<button class="answer ${selected.vowel===o?"active":""}" ${answered?"disabled":""} onclick="selectHangulPart('vowel',${i})">${o}</button>`).join("")}
+   </div>
+   <p id="feedback" class="muted" aria-live="polite">${assemblyFeedback}</p>
+   <button class="primary" id="nextQuestion" style="display:${answered?"block":"none"};width:100%" onclick="startQuiz('hangul')">Próxima pergunta →</button>
+   <p class="tiny">Resposta correta: +5 XP.</p>
+  </div>`;
+  return;
+ }
  content.innerHTML=`
  <div class="panel">
   <button class="ghost" onclick="render('quiz')">← Exercícios</button>
@@ -797,26 +842,34 @@ function renderQuiz(){
    <button class="${quizMode==="lesson"?"active":""}" onclick="startQuiz('lesson')">Lições</button>
   </div>
   <div class="quiz-prompt">
-   <div class="tiny">${q.label}</div>
-   <div class="korean">${q.prompt}</div>
-   ${quizMode==="listening"?
-    '<button class="primary" onclick="speak(currentQuestion.speech)">▶ Ouvir novamente</button>':
-    '<button class="secondary" onclick="speak(currentQuestion.speech)">🔊 Ouvir</button>'}
+   <div class="tiny">${q.label}</div><div class="korean">${q.prompt}</div>
+   ${quizMode==="listening"?'<button class="primary" onclick="speak(currentQuestion.speech)">▶ Ouvir novamente</button>':'<button class="secondary" onclick="speak(currentQuestion.speech)">🔊 Ouvir</button>'}
   </div>
-  <div id="quizOptions">
-   ${q.options.map((o,i)=>`
-    <button class="answer" onclick="answerQuiz(this,${i})">${o}</button>
-   `).join("")}
-  </div>
+  <div id="quizOptions">${q.options.map((o,i)=>`<button class="answer" onclick="answerQuiz(this,${i})">${o}</button>`).join("")}</div>
   <p id="feedback" class="muted" aria-live="polite"></p>
   <button class="primary" id="nextQuestion" style="display:none;width:100%" onclick="startQuiz(quizMode)">Próxima pergunta →</button>
   <p class="tiny">Resposta correta: +5 XP.</p>
  </div>`;
- if(quizMode==="listening"){
-  setTimeout(()=>{
-   if(currentQuestion===q&&!answered)speak(q.speech);
-  },350);
+ if(quizMode==="listening")setTimeout(()=>{if(currentQuestion===q&&!answered)speak(q.speech);},350);
+}
+function selectHangulPart(type,index){
+ if(answered||!currentQuestion||!currentQuestion.assembly)return;
+ const q=currentQuestion;
+ if(type==="consonant")selectedAssembly.consonant=q.consonantOptions[index];
+ if(type==="vowel")selectedAssembly.vowel=q.vowelOptions[index];
+ if(selectedAssembly.consonant&&selectedAssembly.vowel){
+  const formed=composeHangul(selectedAssembly.consonant,selectedAssembly.vowel);
+  if(formed===q.answer){
+   answered=true;
+   assemblyFeedback="Muito bem! Você montou "+q.answer+" corretamente. +5 XP 🎉";
+   addXP(5);quizStreak++;
+   document.getElementById("nextQuestion").style.display="block";
+  }else{
+   assemblyFeedback="Ainda não! Confira a consoante e a vogal escolhidas e tente outra combinação.";
+   selectedAssembly={consonant:null,vowel:null};
+  }
  }
+ renderQuiz();
 }
 function answerQuiz(button,index){
  if(answered)return;
@@ -824,23 +877,12 @@ function answerQuiz(button,index){
  const q=currentQuestion;
  const selected=q.options[index];
  const buttons=[...document.querySelectorAll("#quizOptions button")];
- buttons.forEach(b=>{
-  b.disabled=true;
-  if(b.textContent.trim()===q.answer)b.classList.add("correct");
- });
+ buttons.forEach(b=>{b.disabled=true;if(b.textContent.trim()===q.answer)b.classList.add("correct");});
  const feedback=document.getElementById("feedback");
- if(selected===q.answer){
-  feedback.textContent="Muito bem! Resposta correta. +5 XP 🎉";
-  addXP(5);
-  quizStreak++;
- }else{
-  button.classList.add("wrong");
-  feedback.textContent="Quase! A resposta correta é: "+q.answer;
-  quizStreak=0;
- }
+ if(selected===q.answer){feedback.textContent="Muito bem! Resposta correta. +5 XP 🎉";addXP(5);quizStreak++;}
+ else{button.classList.add("wrong");feedback.textContent="Quase! A resposta correta é: "+q.answer;quizStreak=0;}
  document.getElementById("nextQuestion").style.display="block";
 }
-
 function renderAudioSettings(){
  loadVoices();
  const available=koreanVoices();
