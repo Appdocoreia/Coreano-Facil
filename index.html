@@ -94,6 +94,7 @@ button{cursor:pointer;font:inherit}
  background:white;padding:13px;margin:8px 0;
 }
 .answer:hover{border-color:var(--purple);background:var(--lav)}
+.answer.active{border-color:var(--purple);background:var(--lav);color:var(--purple);font-weight:800}
 .feedback-area{
  text-align:center;padding:24px 16px;margin:20px 0;
  background:white;border:1px solid var(--line);border-radius:18px;
@@ -415,7 +416,7 @@ let speechRate=.82;
 let voices=[];
 let selectedVoiceName="";
 let quizStreak=0;
-let selectedAssembly={consonant:null,vowel:null};
+let selectedAssembly={consonant:null,vowel:null,batchim:null};
 let assemblyFeedback="";
 
 const content=document.getElementById("content");
@@ -555,8 +556,8 @@ function renderHangul(){
   {id:"compoundVowels",label:"Vogais compostas"},
   {id:"consonants",label:"Consoantes"},
   {id:"doubleConsonants",label:"Consoantes duplas"},
-  {id:"batchim",label:"받침"},
-  {id:"doubleBatchim",label:"받침 duplo"}
+  {id:"batchim",label:"받침 · Final consonants"},
+  {id:"doubleBatchim",label:"겹받침 · Double finals"}
  ];
  const data={
   vowels:vowelBasic,compoundVowels:vowelCompound,
@@ -568,8 +569,8 @@ function renderHangul(){
   compoundVowels:"As 11 vogais compostas. Algumas pronúncias são muito parecidas no coreano moderno, mas a escrita continua diferente.",
   consonants:"As 14 consoantes básicas. O som pode mudar de acordo com a posição na sílaba.",
   doubleConsonants:"As 5 consoantes tensas. Elas exigem uma articulação mais firme e não são simplesmente versões mais altas das consoantes básicas.",
-  batchim:"Batchim é a consoante que aparece no final de uma sílaba. Existem 7 sons finais principais.",
-  doubleBatchim:"Os 11 batchim compostos. A pronúncia final mais comum está indicada abaixo, mas pode mudar conforme a palavra e a sílaba seguinte."
+  batchim:"Batchim (Final Consonants) é a consoante que aparece no final de uma sílaba. Existem 7 sons finais principais.",
+  doubleBatchim:"Double Batchim (겹받침) são combinações de duas consoantes no final da sílaba. A pronúncia final mais comum está indicada abaixo, mas pode mudar conforme a palavra e a sílaba seguinte."
  };
  content.innerHTML=`
  <div class="panel">
@@ -741,30 +742,45 @@ function renderQuizMenu(){
  </div>`;
 }
 
-function composeHangul(consonant,vowel){
- const L=consonantBasic.findIndex(x=>x.c===consonant);
- const V=vowelBasic.findIndex(x=>x.c===vowel);
- if(L<0||V<0)return "";
- return String.fromCharCode(0xAC00+(L*21+V)*28);
+function composeHangul(consonant,vowel,batchim=""){
+ const initialOrder=["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+ const vowelOrder=["ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ"];
+ const finalOrder=["","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+ const L=initialOrder.indexOf(consonant);
+ const V=vowelOrder.indexOf(vowel);
+ const T=finalOrder.indexOf(batchim);
+ if(L<0||V<0||T<0)return "";
+ return String.fromCharCode(0xAC00+(L*21+V)*28+T);
 }
+
+function romanizeQuizSyllable(consonant,vowel,batchim=""){
+ const onset={"ㄱ":"G","ㄲ":"KK","ㄴ":"N","ㄷ":"D","ㄸ":"TT","ㄹ":"R","ㅁ":"M","ㅂ":"B","ㅃ":"PP","ㅅ":"S","ㅆ":"SS","ㅇ":"","ㅈ":"J","ㅉ":"JJ","ㅊ":"CH","ㅋ":"K","ㅌ":"T","ㅍ":"P","ㅎ":"H"};
+ const vowelMap={"ㅏ":"A","ㅐ":"AE","ㅑ":"YA","ㅒ":"YAE","ㅓ":"EO","ㅔ":"E","ㅕ":"YEO","ㅖ":"YE","ㅗ":"O","ㅘ":"WA","ㅙ":"WAE","ㅚ":"OE","ㅛ":"YO","ㅜ":"U","ㅝ":"WO","ㅞ":"WE","ㅟ":"WI","ㅠ":"YU","ㅡ":"EU","ㅢ":"UI","ㅣ":"I"};
+ const finalMap={"":"","ㄱ":"K","ㄲ":"K","ㄳ":"KS","ㄴ":"N","ㄵ":"NJ","ㄶ":"NH","ㄷ":"T","ㄹ":"L","ㄺ":"LG","ㄻ":"LM","ㄼ":"LB","ㄽ":"LS","ㄾ":"LT","ㄿ":"LP","ㅀ":"LH","ㅁ":"M","ㅂ":"P","ㅄ":"PS","ㅅ":"T","ㅆ":"T","ㅇ":"NG","ㅈ":"T","ㅊ":"T","ㅋ":"K","ㅌ":"T","ㅍ":"P","ㅎ":"T"};
+ return (onset[consonant]??"")+(vowelMap[vowel]??"")+(finalMap[batchim]??"");
+}
+
 function makeQuestion(mode){
  if(mode==="hangul"){
   const consonant=consonantBasic[Math.floor(Math.random()*consonantBasic.length)];
   const vowel=vowelBasic[Math.floor(Math.random()*vowelBasic.length)];
-  const onsetRoman={"ㄱ":"G","ㄴ":"N","ㄷ":"D","ㄹ":"R","ㅁ":"M","ㅂ":"B","ㅅ":"S","ㅇ":"","ㅈ":"J","ㅊ":"CH","ㅋ":"K","ㅌ":"T","ㅍ":"P","ㅎ":"H"};
-  const roman=(onsetRoman[consonant.c]||"")+(vowel.s||"").toUpperCase();
+  const finalPool=["","ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅇ","ㄺ","ㄻ","ㄼ","ㅄ"];
+  const batchim=finalPool[Math.floor(Math.random()*finalPool.length)];
   const consonants=[consonant,...consonantBasic.filter(x=>x.c!==consonant.c).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
   const vowels=[vowel,...vowelBasic.filter(x=>x.c!==vowel.c).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
+  const batchimOptions=[batchim,...finalPool.filter(x=>x!==batchim).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
   return {
    assembly:true,
-   prompt:roman,
+   prompt:romanizeQuizSyllable(consonant.c,vowel.c,batchim),
    label:"MONTE A SÍLABA COREANA",
-   answer:composeHangul(consonant.c,vowel.c),
+   answer:composeHangul(consonant.c,vowel.c,batchim),
    consonant:consonant.c,
    vowel:vowel.c,
+   batchim,
    consonantOptions:consonants.map(x=>x.c),
    vowelOptions:vowels.map(x=>x.c),
-   speech:composeHangul(consonant.c,vowel.c)
+   batchimOptions,
+   speech:composeHangul(consonant.c,vowel.c,batchim)
   };
  }
  if(mode==="lesson"){
@@ -786,10 +802,11 @@ function makeQuestion(mode){
   answer:item[1],options:options.map(x=>x[1]),speech:item[0]
  };
 }
+
 function startQuiz(mode){
  quizMode=mode;
  answered=false;
- selectedAssembly={consonant:null,vowel:null};
+ selectedAssembly={consonant:null,vowel:null,batchim:null};
  assemblyFeedback="";
  currentQuestion=makeQuestion(mode);
  renderQuiz();
@@ -799,7 +816,9 @@ function renderQuiz(){
  const q=currentQuestion;
  if(q.assembly){
   const selected=selectedAssembly;
-  const preview=selected.consonant&&selected.vowel?composeHangul(selected.consonant,selected.vowel):"?";
+  const ready=selected.consonant!==null&&selected.vowel!==null&&selected.batchim!==null;
+  const preview=ready?composeHangul(selected.consonant,selected.vowel,selected.batchim):"?";
+  const batchimLabel=value=>value===""?"없음":value+({"ㄺ":" (ㄹ+ㄱ)","ㄻ":" (ㄹ+ㅁ)","ㄼ":" (ㄹ+ㅂ)","ㅄ":" (ㅂ+ㅅ)"}[value]||"");
   content.innerHTML=`
   <div class="panel">
    <button class="ghost" onclick="render('quiz')">← Exercícios</button>
@@ -813,24 +832,29 @@ function renderQuiz(){
    <div class="quiz-prompt">
     <div class="tiny">${q.label}</div>
     <div style="font-size:34px;font-weight:800;margin:10px 0">${q.prompt}</div>
-    <div class="tiny">Escolha uma consoante e uma vogal para formar a sílaba.</div>
+    <div class="tiny">Escolha a consoante inicial, a vogal e o batchim (consoante final).</div>
     <div style="font-size:42px;font-weight:800;margin-top:12px;color:var(--purple)">${preview}</div>
-    <div class="tiny">${selected.consonant||"＿"} + ${selected.vowel||"＿"}</div>
+    <div class="tiny">${selected.consonant||"＿"} + ${selected.vowel||"＿"} + ${selected.batchim===null?"＿":batchimLabel(selected.batchim)}</div>
    </div>
-   <h3>1. Escolha a consoante</h3>
-   <div id="consonantOptions" class="char-grid">
+   <h3>1. Escolha a consoante inicial</h3>
+   <div class="char-grid">
     ${q.consonantOptions.map((o,i)=>`<button class="answer ${selected.consonant===o?"active":""}" ${answered?"disabled":""} onclick="selectHangulPart('consonant',${i})">${o}</button>`).join("")}
    </div>
    <h3 style="margin-top:16px">2. Escolha a vogal</h3>
-   <div id="vowelOptions" class="char-grid">
+   <div class="char-grid">
     ${q.vowelOptions.map((o,i)=>`<button class="answer ${selected.vowel===o?"active":""}" ${answered?"disabled":""} onclick="selectHangulPart('vowel',${i})">${o}</button>`).join("")}
+   </div>
+   <h3 style="margin-top:16px">3. Escolha o batchim</h3>
+   <div class="char-grid">
+    ${q.batchimOptions.map((o,i)=>`<button class="answer ${selected.batchim===o?"active":""}" ${answered?"disabled":""} onclick="selectHangulPart('batchim',${i})">${batchimLabel(o)}</button>`).join("")}
    </div>
    <p id="feedback" class="muted" aria-live="polite">${assemblyFeedback}</p>
    <button class="primary" id="nextQuestion" style="display:${answered?"block":"none"};width:100%" onclick="startQuiz('hangul')">Próxima pergunta →</button>
-   <p class="tiny">Resposta correta: +5 XP.</p>
+   <p class="tiny">Resposta correta: +5 XP. O batchim pode ser 없음 (sem consoante final).</p>
   </div>`;
   return;
  }
+
  content.innerHTML=`
  <div class="panel">
   <button class="ghost" onclick="render('quiz')">← Exercícios</button>
@@ -857,20 +881,22 @@ function selectHangulPart(type,index){
  const q=currentQuestion;
  if(type==="consonant")selectedAssembly.consonant=q.consonantOptions[index];
  if(type==="vowel")selectedAssembly.vowel=q.vowelOptions[index];
- if(selectedAssembly.consonant&&selectedAssembly.vowel){
-  const formed=composeHangul(selectedAssembly.consonant,selectedAssembly.vowel);
+ if(type==="batchim")selectedAssembly.batchim=q.batchimOptions[index];
+ const ready=selectedAssembly.consonant!==null&&selectedAssembly.vowel!==null&&selectedAssembly.batchim!==null;
+ if(ready){
+  const formed=composeHangul(selectedAssembly.consonant,selectedAssembly.vowel,selectedAssembly.batchim);
   if(formed===q.answer){
    answered=true;
    assemblyFeedback="Muito bem! Você montou "+q.answer+" corretamente. +5 XP 🎉";
    addXP(5);quizStreak++;
-   document.getElementById("nextQuestion").style.display="block";
   }else{
-   assemblyFeedback="Ainda não! Confira a consoante e a vogal escolhidas e tente outra combinação.";
-   selectedAssembly={consonant:null,vowel:null};
+   assemblyFeedback="Ainda não! Confira as três partes e tente novamente.";
+   selectedAssembly={consonant:null,vowel:null,batchim:null};
   }
  }
  renderQuiz();
 }
+
 function answerQuiz(button,index){
  if(answered)return;
  answered=true;
